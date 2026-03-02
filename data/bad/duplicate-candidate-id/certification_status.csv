@@ -1,0 +1,2 @@
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-2001,2001,Associate,Certified,2026-01-15T10:00:00Z,Automated,2026-01-15T10:00:00Z

@@ -1,0 +1,21 @@
+# Rule Severity Matrix
+
+| Rule ID | Description | Data Quality Dimension | Severity | Failure Symptoms | Remediation Guidance | Verification Target |
+| --- | --- | --- | --- | --- | --- | --- |
+| BR-01 | Candidate master schema completeness (required columns, non-null PK/email) | Completeness / Uniqueness | Critical | GX expectation fails with missing columns or null PK; release decision blocks | Reload sourced master; rebuild CSV ensuring all required columns and non-null `candidate_id`/`email`; rerun suite | `gx/expectations/candidates_suite.yml` – `expect_table_columns_to_match_ordered_list` + `expect_column_values_to_not_be_null` |
+| BR-02 | Candidate master uniqueness (`candidate_id`, `email`) | Uniqueness | Critical | Duplicate rows detected when batch processed; dedup step triggered | Deduplicate upstream source, enforce `candidate_id`/`email` uniqueness | Same suite; `expect_column_values_to_be_unique` expectation |
+| BR-03 | Exam results composite key (candidate/exam/attempt) must be unique | Uniqueness | Critical | Batch fails with duplicate attempt attempt_number; gating artifact is `block` | Halt ingest, remove duplicates, reprocess; escalate to data provider | `gx/expectations/exam_results_suite.yml` – custom uniqueness expectation |
+| BR-04 | Score & scaled score within 0–100 | Validity | Warning | Out-of-range score triggers warning; release decision may allow with caution | Adjust scoring script, verify calculation, rerun synthetic `bad` sample | `expect_column_values_to_be_between(score, 0, 100)` & `expect_column_values_to_be_between(score_scaled, 0, 100)` |
+| BR-05 | Pass/Fail mapping to certification status | Consistency | Critical / Warning (depends on mismatch) | Pass without `Certified` or fail marked as `Certified`; severity is critical for pass mismatch, warning for fail mismatch | Investigate business rule, update status feed, rerun expectation suite | `gx/expectations/cert_status_suite.yml` – expect statuses in allowed set and cross-check pass/fail via helper expectation |
+| BR-06 | Exam date within rolling 12-month window | Validity | Warning | Future/stale date; flagged as `warning` but logged for monitoring | Confirm exam_date calculation; ensure timezone normalized | `expect_column_values_to_be_between(exam_date, today-12mo, today)` in exam suite |
+| BR-07 | Cross-file candidate_id matching (exam + cert refer to master) | Consistency | Critical | Validation error referencing missing `candidate_id` in master; release blocked | Backfill candidate master, rerun ingestion | Functional join test in regression layer and expectation `expect_column_values_to_be_in_set` |
+| BR-08 | Freshness (exam file must arrive ≤24h after latest exam_date) | Timeliness | Critical / Warning | Lag >24h triggers `block` (critical) or `warn` (24-48h); recorded in release decision | Re-trigger ingest, coordinate with source to deliver on time; notify ops | `gx/expectations/freshness_suite.yml` – custom lag expectation using `file_received_ts` metadata |
+| BR-09 | Certification status uniqueness per level | Consistency / Uniqueness | Critical | Duplicate certification_row for same level/time; automation halts to avoid conflicting statuses | Resolve overlapping records by choosing latest `status_effective_ts` and de-dup | Expectation ensures `candidate_id + certification_level` unique within rolling window |
+| BR-10 | File-level metadata availability (`file_received_ts`, `status_source`) | Info | Info | Expectation logs missing metadata but lets release continue; `info` severity notes in validation summary | Ask data provider to include the timestamp in future exports | `expect_table_columns_to_exist` for metadata columns in optional metadata expectation group |
+
+Severity definitions
+- **Critical**: validation failure blocks release and must be resolved before production deployment.
+- **Warning**: records still land in the ingest but trigger reviews; release decision may allow a guarded release with documented risk.
+- **Info**: used for observability; not release-blocking but should be tracked and documented.
+
+Use this matrix to prioritize remediation, guide QA automation, and feed the release decision pipeline so each rule’s severity is explicit in automation artifacts.

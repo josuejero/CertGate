@@ -1,0 +1,2 @@
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-5001,5001,Associate,Not Certified,2026-02-18T12:00:00Z,Manual,2026-02-18T12:00:00Z

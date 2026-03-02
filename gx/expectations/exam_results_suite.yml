@@ -1,0 +1,68 @@
+expectation_suite_name: exam_results_suite
+data_asset_type: pandas
+meta:
+  notes: Exam outcome assertions covering schema, pass/fail, and score ranges.
+  contributors:
+    - CertGate QA
+  great_expectations_version: "0.17.0"
+ge_cloud_id: null
+evaluation_parameters:
+  min_exam_date: null
+  max_exam_date: null
+expectations:
+  - expectation_type: expect_table_columns_to_match_ordered_list
+    kwargs:
+      column_list:
+        - exam_result_id
+        - candidate_id
+        - exam_code
+        - exam_date
+        - attempt_number
+        - score
+        - score_scaled
+        - pass_fail
+        - exam_location
+        - file_received_ts
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: exam_result_id
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: candidate_id
+  - expectation_type: expect_column_values_to_be_unique
+    kwargs:
+      column: exam_result_id
+  - expectation_type: expect_compound_columns_to_be_unique
+    kwargs:
+      column_list:
+        - candidate_id
+        - exam_code
+        - attempt_number
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: score
+      min_value: 0
+      max_value: 100
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: score_scaled
+      min_value: 0
+      max_value: 100
+  - expectation_type: expect_column_values_to_be_in_set
+    kwargs:
+      column: pass_fail
+      value_set:
+        - Pass
+        - Fail
+        - P
+        - F
+        - pass
+        - fail
+  - expectation_type: expect_column_values_to_be_between
+    kwargs:
+      column: exam_date
+      min_value: "$PARAMETER.min_exam_date"
+      max_value: "$PARAMETER.max_exam_date"
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: file_received_ts

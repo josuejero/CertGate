@@ -1,0 +1,56 @@
+name: ingest_validation_checkpoint
+config_version: 1.0
+class_name: SimpleCheckpoint
+run_name_template: "%Y%m%d-%H%M%S-ingest-validation"
+validations:
+  - batch_request:
+      datasource_name: pandas_ingest
+      data_connector_name: runtime_data_connector
+      data_asset_name: ingest_batch
+      runtime_parameters:
+        batch_data: null
+      batch_identifiers:
+        ingest_batch_id: candidates
+    expectation_suite_name: candidates_suite
+    evaluation_parameters:
+      min_exam_date: null
+      max_exam_date: null
+  - batch_request:
+      datasource_name: pandas_ingest
+      data_connector_name: runtime_data_connector
+      data_asset_name: ingest_batch
+      runtime_parameters:
+        batch_data: null
+      batch_identifiers:
+        ingest_batch_id: exams
+    expectation_suite_name: exam_results_suite
+    evaluation_parameters:
+      min_exam_date: "$PARAMETER.min_exam_date"
+      max_exam_date: "$PARAMETER.max_exam_date"
+  - batch_request:
+      datasource_name: pandas_ingest
+      data_connector_name: runtime_data_connector
+      data_asset_name: ingest_batch
+      runtime_parameters:
+        batch_data: null
+      batch_identifiers:
+        ingest_batch_id: certifications
+    expectation_suite_name: cert_status_suite
+  - batch_request:
+      datasource_name: pandas_ingest
+      data_connector_name: runtime_data_connector
+      data_asset_name: ingest_batch
+      runtime_parameters:
+        batch_data: null
+      batch_identifiers:
+        ingest_batch_id: freshness
+    expectation_suite_name: freshness_suite
+    evaluation_parameters:
+      min_file_received_ts: "$PARAMETER.min_file_received_ts"
+      max_file_received_ts: "$PARAMETER.max_file_received_ts"
+action_list_operator_name: action_list_operator
+evaluation_parameters:
+  min_exam_date: null
+  max_exam_date: null
+  min_file_received_ts: null
+  max_file_received_ts: null

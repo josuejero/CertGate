@@ -1,0 +1,2 @@
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-3001,3001,CG-EX,2026-02-19,1,123,123,Pass,Seattle,2026-02-19T12:00:00Z

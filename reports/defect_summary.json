@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-03-02T21:06:30.491735+00:00",
+  "defect_count": 1,
+  "defects": [
+    {
+      "rule_id": "BR-08",
+      "description": "Freshness exceeds the critical lag threshold.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#br-08",
+      "details": {
+        "lag_hours": 590.11,
+        "reference_time": "2026-03-02T21:06:30.491707+00:00",
+        "latest_data_time": "2026-02-06T07:00:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ],
+  "root_cause_counts": {
+    "stale_data": 1
+  }
+}

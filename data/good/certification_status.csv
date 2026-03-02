@@ -1,0 +1,3 @@
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-1001,1001,Associate,Certified,2026-01-30T08:00:00Z,Automated,2026-01-30T08:00:00Z
+CS-1002,1002,Associate,Not Certified,2025-11-20T13:10:00Z,Manual,2025-11-20T13:10:00Z

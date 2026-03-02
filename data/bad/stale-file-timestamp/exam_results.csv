@@ -1,0 +1,2 @@
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-5001,5001,CG-EX,2026-01-20,1,79,79,Fail,Boston,2026-02-15T07:35:00Z

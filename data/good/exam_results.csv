@@ -1,0 +1,3 @@
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-1001,1001,CG-EX,2026-01-25,1,94,94,Pass,Remote,2026-01-25T10:15:00Z
+ER-1002,1002,CG-EX,2025-11-12,1,58,58,Fail,New York,2025-11-12T09:05:00Z

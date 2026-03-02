@@ -1,0 +1,32 @@
+expectation_suite_name: candidates_suite
+data_asset_type: pandas
+meta:
+  notes: Candidate master schema, completeness, and uniqueness assertions.
+  contributors:
+    - CertGate QA
+  great_expectations_version: "0.17.0"
+ge_cloud_id: null
+evaluation_parameters: {}
+expectations:
+  - expectation_type: expect_table_columns_to_match_ordered_list
+    kwargs:
+      column_list:
+        - candidate_id
+        - birth_date
+        - email
+        - first_name
+        - last_name
+        - created_ts
+        - source_system
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: candidate_id
+  - expectation_type: expect_column_values_to_not_be_null
+    kwargs:
+      column: email
+  - expectation_type: expect_column_values_to_be_unique
+    kwargs:
+      column: candidate_id
+  - expectation_type: expect_column_values_to_be_unique
+    kwargs:
+      column: email

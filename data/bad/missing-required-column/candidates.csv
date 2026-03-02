@@ -1,0 +1,2 @@
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+1001,1990-05-12,alice.downs@example.com,Alice,Downs,2026-02-28T09:45:00Z,lms

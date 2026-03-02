@@ -1,0 +1,2 @@
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+3001,1992-12-05,james.li@example.com,James,Li,2026-02-22T11:30:00Z,lms

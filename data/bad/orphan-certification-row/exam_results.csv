@@ -1,0 +1,2 @@
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-7001,7001,CG-EX,2026-01-28,1,88,88,Pass,Remote,2026-01-28T09:00:00Z

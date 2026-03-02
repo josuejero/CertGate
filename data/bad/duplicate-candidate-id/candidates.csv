@@ -1,0 +1,3 @@
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+2001,1989-04-10,carol.martin@example.com,Carol,Martin,2026-02-01T08:00:00Z,lms
+2001,1989-04-10,caroline.dup@example.com,Caroline,Dup,2026-02-01T08:05:00Z,lms
