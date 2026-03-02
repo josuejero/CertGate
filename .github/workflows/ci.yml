@@ -1,0 +1,77 @@
+name: CertGate CI & Demo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run pytest suite
+        run: pytest
+      - name: Execute Great Expectations checkpoint
+        run: python scripts/run_great_expectations.py
+      - name: Generate release reports
+        run: python scripts/generate_release_reports.py
+      - name: Upload reports artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports
+      - name: Upload data docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: gx-data-docs
+          path: gx/data_docs/local_site
+
+  publish-pages:
+    needs: test
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download reports artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: reports
+          path: artifacts/reports
+      - name: Download data docs
+        uses: actions/download-artifact@v4
+        with:
+          name: gx-data-docs
+          path: artifacts/data-docs
+      - name: Build Pages payload
+        run: |
+          rm -rf page
+          mkdir -p page
+          cp -R demo-site/* page/
+          mkdir -p page/data-docs
+          cp -R artifacts/data-docs/. page/data-docs/
+          mkdir -p page/reports
+          cp -R artifacts/reports/* page/reports/
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: page
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com

@@ -1,0 +1,254 @@
+:root {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: #e2e8f0;
+  background-color: #020617;
+  line-height: 1.5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: #020617;
+}
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 24px;
+  border-bottom: 1px solid #0f172a;
+}
+.hero-cta {
+  text-align: right;
+}
+.hero h1 {
+  margin: 0;
+  font-size: 2.6rem;
+}
+.hero p {
+  margin: 8px 0 0;
+  color: #94a3b8;
+}
+.demo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+}
+.hero-meta {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  word-break: break-all;
+}
+.section-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+.status-panel {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 40px;
+}
+.card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.6);
+}
+.status-pill {
+  display: inline-flex;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #1e293b;
+}
+.status-pill[data-status="ready"] {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+.status-pill[data-status="warning only"] {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
+}
+.status-pill[data-status="blocked"] {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+.status-card h2 {
+  margin: 16px 0 0;
+  font-size: 2rem;
+}
+.status-card ul {
+  margin-top: 16px;
+  padding-left: 20px;
+  color: #cbd5f5;
+}
+.stats-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+.stats-grid .stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: #0b1121;
+  border: 1px solid #1e293b;
+}
+.stats-grid .stat-label {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.stats-grid .stat-value {
+  margin: 4px 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.rule-categories {
+  margin-bottom: 40px;
+  display: grid;
+  gap: 16px;
+}
+.rule-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.rule-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+}
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.link-list li a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+.link-list li a:hover {
+  text-decoration: underline;
+}
+.data-docs {
+  margin-bottom: 40px;
+}
+.artifacts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.artifacts li {
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.artifacts a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+.legend-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.legend-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #1e293b;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  background: #0b1121;
+}
+.screenshots {
+  margin: 40px 0;
+}
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.screenshot-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.screenshot-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.screenshot-card p {
+  margin: 12px;
+  color: #94a3b8;
+}
+.defect-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.defect-table th,
+.defect-table td {
+  padding: 10px;
+  border: 1px solid #1e293b;
+  text-align: left;
+}
+.defect-table th {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.table-wrapper {
+  overflow-x: auto;
+}
+.footer-note {
+  text-align: center;
+  margin: 60px 0 40px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+}

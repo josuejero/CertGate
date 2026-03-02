@@ -97,7 +97,7 @@ def evaluate_table_freshness(
 
     if timestamp_column and timestamp_column in table.df.columns:
         column_ts = pd.to_datetime(table.df[timestamp_column], utc=True, errors="coerce")
-        if column_ts.dropna().any():
+        if not column_ts.dropna().empty:
             reported_ts.append(column_ts.max().to_pydatetime())
 
     for key in metadata_keys:

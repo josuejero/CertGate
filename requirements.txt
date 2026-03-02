@@ -1,0 +1,4 @@
+great_expectations<0.18
+pandas>=2.2,<4
+pytest>=7.0,<8
+PyYAML>=6.0

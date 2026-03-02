@@ -187,6 +187,8 @@ def normalize_dataframe_dtypes(
             fallback = str(target_dtype).lower()
             if "datetime" in fallback:
                 normalized[column] = pd.to_datetime(normalized[column], errors="coerce")
+            else:
+                normalized[column] = normalized[column].astype("object")
             issues.append(
                 build_rule_outcome(
                     rule_id=f"{rule_id_prefix}-{column}",
