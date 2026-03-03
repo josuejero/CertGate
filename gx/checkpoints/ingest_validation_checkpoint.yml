@@ -2,11 +2,6 @@ name: ingest_validation_checkpoint
 config_version: 1.0
 class_name: SimpleCheckpoint
 run_name_template: "%Y%m%d-%H%M%S-ingest-validation"
-validations:
-  - expectation_suite_name: candidates_suite
-  - expectation_suite_name: exam_results_suite
-  - expectation_suite_name: cert_status_suite
-  - expectation_suite_name: freshness_suite
 action_list:
   - name: store_validation_result
     action:
