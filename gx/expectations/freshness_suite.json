@@ -1,0 +1,32 @@
+{
+  "expectation_suite_name": "freshness_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Timestamp freshness expectations used by nightly gating.",
+    "contributors": [
+      "CertGate QA"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {
+    "min_file_received_ts": null,
+    "max_file_received_ts": null
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "file_received_ts"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "file_received_ts",
+        "min_value": "$PARAMETER.min_file_received_ts",
+        "max_value": "$PARAMETER.max_file_received_ts"
+      }
+    }
+  ]
+}

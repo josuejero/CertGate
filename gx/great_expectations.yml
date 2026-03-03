@@ -5,9 +5,12 @@ datasources:
     module_name: great_expectations.datasource
     execution_engine:
       class_name: PandasExecutionEngine
+      module_name: great_expectations.execution_engine
     data_connectors:
       runtime_data_connector:
+        name: runtime_data_connector
         class_name: RuntimeDataConnector
+        module_name: great_expectations.datasource.data_connector
         batch_identifiers:
           - ingest_batch
 stores:
@@ -15,19 +18,20 @@ stores:
     class_name: ExpectationsStore
     store_backend:
       class_name: TupleFilesystemStoreBackend
-      base_directory: gx/expectations
+      base_directory: expectations
+      filepath_suffix: .json
   validations_store:
     class_name: ValidationsStore
     store_backend:
       class_name: TupleFilesystemStoreBackend
-      base_directory: gx/validations
+      base_directory: validations
   evaluation_parameter_store:
     class_name: EvaluationParameterStore
   checkpoint_store:
     class_name: CheckpointStore
     store_backend:
       class_name: TupleFilesystemStoreBackend
-      base_directory: gx/checkpoints
+      base_directory: checkpoints
 expectations_store_name: expectations_store
 validations_store_name: validations_store
 evaluation_parameter_store_name: evaluation_parameter_store
@@ -37,7 +41,7 @@ data_docs_sites:
     class_name: SiteBuilder
     store_backend:
       class_name: TupleFilesystemStoreBackend
-      base_directory: gx/data_docs/local_site
+      base_directory: data_docs/local_site
     site_index_builder:
       class_name: DefaultSiteIndexBuilder
 validation_operators:
@@ -50,3 +54,13 @@ validation_operators:
       - name: update_data_docs
         action:
           class_name: UpdateDataDocsAction
+plugins_directory:
+notebooks:
+config_variables_file_path:
+anonymous_usage_statistics:
+  data_context_id: 0cd31032-d0ae-465f-b9a1-e42fd76ba463
+  enabled: true
+include_rendered_content:
+  globally: false
+  expectation_suite: false
+  expectation_validation_result: false

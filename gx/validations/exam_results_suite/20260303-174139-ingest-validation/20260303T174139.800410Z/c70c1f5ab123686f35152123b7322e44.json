@@ -1,0 +1,343 @@
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "exams"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174140.206910Z",
+      "pandas_data_fingerprint": "2dcf5d7869b97343d4c7283da03e6281"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "exam_results_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174140.209446Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": "min_value cannot be greater than max_value",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 548, in _process_direct_and_bundled_metric_computation_configurations\n    ] = metric_computation_configuration.metric_fn(  # type: ignore[misc] # F not callable\n        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        **metric_computation_configuration.metric_provider_kwargs\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/metric_provider.py\", line 100, in inner_func\n    return metric_fn(*args, **kwargs)\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/map_metric_provider/column_condition_partial.py\", line 119, in inner_func\n    meets_expectation_series = metric_fn(\n        cls,\n    ...<2 lines>...\n        _metrics=metrics,\n    )\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/column_map_metrics/column_values_between.py\", line 76, in _pandas\n    raise ValueError(\"min_value cannot be greater than max_value\")\nValueError: min_value cannot be greater than max_value\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/validator/validation_graph.py\", line 285, in _resolve\n    self._execution_engine.resolve_metrics(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metrics_to_resolve=computable_metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metrics=metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        runtime_configuration=runtime_configuration,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 283, in resolve_metrics\n    return self._process_direct_and_bundled_metric_computation_configurations(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metric_fn_direct_configurations=metric_fn_direct_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metric_fn_bundle_configurations=metric_fn_bundle_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 552, in _process_direct_and_bundled_metric_computation_configurations\n    raise gx_exceptions.MetricResolutionError(\n    ...<4 lines>...\n    ) from e\ngreat_expectations.exceptions.exceptions.MetricResolutionError: min_value cannot be greater than max_value\n",
+        "raised_exception": true
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_date",
+          "max_value": "$PARAMETER.max_exam_date",
+          "min_value": "$PARAMETER.min_exam_date"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {},
+      "success": false
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column_list": [
+            "exam_result_id",
+            "candidate_id",
+            "exam_code",
+            "exam_date",
+            "attempt_number",
+            "score",
+            "score_scaled",
+            "pass_fail",
+            "exam_location",
+            "file_received_ts"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "exam_result_id",
+          "candidate_id",
+          "exam_code",
+          "exam_date",
+          "attempt_number",
+          "score",
+          "score_scaled",
+          "pass_fail",
+          "exam_location",
+          "file_received_ts"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_compound_columns_to_be_unique",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column_list": [
+            "candidate_id",
+            "exam_code",
+            "attempt_number"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_result_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_result_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "score",
+          "max_value": 100,
+          "min_value": 0
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "score_scaled",
+          "max_value": 100,
+          "min_value": 0
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "pass_fail",
+          "value_set": [
+            "Pass",
+            "Fail",
+            "P",
+            "F",
+            "pass",
+            "fail"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "file_received_ts"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 10,
+    "success_percent": 90.0,
+    "successful_expectations": 9,
+    "unsuccessful_expectations": 1
+  },
+  "success": false
+}

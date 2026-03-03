@@ -1,8 +1,39 @@
 from __future__ import annotations
 
+import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+SUPPORTED_PYTHON_MIN = (3, 10)
+SUPPORTED_PYTHON_MAX = (3, 13)
+
+
+def _ensure_python_supported() -> None:
+    version = sys.version_info[:2]
+    if SUPPORTED_PYTHON_MIN <= version <= SUPPORTED_PYTHON_MAX:
+        return
+    version_str = f"{version[0]}.{version[1]}"
+    base_message = (
+        "Great Expectations (<0.18) is tested on Python 3.10→3.13, "
+        f"but you are running Python {version_str}."
+    )
+    if version > SUPPORTED_PYTHON_MAX:
+        raise SystemExit(
+            base_message
+            + " Python 3.14+ is not supported yet because the bundled Pydantic v1 dependency "
+            "issues `issubclass` checks against typing generics and raises "
+            "\"Subscripted generics cannot be used with class and instance checks\" "
+            "on Python 3.14+. Recreate your `.venv` with a supported interpreter (for example "
+            "`PYTHON_CMD=python3.13 ./scripts/bootstrap.sh`) before rerunning this script."
+        )
+    raise SystemExit(base_message + " Please use a supported interpreter before rerunning this script.")
+
+
+_ensure_python_supported()
 
 import pandas as pd
 from great_expectations.core.batch import RuntimeBatchRequest
@@ -11,7 +42,6 @@ from great_expectations.data_context import DataContext
 from src.ingest.loaders import load_table
 from src.rules.schema_rules import get_schema_definition
 
-BASE_DIR = Path(__file__).resolve().parents[1]
 DATA_ROOT = BASE_DIR / "data" / "good"
 GX_ROOT = BASE_DIR / "gx"
 
@@ -20,6 +50,21 @@ SCHEMA_TARGETS = (
     "exam_results",
     "certification_status",
 )
+
+ACTION_LIST = [
+    {
+        "name": "store_validation_result",
+        "action": {"class_name": "StoreValidationResultAction"},
+    },
+    {
+        "name": "store_evaluation_parameters",
+        "action": {"class_name": "StoreEvaluationParametersAction"},
+    },
+    {
+        "name": "update_data_docs",
+        "action": {"class_name": "UpdateDataDocsAction"},
+    },
+]
 
 
 def _load_dataframe(table_key: str) -> pd.DataFrame:
@@ -52,7 +97,7 @@ def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchReque
         data_connector_name="runtime_data_connector",
         data_asset_name="ingest_batch",
         runtime_parameters={"batch_data": df},
-        batch_identifiers={"ingest_batch_id": identifier},
+        batch_identifiers={"ingest_batch": identifier},
     )
 
 
@@ -93,8 +138,9 @@ def main() -> None:
         checkpoint_name="ingest_validation_checkpoint",
         validations=validations,
         evaluation_parameters=evaluation_params,
+        action_list=ACTION_LIST,
     )
-    print("Great Expectations checkpoint executed:", result.checkpoint_name)
+    print("Great Expectations checkpoint executed:", result.name)
 
 
 if __name__ == "__main__":

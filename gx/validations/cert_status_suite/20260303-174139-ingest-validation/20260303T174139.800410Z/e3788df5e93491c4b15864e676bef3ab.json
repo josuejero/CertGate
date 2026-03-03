@@ -1,0 +1,278 @@
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "certifications"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174140.558684Z",
+      "pandas_data_fingerprint": "6e515432aa23064d5d3bce8bd663f2ae"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "cert_status_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174140.563419Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column_list": [
+            "cert_status_id",
+            "candidate_id",
+            "certification_level",
+            "certification_status",
+            "certified_ts",
+            "status_source",
+            "status_effective_ts"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "cert_status_id",
+          "candidate_id",
+          "certification_level",
+          "certification_status",
+          "certified_ts",
+          "status_source",
+          "status_effective_ts"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_compound_columns_to_be_unique",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column_list": [
+            "candidate_id",
+            "certification_level"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "cert_status_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "cert_status_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_status",
+          "value_set": [
+            "Certified",
+            "Certification Granted",
+            "NeedsReview",
+            "Certification Pending",
+            "Not Certified"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_status"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_level"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 8,
+    "success_percent": 100.0,
+    "successful_expectations": 8,
+    "unsuccessful_expectations": 0
+  },
+  "success": true
+}

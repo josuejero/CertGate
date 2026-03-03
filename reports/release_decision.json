@@ -1,16 +1,56 @@
 {
   "status": "Blocked",
-  "timestamp": "2026-03-02T21:06:30.491735+00:00",
-  "decision_reason": "Critical failure BR-08 blocks release.",
+  "timestamp": "2026-03-03T17:42:35.110418+00:00",
+  "decision_reason": "Critical failure candidates-dtype-created_ts blocks release.",
   "failed_rules": [
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
     {
       "rule_id": "BR-08",
       "severity": "critical",
       "root_cause": "stale_data",
       "details": {
-        "lag_hours": 590.11,
-        "reference_time": "2026-03-02T21:06:30.491707+00:00",
-        "latest_data_time": "2026-02-06T07:00:00+00:00",
+        "lag_hours": 895.46,
+        "reference_time": "2026-03-03T17:42:35.110395+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
         "timestamp_source": "file_received_ts",
         "max_allowed_hours": 24,
         "warning_hours": 48

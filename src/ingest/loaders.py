@@ -46,6 +46,19 @@ def discover_ingest_files(base_dir: Path, file_names: Sequence[str]) -> Dict[str
     return resolved
 
 
+def _prune_datetime_dtypes(
+    dtype_overrides: Optional[Mapping[str, Any]],
+    parse_dates: Optional[Sequence[str]],
+) -> Optional[Dict[str, Any]]:
+    if not dtype_overrides:
+        return None
+    if not parse_dates:
+        return dict(dtype_overrides)
+    excluded = set(parse_dates)
+    pruned = {key: value for key, value in dtype_overrides.items() if key not in excluded}
+    return pruned or None
+
+
 def load_table(
     name: str,
     path: Path,
@@ -64,7 +77,7 @@ def load_table(
     df = pd.read_csv(
         resolved_path,
         parse_dates=list(parse_dates) if parse_dates else None,
-        dtype=dict(dtype_overrides) if dtype_overrides else None,
+        dtype=_prune_datetime_dtypes(dtype_overrides, parse_dates),
         **read_kwargs,
     )
 
