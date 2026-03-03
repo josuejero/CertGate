@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 if str(BASE_DIR) not in sys.path:
@@ -33,11 +34,10 @@ def _ensure_python_supported() -> None:
     raise SystemExit(base_message + " Please use a supported interpreter before rerunning this script.")
 
 
-_ensure_python_supported()
-
 import pandas as pd
-from great_expectations.core.batch import RuntimeBatchRequest
-from great_expectations.data_context import DataContext
+
+if TYPE_CHECKING:
+    from great_expectations.core.batch import RuntimeBatchRequest
 
 from src.ingest.loaders import load_table
 from src.rules.schema_rules import get_schema_definition
@@ -66,6 +66,33 @@ ACTION_LIST = [
     },
 ]
 
+VALIDATION_RUN_CONFIGS = (
+    {
+        "table_key": "candidates",
+        "expectation_suite_name": "candidates_suite",
+        "batch_identifier": "candidates",
+    },
+    {
+        "table_key": "exam_results",
+        "expectation_suite_name": "exam_results_suite",
+        "batch_identifier": "exams",
+    },
+    {
+        "table_key": "certification_status",
+        "expectation_suite_name": "cert_status_suite",
+        "batch_identifier": "certifications",
+    },
+    {
+        "table_key": "exam_results",
+        "expectation_suite_name": "freshness_suite",
+        "batch_identifier": "freshness",
+    },
+)
+
+EXPECTATION_SUITE_NAMES = tuple(
+    config["expectation_suite_name"] for config in VALIDATION_RUN_CONFIGS
+)
+
 
 def _load_dataframe(table_key: str) -> pd.DataFrame:
     definition = get_schema_definition(table_key)
@@ -92,6 +119,8 @@ def _to_datetime(value: pd.Timestamp | datetime | str) -> datetime:
 
 
 def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchRequest:
+    from great_expectations.core.batch import RuntimeBatchRequest
+
     return RuntimeBatchRequest(
         datasource_name="pandas_ingest",
         data_connector_name="runtime_data_connector",
@@ -102,36 +131,35 @@ def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchReque
 
 
 def main() -> None:
+    _ensure_python_supported()
+    from great_expectations.data_context import DataContext
+
     context = DataContext(context_root_dir=str(GX_ROOT))
 
-    candidates_df = _load_dataframe("candidates")
-    exam_df = _load_dataframe("exam_results")
-    cert_df = _load_dataframe("certification_status")
+    table_dfs = {
+        table_key: _load_dataframe(table_key) for table_key in SCHEMA_TARGETS
+    }
+    exam_df = table_dfs["exam_results"]
 
     evaluation_params = {
         "min_exam_date": _to_datetime(exam_df["exam_date"].min()),
         "max_exam_date": _to_datetime(exam_df["exam_date"].max()),
-        "min_file_received_ts": _to_datetime(exam_df["file_received_ts"].min()),
-        "max_file_received_ts": _to_datetime(exam_df["file_received_ts"].max()),
+        "min_file_received_ts": _to_datetime(
+            exam_df["file_received_ts"].min()
+        ),
+        "max_file_received_ts": _to_datetime(
+            exam_df["file_received_ts"].max()
+        ),
     }
 
     validations = [
         {
-            "batch_request": _build_batch_request(candidates_df, "candidates"),
-            "expectation_suite_name": "candidates_suite",
-        },
-        {
-            "batch_request": _build_batch_request(exam_df, "exams"),
-            "expectation_suite_name": "exam_results_suite",
-        },
-        {
-            "batch_request": _build_batch_request(cert_df, "certifications"),
-            "expectation_suite_name": "cert_status_suite",
-        },
-        {
-            "batch_request": _build_batch_request(exam_df, "freshness"),
-            "expectation_suite_name": "freshness_suite",
-        },
+            "batch_request": _build_batch_request(
+                table_dfs[config["table_key"]], config["batch_identifier"]
+            ),
+            "expectation_suite_name": config["expectation_suite_name"],
+        }
+        for config in VALIDATION_RUN_CONFIGS
     ]
 
     result = context.run_checkpoint(
