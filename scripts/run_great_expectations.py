@@ -43,7 +43,7 @@ def _to_datetime(value: pd.Timestamp | datetime | str) -> datetime:
         return pd.to_datetime(value).to_pydatetime()
     if isinstance(value, datetime):
         return value
-    raise ValueError(f\"Unable to interpret {value!r} as datetime\")  # type: ignore[unreachable]
+    raise ValueError(f"Unable to interpret {value!r} as datetime")  # type: ignore[unreachable]
 
 
 def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchRequest:
