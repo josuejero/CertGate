@@ -6,7 +6,7 @@ on:
   pull_request:
   workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: "0 8 * * *"
 
 jobs:
   test:
@@ -44,21 +44,22 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      pages: write
-      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@v4
+
       - name: Download reports artifacts
         uses: actions/download-artifact@v4
         with:
           name: reports
           path: artifacts/reports
+
       - name: Download data docs
         uses: actions/download-artifact@v4
         with:
           name: gx-data-docs
           path: artifacts/data-docs
+
       - name: Build Pages payload
         run: |
           rm -rf page
@@ -68,10 +69,11 @@ jobs:
           cp -R artifacts/data-docs/. page/data-docs/
           mkdir -p page/reports
           cp -R artifacts/reports/* page/reports/
+
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: page
+          publish_dir: ./page
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com

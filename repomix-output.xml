@@ -1,0 +1,4756 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/
+  workflows/
+    ci.yml
+data/
+  bad/
+    cert-status-inconsistent-with-exam/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    disciplinary-flag-missing-candidate/
+      candidates.csv
+      certification_status.csv
+      disciplinary_flags.csv
+      exam_results.csv
+    duplicate-candidate-id/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    future-exam-date/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    invalid-score/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    missing-required-column/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    orphan-certification-row/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    stale-file-timestamp/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+  good/
+    candidates.csv
+    certification_status.csv
+    exam_results.csv
+  regression/
+    regression-duplicate-exam-attempt/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    regression-lagging-exam-file/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+    regression-missing-candidate-join/
+      candidates.csv
+      certification_status.csv
+      exam_results.csv
+demo-site/
+  assets/
+    validation-fail.png
+    validation-pass.png
+    workflow.gif
+  index.html
+  styles.css
+docs/
+  business-rules.md
+  defect-log.md
+  rule-severity-matrix.md
+  test-plan.md
+gx/
+  checkpoints/
+    .ge_store_backend_id
+    ingest_validation_checkpoint.yml
+  expectations/
+    .ge_store_backend_id
+    candidates_suite.json
+    cert_status_suite.json
+    exam_results_suite.json
+    freshness_suite.json
+  plugins/
+    custom_data_docs/
+      styles/
+        data_docs_custom_styles.css
+  validations/
+    candidates_suite/
+      20260303-174139-ingest-validation/
+        20260303T174139.800410Z/
+          106952c2d1ae54a9bf3d2fec187882f1.json
+    cert_status_suite/
+      20260303-174139-ingest-validation/
+        20260303T174139.800410Z/
+          e3788df5e93491c4b15864e676bef3ab.json
+    exam_results_suite/
+      20260303-174139-ingest-validation/
+        20260303T174139.800410Z/
+          c70c1f5ab123686f35152123b7322e44.json
+    freshness_suite/
+      20260303-174139-ingest-validation/
+        20260303T174139.800410Z/
+          fab8550bd7ed88d223fae5ed07eff1a2.json
+    .ge_store_backend_id
+  .gitignore
+  great_expectations.yml
+reports/
+  defect_summary.json
+  junit.xml
+  release_decision.json
+  validation_summary.json
+scripts/
+  bootstrap.sh
+  generate_demo_assets.py
+  generate_release_reports.py
+  run_great_expectations.py
+src/
+  ingest/
+    __init__.py
+    loaders.py
+  rules/
+    __init__.py
+    business_rules.py
+    schema_rules.py
+  __init__.py
+  reporting.py
+tests/
+  defect_triage/
+    test_triage_mapping.py
+  functional/
+    test_schema_and_business.py
+  regression/
+    test_regression_scenarios.py
+  smoke/
+    test_environment.py
+  uat/
+    test_release_decision.py
+  unit/
+    test_business_rules.py
+    test_reporting.py
+    test_schema_rules.py
+  conftest.py
+.repomixignore
+pytest.ini
+README.md
+requirements.txt
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".repomixignore">
+*.svg
+gx/data_docs/local_site/
+</file>
+
+<file path="data/bad/cert-status-inconsistent-with-exam/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+6001,1993-09-01,emily.roberts@example.com,Emily,Roberts,2026-02-20T15:30:00Z,lms
+</file>
+
+<file path="data/bad/cert-status-inconsistent-with-exam/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-6001,6001,Associate,Needs Review,2026-02-27T09:00:00Z,Manual,2026-02-27T09:00:00Z
+</file>
+
+<file path="data/bad/cert-status-inconsistent-with-exam/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-6001,6001,CG-EX,2026-02-25,1,91,91,Pass,Remote,2026-02-25T11:00:00Z
+</file>
+
+<file path="data/bad/disciplinary-flag-missing-candidate/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+8001,1994-03-27,quentin.hale@example.com,Quentin,Hale,2026-02-10T06:45:00Z,lms
+</file>
+
+<file path="data/bad/disciplinary-flag-missing-candidate/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-8001,8001,Associate,Certified,2026-03-01T09:00:00Z,Automated,2026-03-01T09:00:00Z
+</file>
+
+<file path="data/bad/disciplinary-flag-missing-candidate/disciplinary_flags.csv">
+flag_id,candidate_id,flag_type,flag_date,notes
+DF-8001,8001,Academic Integrity,2026-02-15,Reviewed and cleared
+DF-9002,9002,Code of Conduct,2026-02-20,Referred to conduct board
+</file>
+
+<file path="data/bad/disciplinary-flag-missing-candidate/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-8001,8001,CG-EX,2026-02-28,1,82,82,Pass,Remote,2026-02-28T10:30:00Z
+</file>
+
+<file path="data/bad/duplicate-candidate-id/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+2001,1989-04-10,carol.martin@example.com,Carol,Martin,2026-02-01T08:00:00Z,lms
+2001,1989-04-10,caroline.dup@example.com,Caroline,Dup,2026-02-01T08:05:00Z,lms
+</file>
+
+<file path="data/bad/duplicate-candidate-id/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-2001,2001,Associate,Certified,2026-01-15T10:00:00Z,Automated,2026-01-15T10:00:00Z
+</file>
+
+<file path="data/bad/duplicate-candidate-id/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-2001,2001,CG-EX,2026-01-10,1,85,85,Pass,Remote,2026-01-10T09:40:00Z
+</file>
+
+<file path="data/bad/future-exam-date/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+4001,1991-07-22,lara.gomez@example.com,Lara,Gomez,2026-02-05T07:10:00Z,lms
+</file>
+
+<file path="data/bad/future-exam-date/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-4001,4001,Associate,Certified,2026-05-15T08:00:00Z,Automated,2026-05-15T08:00:00Z
+</file>
+
+<file path="data/bad/future-exam-date/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-4001,4001,CG-EX,2026-05-10,1,88,88,Pass,Remote,2026-05-10T10:00:00Z
+</file>
+
+<file path="data/bad/invalid-score/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+3001,1992-12-05,james.li@example.com,James,Li,2026-02-22T11:30:00Z,lms
+</file>
+
+<file path="data/bad/invalid-score/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-3001,3001,Associate,Certified,2026-02-25T16:00:00Z,Automated,2026-02-25T16:00:00Z
+</file>
+
+<file path="data/bad/invalid-score/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-3001,3001,CG-EX,2026-02-19,1,123,123,Pass,Seattle,2026-02-19T12:00:00Z
+</file>
+
+<file path="data/bad/missing-required-column/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+1001,1990-05-12,alice.downs@example.com,Alice,Downs,2026-02-28T09:45:00Z,lms
+</file>
+
+<file path="data/bad/missing-required-column/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-1001,1001,Associate,Certified,2026-01-30T08:00:00Z,Automated,2026-01-30T08:00:00Z
+</file>
+
+<file path="data/bad/missing-required-column/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score_scaled,pass_fail,exam_location,file_received_ts
+ER-1001,1001,CG-EX,2026-01-25,1,94,Pass,Remote,2026-01-25T10:15:00Z
+</file>
+
+<file path="data/bad/orphan-certification-row/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+7001,1986-06-17,dana.owens@example.com,Dana,Owens,2026-01-20T10:00:00Z,lms
+</file>
+
+<file path="data/bad/orphan-certification-row/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-7001,7001,Associate,Certified,2026-02-02T08:00:00Z,Automated,2026-02-02T08:00:00Z
+CS-9999,9999,Associate,Certified,2026-02-03T07:30:00Z,Automated,2026-02-03T07:30:00Z
+</file>
+
+<file path="data/bad/orphan-certification-row/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-7001,7001,CG-EX,2026-01-28,1,88,88,Pass,Remote,2026-01-28T09:00:00Z
+</file>
+
+<file path="data/bad/stale-file-timestamp/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+5001,1979-03-14,ryan.kapoor@example.com,Ryan,Kapoor,2026-01-18T13:00:00Z,lms
+</file>
+
+<file path="data/bad/stale-file-timestamp/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-5001,5001,Associate,Not Certified,2026-02-18T12:00:00Z,Manual,2026-02-18T12:00:00Z
+</file>
+
+<file path="data/bad/stale-file-timestamp/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-5001,5001,CG-EX,2026-01-20,1,79,79,Fail,Boston,2026-02-15T07:35:00Z
+</file>
+
+<file path="data/good/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+1001,1990-05-12,alice.downs@example.com,Alice,Downs,2026-02-28T09:45:00Z,lms
+1002,1988-11-03,bob.nguyen@example.com,Bob,Nguyen,2026-01-15T14:20:00Z,lms
+</file>
+
+<file path="data/good/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-1001,1001,Associate,Certified,2026-01-30T08:00:00Z,Automated,2026-01-30T08:00:00Z
+CS-1002,1002,Associate,Not Certified,2025-11-20T13:10:00Z,Manual,2025-11-20T13:10:00Z
+</file>
+
+<file path="data/good/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-1001,1001,CG-EX,2026-01-25,1,94,94,Pass,Remote,2026-01-25T10:15:00Z
+ER-1002,1002,CG-EX,2025-11-12,1,58,58,Fail,New York,2025-11-12T09:05:00Z
+</file>
+
+<file path="data/regression/regression-duplicate-exam-attempt/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+9101,1995-12-30,marco.sanchez@example.com,Marco,Sanchez,2026-02-28T10:10:00Z,lms
+</file>
+
+<file path="data/regression/regression-duplicate-exam-attempt/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-9101,9101,Associate,Certified,2026-02-28T11:00:00Z,Automated,2026-02-28T11:00:00Z
+</file>
+
+<file path="data/regression/regression-duplicate-exam-attempt/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-9101-1,9101,CG-EX,2026-02-26,1,92,92,Pass,Remote,2026-02-26T10:00:00Z
+ER-9101-2,9101,CG-EX,2026-02-26,1,92,92,Pass,Remote,2026-02-26T10:05:00Z
+</file>
+
+<file path="data/regression/regression-lagging-exam-file/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+9201,1987-01-08,selena.martins@example.com,Selena,Martins,2026-02-27T12:20:00Z,lms
+</file>
+
+<file path="data/regression/regression-lagging-exam-file/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-9201,9201,Associate,Needs Review,2026-02-10T08:30:00Z,Manual,2026-02-10T08:30:00Z
+</file>
+
+<file path="data/regression/regression-lagging-exam-file/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-9201,9201,CG-EX,2026-02-01,1,74,74,Fail,Remote,2026-02-06T07:00:00Z
+</file>
+
+<file path="data/regression/regression-missing-candidate-join/candidates.csv">
+candidate_id,birth_date,email,first_name,last_name,created_ts,source_system
+9003,1985-08-11,irene.long@example.com,Irene,Long,2026-01-25T13:00:00Z,lms
+</file>
+
+<file path="data/regression/regression-missing-candidate-join/certification_status.csv">
+cert_status_id,candidate_id,certification_level,certification_status,certified_ts,status_source,status_effective_ts
+CS-9002,9002,Associate,Certified,2026-01-22T10:00:00Z,Automated,2026-01-22T10:00:00Z
+</file>
+
+<file path="data/regression/regression-missing-candidate-join/exam_results.csv">
+exam_result_id,candidate_id,exam_code,exam_date,attempt_number,score,score_scaled,pass_fail,exam_location,file_received_ts
+ER-9002,9002,CG-EX,2026-01-20,1,81,81,Pass,Remote,2026-01-20T08:00:00Z
+</file>
+
+<file path="demo-site/index.html">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CertGate QA Demo</title>
+    <meta
+      name="description"
+      content="Automated CertGate QA pipeline with Great Expectations data docs, release decision exports, and recruiter-ready summary."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Recruiter-ready QA demo</p>
+        <h1>CertGate public QA showcase</h1>
+        <p>
+          Live snapshot of the automated gating run: pytest layers, Great Expectations checkpoints,
+          and structured release exports. Every workflow refresh pushes a clickable page for the hiring
+          team to inspect.</p>
+      </div>
+      <div>
+        <a class="demo-link" id="demo-link" href="#" target="_blank" rel="noopener">Live demo link</a>
+        <p class="hero-meta" id="demo-url">Loading link...</p>
+      </div>
+    </header>
+    <main>
+      <section class="status-panel">
+        <article class="card status-card">
+          <span class="status-pill" id="status-pill" data-status="loading">Loading...</span>
+          <h2 id="status-text">Fetching validation data...</h2>
+          <p id="status-timestamp"></p>
+          <p id="status-reason"></p>
+          <ul id="fail-list"><li>Waiting for the latest release decision.</li></ul>
+        </article>
+        <article class="card">
+          <p class="section-title">Validation coverage</p>
+          <div class="stats-grid">
+            <div class="stat">
+              <p class="stat-label">Rules evaluated</p>
+              <p class="stat-value" id="rule-count">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Failures</p>
+              <p class="stat-value" id="failed-count">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Generated</p>
+              <p class="stat-value" id="generated-at">—</p>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="overview card">
+        <p class="section-title">Project overview</p>
+        <p>
+          CertGate combines schema and business-rule automation to guard releases for the candidate,
+          examination, and certification feeds. Pytest layers exercise every helper and regression
+          scenario, while Great Expectations keeps data docs and checkpoints live for recruiters.
+        </p>
+      </section>
+      <section class="rule-categories">
+        <article class="rule-card">
+          <h3>Schema &amp; completeness</h3>
+          <p>Ensure required columns, dtypes, and unique identifiers before a batch ever lands in production.</p>
+        </article>
+        <article class="rule-card">
+          <h3>Consistency &amp; integrity</h3>
+          <p>Candidate joins, pass/fail status mappings, and certification uniqueness guard the business logic.</p>
+        </article>
+        <article class="rule-card">
+          <h3>Freshness &amp; timeliness</h3>
+          <p>Metadata and timestamps verify that data arrives within the 24-hour window or flags a warning.</p>
+        </article>
+      </section>
+      <section class="data-docs card">
+        <p class="section-title">Great Expectations data docs</p>
+        <p>Click through the GX site to see every expectation suite and validation result that underpins this demo.</p>
+        <ul class="link-list">
+          <li><a href="data-docs/index.html" target="_blank" rel="noopener">Data docs index</a></li>
+          <li><a href="data-docs/candidates_suite/index.html" target="_blank" rel="noopener">Candidate suite</a></li>
+          <li><a href="data-docs/exam_results_suite/index.html" target="_blank" rel="noopener">Exam results suite</a></li>
+          <li><a href="data-docs/cert_status_suite/index.html" target="_blank" rel="noopener">Certification suite</a></li>
+        </ul>
+      </section>
+      <section class="artifacts card">
+        <p class="section-title">Raw artifacts</p>
+        <ul>
+          <li><a href="reports/release_decision.json" target="_blank">release_decision.json</a></li>
+          <li><a href="reports/validation_summary.json" target="_blank">validation_summary.json</a></li>
+          <li><a href="reports/defect_summary.json" target="_blank">defect_summary.json</a></li>
+          <li><a href="reports/junit.xml" target="_blank">junit.xml</a></li>
+        </ul>
+      </section>
+      <section class="screenshots">
+        <p class="section-title">Validation highlights</p>
+        <div class="screenshots-grid">
+          <article class="screenshot-card">
+            <img src="assets/validation-fail.png" alt="Failed validation highlight" />
+            <p>Failed validation captures the critical freshness lag that currently blocks release.</p>
+          </article>
+          <article class="screenshot-card">
+            <img src="assets/validation-pass.png" alt="Passing validation highlight" />
+            <p>The passing capture shows clean schema, scoring, and pass/fail business logic.</p>
+          </article>
+          <article class="screenshot-card">
+            <img src="assets/workflow.gif" alt="Animated workflow GIF" />
+            <p>GIF: bad dataset → blocked release → corrected bundle → ready for release.</p>
+          </article>
+        </div>
+      </section>
+      <section class="card">
+        <p class="section-title">Defect summary</p>
+        <div id="defect-legend" class="legend-stack"></div>
+        <div class="table-wrapper">
+          <table class="defect-table">
+            <thead>
+              <tr>
+                <th>Rule ID</th>
+                <th>Severity</th>
+                <th>Description</th>
+                <th>Root cause</th>
+                <th>Remediation</th>
+              </tr>
+            </thead>
+            <tbody id="defect-table-body">
+              <tr>
+                <td colspan="5">Loading defects...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-note">
+      Latest artifacts pulled from the CI workflow and deployed to GitHub Pages.
+    </footer>
+    <script>
+      const reportPaths = {
+        release: "reports/release_decision.json",
+        validation: "reports/validation_summary.json",
+        defects: "reports/defect_summary.json",
+      };
+
+      const friendlyCauses = {
+        schema_issue: "Schema issues",
+        integrity_issue: "Integrity",
+        stale_data: "Freshness",
+        duplicate_record: "Duplicate records",
+        invalid_business_rule_state: "Business rule drift",
+      };
+
+      function getTimestampLabel(timestamp) {
+        try {
+          return new Date(timestamp).toLocaleString(undefined, {
+            dateStyle: "medium",
+            timeStyle: "short",
+          });
+        } catch (error) {
+          return timestamp || "n/a";
+        }
+      }
+
+      async function fetchJson(path) {
+        const response = await fetch(path);
+        if (!response.ok) {
+          throw new Error(`Failed to load ${path}: ${response.status}`);
+        }
+        return response.json();
+      }
+
+      function renderStatus(decision, validation) {
+        const statusText = document.getElementById("status-text");
+        const statusPill = document.getElementById("status-pill");
+        statusText.textContent = decision.status;
+        statusPill.textContent = decision.status;
+        statusPill.dataset.status = decision.status.toLowerCase();
+        document.getElementById("status-reason").textContent = decision.decision_reason;
+        document.getElementById("status-timestamp").textContent = `Run: ${getTimestampLabel(
+          decision.timestamp
+        )}`;
+        const failList = document.getElementById("fail-list");
+        failList.innerHTML = "";
+        if (!decision.failed_rules.length) {
+          failList.innerHTML = "<li>No blocking defects.</li>";
+        } else {
+          decision.failed_rules.forEach((rule) => {
+            const li = document.createElement("li");
+            li.textContent = `${rule.rule_id} (${rule.severity}): ${rule.root_cause}`;
+            failList.appendChild(li);
+          });
+        }
+        document.getElementById("rule-count").textContent = validation.rule_count;
+        document.getElementById("failed-count").textContent = validation.failed_count;
+        document.getElementById("generated-at").textContent = getTimestampLabel(validation.generated_at);
+      }
+
+      function renderDefects(defectData) {
+        const tbody = document.getElementById("defect-table-body");
+        tbody.innerHTML = "";
+        if (!defectData.defects.length) {
+          tbody.innerHTML = "<tr><td colspan=5>No defects found.</td></tr>";
+        } else {
+          for (const defect of defectData.defects) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${defect.rule_id}</td>
+            <td>${defect.severity}</td>
+            <td>${defect.description}</td>
+            <td>${friendlyCauses[defect.root_cause] || defect.root_cause}</td>
+            <td><a href="${defect.remediation_link}" target="_blank">rule matrix</a></td>
+          `;
+            tbody.appendChild(row);
+          }
+        }
+        const legend = document.getElementById("defect-legend");
+        legend.innerHTML = "";
+        if (defectData.root_cause_counts) {
+          Object.entries(defectData.root_cause_counts).forEach(([key, value]) => {
+            const pill = document.createElement("span");
+            pill.className = "legend-pill";
+            pill.textContent = `${friendlyCauses[key] || key}: ${value}`;
+            legend.appendChild(pill);
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentUrl = window.location.href;
+        const demoLink = document.getElementById("demo-link");
+        demoLink.href = currentUrl;
+        document.getElementById("demo-url").textContent = currentUrl;
+
+        Promise.all([
+          fetchJson(reportPaths.release),
+          fetchJson(reportPaths.validation),
+          fetchJson(reportPaths.defects),
+        ])
+          .then(([decision, validation, defects]) => {
+            renderStatus(decision, validation);
+            renderDefects(defects);
+          })
+          .catch((error) => {
+            console.error(error);
+            document.getElementById("status-text").textContent = "Artifacts pending";
+            document.getElementById("status-reason").textContent =
+              "Run the workflow to populate the demo payloads.";
+          });
+      });
+    </script>
+  </body>
+</html>
+</file>
+
+<file path="demo-site/styles.css">
+:root {
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: #e2e8f0;
+  background-color: #020617;
+  line-height: 1.5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background-color: #020617;
+}
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 24px;
+  border-bottom: 1px solid #0f172a;
+}
+.hero-cta {
+  text-align: right;
+}
+.hero h1 {
+  margin: 0;
+  font-size: 2.6rem;
+}
+.hero p {
+  margin: 8px 0 0;
+  color: #94a3b8;
+}
+.demo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+}
+.hero-meta {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  word-break: break-all;
+}
+.section-title {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 1.6rem;
+}
+.status-panel {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 40px;
+}
+.card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 45px rgba(2, 6, 23, 0.6);
+}
+.status-pill {
+  display: inline-flex;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: #1e293b;
+}
+.status-pill[data-status="ready"] {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.12);
+}
+.status-pill[data-status="warning only"] {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.15);
+}
+.status-pill[data-status="blocked"] {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+.status-card h2 {
+  margin: 16px 0 0;
+  font-size: 2rem;
+}
+.status-card ul {
+  margin-top: 16px;
+  padding-left: 20px;
+  color: #cbd5f5;
+}
+.stats-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+.stats-grid .stat {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  background: #0b1121;
+  border: 1px solid #1e293b;
+}
+.stats-grid .stat-label {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.stats-grid .stat-value {
+  margin: 4px 0 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+.rule-categories {
+  margin-bottom: 40px;
+  display: grid;
+  gap: 16px;
+}
+.rule-card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.rule-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.2rem;
+}
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.link-list li a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+.link-list li a:hover {
+  text-decoration: underline;
+}
+.data-docs {
+  margin-bottom: 40px;
+}
+.artifacts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.artifacts li {
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.artifacts a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+.legend-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.legend-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #1e293b;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  background: #0b1121;
+}
+.screenshots {
+  margin: 40px 0;
+}
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.screenshot-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  background: #0f172a;
+}
+.screenshot-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.screenshot-card p {
+  margin: 12px;
+  color: #94a3b8;
+}
+.defect-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.defect-table th,
+.defect-table td {
+  padding: 10px;
+  border: 1px solid #1e293b;
+  text-align: left;
+}
+.defect-table th {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.table-wrapper {
+  overflow-x: auto;
+}
+.footer-note {
+  text-align: center;
+  margin: 60px 0 40px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+</file>
+
+<file path="docs/business-rules.md">
+# CertGate Business Rules
+
+## Purpose
+This document defines the data contract for CertGate's inbound feeds so that expectations can be translated into Great Expectations suites, validation artifacts, and release-gate decisions before any code is run. The focus is on the candidate master list, examination results, and certification status streams, covering schema, primary/uniqueness keys, valid ranges/windows, certification mappings, cross-file joins, freshness expectations, and severity tagging.
+
+## Files and Schemas
+| File | Required columns | Primary / uniqueness key | Notes on completeness/uniqueness |
+| --- | --- | --- | --- |
+| `candidates.csv` | `candidate_id`, `birth_date`, `email`, `first_name`, `last_name`, `created_ts`, `source_system` | `candidate_id` is the primary key; `email` must be globally unique across records | Candidate records must be complete and unique. Missing `candidate_id` or duplicate `email` should halt validation (critical). |
+| `exam_results.csv` | `exam_result_id`, `candidate_id`, `exam_code`, `exam_date`, `attempt_number`, `score`, `score_scaled`, `pass_fail`, `exam_location`, `file_received_ts` | Compound uniqueness on (`candidate_id`, `exam_code`, `attempt_number`) enforces one row per attempt; `exam_result_id` is also a unique identifier for traceability | `score` and `score_scaled` must be numeric; missing combination keys or duplicates trigger critical severity. |
+| `certification_status.csv` | `cert_status_id`, `candidate_id`, `certification_level`, `certified_ts`, `status_source`, `status_effective_ts` | `cert_status_id` primary key; `candidate_id` must be unique per `certification_level` at a point in time (no overlapping records for the same level) | Certification rows describe the current status; duplicate `candidate_id` + `certification_level` with overlapping timestamps breachs consistency and uniqueness expectations (critical). |
+
+## Allowed Score Range
+- `score` and `score_scaled` must fall within 0–100 inclusive (percentage). Values outside this range indicate data corruption/entry errors and are tagged as **warning** severity when caught in validation.
+- Non-numeric or null scores mean the entire row is invalid and should be routed to the `bad` synthetic bucket for regression testing.
+
+## Valid Exam-Date Window
+- All `exam_date` values must fall within the 12-month window ending on the validation execution date (e.g., if validations run on March 2, 2026, allowed window is March 2, 2025 through March 2, 2026). Dates outside this window are flagged as **warning** since they indicate stale or future-dated records.
+- The exam feed may include a `file_received_ts`; this timestamp must not be older than 24 hours past the `exam_date` to satisfy timeliness expectations.
+
+## Pass/Fail to Certification-Status Mapping
+| Pass/Fail value | Expected certification status | Severity if mismatch |
+| --- | --- | --- |
+| `Pass`, `pass`, `P` | `Certified`, `Certification Granted` | **Critical** if certification status is blank or not in the allowed list for a passing exam (reports block release). |
+| `Fail`, `fail`, `F` | `NeedsReview`, `Certification Pending`, `Not Certified` | **Warning** if a failing attempt is associated with a `Certified` status; this might warrant manual review. |
+
+Certification rows without a corresponding attempt (no pass/fail link) are allowed but should be noted as **info** (for audit tracing) unless they contradict historical results.
+
+## Cross-File Candidate ID Matching
+- Every `candidate_id` in `exam_results.csv` and `certification_status.csv` must exist in `candidates.csv`. Missing candidate references break **consistency** and are tagged as **critical**.
+- Candidate records that appear in the master after an exam entry should trigger a **warning** until the master is refreshed; this ensures near-real-time consistency between upstream sources.
+
+## Freshness Thresholds for Inbound Files
+| File | Freshness definition | Allowed lag | Severity |
+| --- | --- | --- | --- |
+| `candidates.csv` | `created_ts` top-of-file or file metadata | Ingested within 24 hours of the most recent `created_ts` | **Warning** (if gap > 24h) / **Critical** (> 72h or running behind multiple days) |
+| `exam_results.csv` | `file_received_ts` or max `exam_date`; also expect `file_received_ts` in metadata | Ingested within 24 hours of the latest `exam_date` | **Critical** if lag > 24h (production gate); **Warning** if lag 24–48h to prompt action. |
+| `certification_status.csv` | `status_effective_ts` | Same-day delivery preferred; maximum 48h lag | **Warning** if lag 24–48h, **Info** if on time, **Critical** if > 48h during release readiness. |
+
+## Severity per Rule
+The rule severity follows the data-quality dimension impacted:
+- **Completeness/Uniqueness (critical)**: missing required columns, duplicate primary keys, and candidate_id duplicates.
+- **Validity (warning)**: out-of-range scores, invalid pass/fail to certification mappings, invalid datetimes (exam_date, certified_ts).
+- **Consistency (critical/warning)**: missing candidate master joins (critical) or mismatched status (warning).
+- **Timeliness (warning/critical)**: stale files or CPT (candidate processing time) beyond thresholds.
+- **Info**: metadata confirmations (e.g., optional `source_system`) that do not block releases but provide context.
+
+This business rule sheet will guide expectation suite authoring, synthetic data creation, and automated test coverage before code is written.
+</file>
+
+<file path="docs/defect-log.md">
+# Defect Log
+
+<!-- Track rule failures here with timestamp, rule IDs, severity, impacted files, synthetic reproduction steps, and status. -->
+
+| Timestamp (UTC) | Rule ID | Severity | File(s) | Description | Status |
+| --- | --- | --- | --- | --- | --- |
+| _empty_ | _empty_ | _empty_ | _empty_ | _empty_ | _empty_ |
+</file>
+
+<file path="docs/rule-severity-matrix.md">
+# Rule Severity Matrix
+
+| Rule ID | Description | Data Quality Dimension | Severity | Failure Symptoms | Remediation Guidance | Verification Target |
+| --- | --- | --- | --- | --- | --- | --- |
+| BR-01 | Candidate master schema completeness (required columns, non-null PK/email) | Completeness / Uniqueness | Critical | GX expectation fails with missing columns or null PK; release decision blocks | Reload sourced master; rebuild CSV ensuring all required columns and non-null `candidate_id`/`email`; rerun suite | `gx/expectations/candidates_suite.yml` – `expect_table_columns_to_match_ordered_list` + `expect_column_values_to_not_be_null` |
+| BR-02 | Candidate master uniqueness (`candidate_id`, `email`) | Uniqueness | Critical | Duplicate rows detected when batch processed; dedup step triggered | Deduplicate upstream source, enforce `candidate_id`/`email` uniqueness | Same suite; `expect_column_values_to_be_unique` expectation |
+| BR-03 | Exam results composite key (candidate/exam/attempt) must be unique | Uniqueness | Critical | Batch fails with duplicate attempt attempt_number; gating artifact is `block` | Halt ingest, remove duplicates, reprocess; escalate to data provider | `gx/expectations/exam_results_suite.yml` – custom uniqueness expectation |
+| BR-04 | Score & scaled score within 0–100 | Validity | Warning | Out-of-range score triggers warning; release decision may allow with caution | Adjust scoring script, verify calculation, rerun synthetic `bad` sample | `expect_column_values_to_be_between(score, 0, 100)` & `expect_column_values_to_be_between(score_scaled, 0, 100)` |
+| BR-05 | Pass/Fail mapping to certification status | Consistency | Critical / Warning (depends on mismatch) | Pass without `Certified` or fail marked as `Certified`; severity is critical for pass mismatch, warning for fail mismatch | Investigate business rule, update status feed, rerun expectation suite | `gx/expectations/cert_status_suite.yml` – expect statuses in allowed set and cross-check pass/fail via helper expectation |
+| BR-06 | Exam date within rolling 12-month window | Validity | Warning | Future/stale date; flagged as `warning` but logged for monitoring | Confirm exam_date calculation; ensure timezone normalized | `expect_column_values_to_be_between(exam_date, today-12mo, today)` in exam suite |
+| BR-07 | Cross-file candidate_id matching (exam + cert refer to master) | Consistency | Critical | Validation error referencing missing `candidate_id` in master; release blocked | Backfill candidate master, rerun ingestion | Functional join test in regression layer and expectation `expect_column_values_to_be_in_set` |
+| BR-08 | Freshness (exam file must arrive ≤24h after latest exam_date) | Timeliness | Critical / Warning | Lag >24h triggers `block` (critical) or `warn` (24-48h); recorded in release decision | Re-trigger ingest, coordinate with source to deliver on time; notify ops | `gx/expectations/freshness_suite.yml` – custom lag expectation using `file_received_ts` metadata |
+| BR-09 | Certification status uniqueness per level | Consistency / Uniqueness | Critical | Duplicate certification_row for same level/time; automation halts to avoid conflicting statuses | Resolve overlapping records by choosing latest `status_effective_ts` and de-dup | Expectation ensures `candidate_id + certification_level` unique within rolling window |
+| BR-10 | File-level metadata availability (`file_received_ts`, `status_source`) | Info | Info | Expectation logs missing metadata but lets release continue; `info` severity notes in validation summary | Ask data provider to include the timestamp in future exports | `expect_table_columns_to_exist` for metadata columns in optional metadata expectation group |
+
+Severity definitions
+- **Critical**: validation failure blocks release and must be resolved before production deployment.
+- **Warning**: records still land in the ingest but trigger reviews; release decision may allow a guarded release with documented risk.
+- **Info**: used for observability; not release-blocking but should be tracked and documented.
+
+Use this matrix to prioritize remediation, guide QA automation, and feed the release decision pipeline so each rule’s severity is explicit in automation artifacts.
+</file>
+
+<file path="docs/test-plan.md">
+# CertGate QA Test Plan
+
+## Overview
+The QA testing plan verifies the business rules defined for CertGate using Great Expectations (GX) suites, pytest layers, synthetic datasets, and automated reporting. Each rule maps to one or more GX expectations housed under `gx/expectations/`, exercised by pytest (unit, functional, regression, and UAT layers), and surfaced via CI artifacts (`reports/validation_summary.json`, `reports/release_decision.json`, `reports/junit.xml`). The plan also references the defect log (`docs/defect-log.md`) so every gating failure is traceable.
+
+## Rule-to-Test Traceability
+| Business rule | GX expectation candidates | Pytest layer | Synthetic data role | Acceptance criteria |
+| --- | --- | --- | --- | --- |
+| Candidate master schema & uniqueness | `expect_table_columns_to_match_ordered_list`, `expect_column_values_to_not_be_null(candidate_id, email)`, `expect_column_values_to_be_unique(candidate_id)`, `expect_column_values_to_be_unique(email)` | Unit + Functional | Provide `good/candidates.csv` and `bad/candidates.csv` for missing columns or duplicate emails | GX suite passes when schema is complete/unique; failing data lands in `bad` set and pytest marks suite as failed, producing JUnit + validation summary. |
+| Exam results schema, composite key, score range, pass/fail mapping, exam_date window | `expect_column_values_to_be_between(score, 0, 100)`, `expect_column_values_to_be_in_set(pass_fail, ['Pass','Fail','P','F'])`, `expect_column_pair_values_A_to_be_B(candidate_id, exam_code, [rows unique])`, `expect_column_values_to_be_between(exam_date, (today-12mo), today)` | Functional + Regression | `good/exam_results.csv` (valid scores, valid pass/fail), `bad/exam_results.csv` (duplicate attempt, score 123) | Suite produces validation results; regression tests assert that `bad` data triggers the expected expectation names and severity. |
+| Certification status validity and mapping | `expect_column_values_to_be_in_set(certification_level, ['Associate','Professional','Expert'])`, `expect_column_values_to_be_in_set(status_source, [...])`, `expect_column_values_to_be_unique(candidate_id, condition=level)` | Regression | Synthetic `certification_status.csv` with mismatched statuses (pass + Not Certified) | On validation failure, defect log entry templates are populated and the release decision artifact is set to `investigate`. |
+| Cross-file candidate matching | `expect_column_values_to_be_in_set(candidate_id in exam_results, column=candidates.candidate_id)`, same for certification_status | Functional + UAT | Regression data where an exam_result points to a missing candidate | GX suite flagged; pytest regression captures severity to differentiate info/warning/critical statuses. |
+| Freshness & file lag | Custom expectation `expect_table_column_values_to_be_no_more_than_n_days_behind(column=file_received_ts, max_lag=1)` or metadata check plus `expect_column_values_to_be_between` using metadata references | UAT + CI smoke | Synthetic metadata to simulate 25-hour lag for exam file | CI gate ensures `reports/release_decision.json` toggles to `block` when lag expectation fails and signals the severity based on the rule matrix. |
+
+## GX Expectation Suites and Structure
+1. **Candidate Suite** (`gx/expectations/candidates_suite.yml`): covers schema, completeness, uniqueness, and optional metadata. Run during every dry run (pytest unit/functional) to prevent corrupt master loads.
+2. **Exam Results Suite** (`gx/expectations/exam_results_suite.yml`): covers composite keys, scores, pass/fail mapping, exam_date window, and candidate joinable references; executed in regression and UAT layers with synthetic failing pushes.
+3. **Certification Suite** (`gx/expectations/cert_status_suite.yml`): ensures status mapping integrity, uniqueness per level, and date validity; invoked in functional/regression contexts and again in UAT with near-production data.
+4. **Freshness Suite** (`gx/expectations/freshness_suite.yml`): validates metadata timestamps (ingest time vs. exam_date) and ensures each file's lag does not exceed defined thresholds; targeted by nightly CI jobs for timeliness assurance.
+
+Each suite produces `gx/validation_results/` that GitHub Actions archives and surfaces via GitHub Pages (per `gx/data_docs/`). Suites should also emit structured summaries to `reports/validation_summary.json` for downstream release automation.
+
+## Pytest Layers
+- **Unit**: quick checks on standalone rule functions (e.g., verifying helper methods for score validation). Use parametrized fixtures referencing `src/rules/` functions and rely on synthetic good/bad CSV snippets stored under `data/`. These tests run locally and in every PR pipeline, generating `reports/junit.xml`.
+- **Functional**: integrate CSV ingestion → GX expectation suite w/ `gx/expectations/*.yml`. Validate `candidates` feed by running the expectation suite against both `good` and `bad` data, verifying JUnit outputs and summarizing severity.
+- **Regression**: include more complex scenarios (duplicate candidates, pass/fail mismatches, metadata lag). Tests assert that failure metadata (rule ID, severity, message) matches the rule severity matrix and that the release decision artifact reflects the correct gating action (`block`, `warn`, `allow-with-notes`).
+- **UAT**: simulate near-production ingestion (daily pipeline with all three files) run by a pre-release job; ensures GX data docs are generated and defects are logged to `docs/defect-log.md` with context for each failing expectation.
+
+## Synthetic Dataset Usage
+- `data/good/` contains canonical CSVs for each file with valid field values. These drive happy-path regression tests and serve as reference for GX expectation authors.
+- `data/bad/` captures targeted failures per rule (missing columns, duplicate candidate IDs, stale timestamps). Their expected fail statuses are recorded in `docs/defect-log.md` entries for reproducibility.
+- `data/regression/` merges multi-file scenarios (e.g., candidate plus exam plus certification) to exercise cross-file checks.
+
+## CI Automation & Reporting
+- GitHub Actions workflow (`.github/workflows/ci.yml`) runs all pytest layers, executes GX validation suites, collects reports, and uploads validation docs to GitHub Pages via a dedicated job.
+- Post-test steps convert GX validation results to `reports/validation_summary.json` (including rule ID, pass/fail, severity, remediation link) and `reports/release_decision.json` (gate outcome: `block`, `warn`, `pass`). If Allure is enabled, `reports/allure-results/` gets populated and published as an optional artifact.
+- Failures automatically append to `docs/defect-log.md` with timestamp, rule ID, severity, impacted file, and remediation steps so data teams can triage quickly.
+
+### Release gating exports
+Post-test automation now serializes every evaluated `RuleOutcome` into three artifacts:
+
+| File | Purpose |
+| --- | --- |
+| `reports/validation_summary.json` | Lists every rule with its pass/fail flag, severity, remediation link (pointing at `docs/rule-severity-matrix.md`), and inferred root-cause tag so teams can quickly trace issues. |
+| `reports/release_decision.json` | Captures the gate status (`Ready`, `Warning only`, or `Blocked`), a short decision reason, and the failing rule list (critical failures also surface their `blocking_root_causes`). |
+| `reports/defect_summary.json` | Contains each defect (i.e., failing rule) with exactly one root cause from `{schema_issue, integrity_issue, stale_data, duplicate_record, invalid_business_rule_state}` plus a root cause tally for dashboards. |
+
+Gate logic follows this priority: any critical failure (schema, integrity, or freshness) triggers `Blocked`, the presence of only non-critical issues yields `Warning only`, and pristine runs produce `Ready`. Structured summaries keep GX checkpoints and CI consumers aligned with production-aware release decisions.
+
+## Acceptance Criteria
+1. Every business rule in `docs/business-rules.md` has a corresponding expectation or pytest guard described in this plan.
+2. GX validation suites run cleanly against `data/good`, and `data/bad` data yields predictable failures, as documented in the defect log.
+3. Reports (`validation_summary.json`, `release_decision.json`, `junit.xml`) capture severity details and link back to the rule severity matrix; CI or manual gating decisions reference these artifacts.
+4. Rule failures that differ in severity update `docs/rule-severity-matrix.md` with actionable remediation steps and expected follow-up (e.g., ticket creation, notification). 5. QA layers are traceable: rule → GX expectation → pytest test → report involving explicit severity (critical/warning/info).
+</file>
+
+<file path="gx/checkpoints/.ge_store_backend_id">
+store_backend_id = f4f67810-56cb-499a-9ec7-8b53391f204c
+</file>
+
+<file path="gx/expectations/.ge_store_backend_id">
+store_backend_id = 0cd31032-d0ae-465f-b9a1-e42fd76ba463
+</file>
+
+<file path="gx/expectations/candidates_suite.json">
+{
+  "expectation_suite_name": "candidates_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Candidate master schema, completeness, and uniqueness assertions.",
+    "contributors": [
+      "CertGate QA"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {},
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "candidate_id",
+          "birth_date",
+          "email",
+          "first_name",
+          "last_name",
+          "created_ts",
+          "source_system"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "candidate_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "email"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "candidate_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "email"
+      }
+    }
+  ]
+}
+</file>
+
+<file path="gx/expectations/cert_status_suite.json">
+{
+  "expectation_suite_name": "cert_status_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Certification status expectations to capture uniqueness and valid mappings.",
+    "contributors": [
+      "CertGate QA"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {},
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "cert_status_id",
+          "candidate_id",
+          "certification_level",
+          "certification_status",
+          "certified_ts",
+          "status_source",
+          "status_effective_ts"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "cert_status_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "candidate_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "cert_status_id"
+      }
+    },
+    {
+      "expectation_type": "expect_compound_columns_to_be_unique",
+      "kwargs": {
+        "column_list": [
+          "candidate_id",
+          "certification_level"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "certification_status",
+        "value_set": [
+          "Certified",
+          "Certification Granted",
+          "NeedsReview",
+          "Certification Pending",
+          "Not Certified"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "certification_level"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "certification_status"
+      }
+    }
+  ]
+}
+</file>
+
+<file path="gx/expectations/exam_results_suite.json">
+{
+  "expectation_suite_name": "exam_results_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Exam outcome assertions covering schema, pass/fail, and score ranges.",
+    "contributors": [
+      "CertGate QA"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {
+    "min_exam_date": null,
+    "max_exam_date": null
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "exam_result_id",
+          "candidate_id",
+          "exam_code",
+          "exam_date",
+          "attempt_number",
+          "score",
+          "score_scaled",
+          "pass_fail",
+          "exam_location",
+          "file_received_ts"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "exam_result_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "candidate_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "exam_result_id"
+      }
+    },
+    {
+      "expectation_type": "expect_compound_columns_to_be_unique",
+      "kwargs": {
+        "column_list": [
+          "candidate_id",
+          "exam_code",
+          "attempt_number"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "score",
+        "min_value": 0,
+        "max_value": 100
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "score_scaled",
+        "min_value": 0,
+        "max_value": 100
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "pass_fail",
+        "value_set": [
+          "Pass",
+          "Fail",
+          "P",
+          "F",
+          "pass",
+          "fail"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "exam_date",
+        "min_value": "$PARAMETER.min_exam_date",
+        "max_value": "$PARAMETER.max_exam_date"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "file_received_ts"
+      }
+    }
+  ]
+}
+</file>
+
+<file path="gx/expectations/freshness_suite.json">
+{
+  "expectation_suite_name": "freshness_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Timestamp freshness expectations used by nightly gating.",
+    "contributors": [
+      "CertGate QA"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {
+    "min_file_received_ts": null,
+    "max_file_received_ts": null
+  },
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "file_received_ts"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {
+        "column": "file_received_ts",
+        "min_value": "$PARAMETER.min_file_received_ts",
+        "max_value": "$PARAMETER.max_file_received_ts"
+      }
+    }
+  ]
+}
+</file>
+
+<file path="gx/plugins/custom_data_docs/styles/data_docs_custom_styles.css">
+/*index page*/
+.ge-index-page-site-name-title {}
+.ge-index-page-table-container {}
+.ge-index-page-table {}
+.ge-index-page-table-profiling-links-header {}
+.ge-index-page-table-expectations-links-header {}
+.ge-index-page-table-validations-links-header {}
+.ge-index-page-table-profiling-links-list {}
+.ge-index-page-table-profiling-links-item {}
+.ge-index-page-table-expectation-suite-link {}
+.ge-index-page-table-validation-links-list {}
+.ge-index-page-table-validation-links-item {}
+
+/*breadcrumbs*/
+.ge-breadcrumbs {}
+.ge-breadcrumbs-item {}
+
+/*navigation sidebar*/
+.ge-navigation-sidebar-container {}
+.ge-navigation-sidebar-content {}
+.ge-navigation-sidebar-title {}
+.ge-navigation-sidebar-link {}
+</file>
+
+<file path="gx/validations/candidates_suite/20260303-174139-ingest-validation/20260303T174139.800410Z/106952c2d1ae54a9bf3d2fec187882f1.json">
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "candidates"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174139.802044Z",
+      "pandas_data_fingerprint": "693783ba964b5c2539efa11be53e07b0"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "candidates_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174139.846278Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "106952c2d1ae54a9bf3d2fec187882f1",
+          "column_list": [
+            "candidate_id",
+            "birth_date",
+            "email",
+            "first_name",
+            "last_name",
+            "created_ts",
+            "source_system"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "candidate_id",
+          "birth_date",
+          "email",
+          "first_name",
+          "last_name",
+          "created_ts",
+          "source_system"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "106952c2d1ae54a9bf3d2fec187882f1",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "106952c2d1ae54a9bf3d2fec187882f1",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "106952c2d1ae54a9bf3d2fec187882f1",
+          "column": "email"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "106952c2d1ae54a9bf3d2fec187882f1",
+          "column": "email"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 5,
+    "success_percent": 100.0,
+    "successful_expectations": 5,
+    "unsuccessful_expectations": 0
+  },
+  "success": true
+}
+</file>
+
+<file path="gx/validations/cert_status_suite/20260303-174139-ingest-validation/20260303T174139.800410Z/e3788df5e93491c4b15864e676bef3ab.json">
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "certifications"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174140.558684Z",
+      "pandas_data_fingerprint": "6e515432aa23064d5d3bce8bd663f2ae"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "cert_status_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174140.563419Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column_list": [
+            "cert_status_id",
+            "candidate_id",
+            "certification_level",
+            "certification_status",
+            "certified_ts",
+            "status_source",
+            "status_effective_ts"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "cert_status_id",
+          "candidate_id",
+          "certification_level",
+          "certification_status",
+          "certified_ts",
+          "status_source",
+          "status_effective_ts"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_compound_columns_to_be_unique",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column_list": [
+            "candidate_id",
+            "certification_level"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "cert_status_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "cert_status_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_status",
+          "value_set": [
+            "Certified",
+            "Certification Granted",
+            "NeedsReview",
+            "Certification Pending",
+            "Not Certified"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_status"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "e3788df5e93491c4b15864e676bef3ab",
+          "column": "certification_level"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 8,
+    "success_percent": 100.0,
+    "successful_expectations": 8,
+    "unsuccessful_expectations": 0
+  },
+  "success": true
+}
+</file>
+
+<file path="gx/validations/exam_results_suite/20260303-174139-ingest-validation/20260303T174139.800410Z/c70c1f5ab123686f35152123b7322e44.json">
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "exams"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174140.206910Z",
+      "pandas_data_fingerprint": "2dcf5d7869b97343d4c7283da03e6281"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "exam_results_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174140.209446Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": "min_value cannot be greater than max_value",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 548, in _process_direct_and_bundled_metric_computation_configurations\n    ] = metric_computation_configuration.metric_fn(  # type: ignore[misc] # F not callable\n        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        **metric_computation_configuration.metric_provider_kwargs\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/metric_provider.py\", line 100, in inner_func\n    return metric_fn(*args, **kwargs)\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/map_metric_provider/column_condition_partial.py\", line 119, in inner_func\n    meets_expectation_series = metric_fn(\n        cls,\n    ...<2 lines>...\n        _metrics=metrics,\n    )\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/column_map_metrics/column_values_between.py\", line 76, in _pandas\n    raise ValueError(\"min_value cannot be greater than max_value\")\nValueError: min_value cannot be greater than max_value\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/validator/validation_graph.py\", line 285, in _resolve\n    self._execution_engine.resolve_metrics(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metrics_to_resolve=computable_metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metrics=metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        runtime_configuration=runtime_configuration,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 283, in resolve_metrics\n    return self._process_direct_and_bundled_metric_computation_configurations(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metric_fn_direct_configurations=metric_fn_direct_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metric_fn_bundle_configurations=metric_fn_bundle_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 552, in _process_direct_and_bundled_metric_computation_configurations\n    raise gx_exceptions.MetricResolutionError(\n    ...<4 lines>...\n    ) from e\ngreat_expectations.exceptions.exceptions.MetricResolutionError: min_value cannot be greater than max_value\n",
+        "raised_exception": true
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_date",
+          "max_value": "$PARAMETER.max_exam_date",
+          "min_value": "$PARAMETER.min_exam_date"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {},
+      "success": false
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column_list": [
+            "exam_result_id",
+            "candidate_id",
+            "exam_code",
+            "exam_date",
+            "attempt_number",
+            "score",
+            "score_scaled",
+            "pass_fail",
+            "exam_location",
+            "file_received_ts"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "exam_result_id",
+          "candidate_id",
+          "exam_code",
+          "exam_date",
+          "attempt_number",
+          "score",
+          "score_scaled",
+          "pass_fail",
+          "exam_location",
+          "file_received_ts"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_compound_columns_to_be_unique",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column_list": [
+            "candidate_id",
+            "exam_code",
+            "attempt_number"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_result_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_unique",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "exam_result_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "candidate_id"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "score",
+          "max_value": 100,
+          "min_value": 0
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "score_scaled",
+          "max_value": 100,
+          "min_value": 0
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_in_set",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "pass_fail",
+          "value_set": [
+            "Pass",
+            "Fail",
+            "P",
+            "F",
+            "pass",
+            "fail"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "missing_count": 0,
+        "missing_percent": 0.0,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0,
+        "unexpected_percent_nonmissing": 0.0,
+        "unexpected_percent_total": 0.0
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "c70c1f5ab123686f35152123b7322e44",
+          "column": "file_received_ts"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 10,
+    "success_percent": 90.0,
+    "successful_expectations": 9,
+    "unsuccessful_expectations": 1
+  },
+  "success": false
+}
+</file>
+
+<file path="gx/validations/freshness_suite/20260303-174139-ingest-validation/20260303T174139.800410Z/fab8550bd7ed88d223fae5ed07eff1a2.json">
+{
+  "evaluation_parameters": {
+    "max_exam_date": "2026-01-25 00:00:00",
+    "max_file_received_ts": "2026-01-25 10:15:00+00:00",
+    "min_exam_date": "2025-11-12 00:00:00",
+    "min_file_received_ts": "2025-11-12 09:05:00+00:00"
+  },
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "ingest_batch": "freshness"
+      },
+      "data_asset_name": "ingest_batch",
+      "data_connector_name": "runtime_data_connector",
+      "datasource_name": "pandas_ingest"
+    },
+    "batch_markers": {
+      "ge_load_time": "20260303T174140.816159Z",
+      "pandas_data_fingerprint": "2dcf5d7869b97343d4c7283da03e6281"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "ingest_batch"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "ingest_validation_checkpoint",
+    "expectation_suite_name": "freshness_suite",
+    "great_expectations_version": "0.17.23",
+    "run_id": {
+      "run_name": "20260303-174139-ingest-validation",
+      "run_time": "2026-03-03T12:41:39.800410-05:00"
+    },
+    "validation_id": null,
+    "validation_time": "20260303T174140.818907Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": "min_value cannot be greater than max_value",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 548, in _process_direct_and_bundled_metric_computation_configurations\n    ] = metric_computation_configuration.metric_fn(  # type: ignore[misc] # F not callable\n        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        **metric_computation_configuration.metric_provider_kwargs\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/metric_provider.py\", line 100, in inner_func\n    return metric_fn(*args, **kwargs)\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/map_metric_provider/column_condition_partial.py\", line 119, in inner_func\n    meets_expectation_series = metric_fn(\n        cls,\n    ...<2 lines>...\n        _metrics=metrics,\n    )\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/expectations/metrics/column_map_metrics/column_values_between.py\", line 76, in _pandas\n    raise ValueError(\"min_value cannot be greater than max_value\")\nValueError: min_value cannot be greater than max_value\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/validator/validation_graph.py\", line 285, in _resolve\n    self._execution_engine.resolve_metrics(\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metrics_to_resolve=computable_metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metrics=metrics,  # type: ignore[arg-type]  # Metric typing needs further refinement.\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        runtime_configuration=runtime_configuration,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 283, in resolve_metrics\n    return self._process_direct_and_bundled_metric_computation_configurations(\n           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        metric_fn_direct_configurations=metric_fn_direct_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        metric_fn_bundle_configurations=metric_fn_bundle_configurations,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/Users/wholesway/Documents/Internship-Projects/CertGate/.venv/lib/python3.13/site-packages/great_expectations/execution_engine/execution_engine.py\", line 552, in _process_direct_and_bundled_metric_computation_configurations\n    raise gx_exceptions.MetricResolutionError(\n    ...<4 lines>...\n    ) from e\ngreat_expectations.exceptions.exceptions.MetricResolutionError: min_value cannot be greater than max_value\n",
+        "raised_exception": true
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_be_between",
+        "kwargs": {
+          "batch_id": "fab8550bd7ed88d223fae5ed07eff1a2",
+          "column": "file_received_ts",
+          "max_value": "$PARAMETER.max_file_received_ts",
+          "min_value": "$PARAMETER.min_file_received_ts"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {},
+      "success": false
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_column_values_to_not_be_null",
+        "kwargs": {
+          "batch_id": "fab8550bd7ed88d223fae5ed07eff1a2",
+          "column": "file_received_ts"
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "element_count": 2,
+        "partial_unexpected_counts": [],
+        "partial_unexpected_index_list": [],
+        "partial_unexpected_list": [],
+        "unexpected_count": 0,
+        "unexpected_percent": 0.0
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 2,
+    "success_percent": 50.0,
+    "successful_expectations": 1,
+    "unsuccessful_expectations": 1
+  },
+  "success": false
+}
+</file>
+
+<file path="gx/validations/.ge_store_backend_id">
+store_backend_id = a37fa0f0-5a44-4aec-a12a-aabb74a3c97a
+</file>
+
+<file path="gx/.gitignore">
+uncommitted/
+</file>
+
+<file path="scripts/bootstrap.sh">
+#!/usr/bin/env bash
+set -euo pipefail
+
+SUPPORTED_PYTHON_MAJOR=3
+SUPPORTED_PYTHON_MIN_MINOR=10
+SUPPORTED_PYTHON_MAX_MINOR=13
+
+python_version_supported() {
+  local version=$1
+  local major minor
+  local IFS='.'
+  read -r major minor _ <<<"$version"
+  minor=${minor:-0}
+  if [[ -z "$major" ]] || [[ "$major" -ne $SUPPORTED_PYTHON_MAJOR ]]; then
+    return 1
+  fi
+  if (( minor < SUPPORTED_PYTHON_MIN_MINOR || minor > SUPPORTED_PYTHON_MAX_MINOR )); then
+    return 1
+  fi
+  return 0
+}
+
+python_version_from() {
+  local cmd=$1
+  local version
+  if ! version=$("$cmd" - <<'PY' 2>/dev/null
+import sys
+sys.stdout.write(f"{sys.version_info.major}.{sys.version_info.minor}")
+PY
+  ); then
+    return 1
+  fi
+  echo "$version"
+}
+
+find_supported_python_cmd() {
+  local candidate
+  local version
+  local candidates=(python3.13 python3.12 python3.11 python3.10 python3 python)
+  for candidate in "${candidates[@]}"; do
+    if ! command -v "$candidate" >/dev/null 2>&1; then
+      continue
+    fi
+    if version=$(python_version_from "$candidate"); then
+      if python_version_supported "$version"; then
+        echo "$candidate"
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+PYTHON_CMD=${PYTHON_CMD:-}
+if [[ -n "$PYTHON_CMD" ]]; then
+  if ! command -v "$PYTHON_CMD" >/dev/null 2>&1; then
+    echo "ERROR: $PYTHON_CMD is not available on PATH. Provide a supported interpreter (Python 3.10–3.13)."
+    exit 1
+  fi
+  if ! version=$(python_version_from "$PYTHON_CMD"); then
+    echo "ERROR: Unable to detect the version of $PYTHON_CMD."
+    exit 1
+  fi
+  if ! python_version_supported "$version"; then
+    echo "ERROR: $PYTHON_CMD is Python $version, which falls outside the supported 3.10–3.13 range."
+    echo "Set PYTHON_CMD to a supported interpreter (for example python3.13) and rerun the bootstrap script."
+    exit 1
+  fi
+else
+  if ! PYTHON_CMD=$(find_supported_python_cmd); then
+    echo "ERROR: No supported Python 3 interpreter (3.10–3.13) found on PATH. Install one and rerun the bootstrap script."
+    exit 1
+  fi
+fi
+
+if [[ ! -d ".venv" || ! -x ".venv/bin/python" ]]; then
+  echo "Creating a virtual environment with $PYTHON_CMD."
+  "$PYTHON_CMD" -m venv .venv
+else
+  venv_version=""
+  if venv_version=$(python_version_from ".venv/bin/python"); then
+    if python_version_supported "$venv_version"; then
+      echo "Reusing existing .venv virtual environment (Python $venv_version)."
+    else
+      echo "Existing .venv uses Python $venv_version, which is not supported."
+      echo "Recreating .venv with $PYTHON_CMD."
+      rm -rf .venv
+      "$PYTHON_CMD" -m venv .venv
+    fi
+  else
+    echo "Existing .venv is unusable (could not read its Python interpreter)."
+    echo "Recreating .venv with $PYTHON_CMD."
+    rm -rf .venv
+    "$PYTHON_CMD" -m venv .venv
+  fi
+fi
+
+# shellcheck source=/dev/null
+source ".venv/bin/activate"
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+
+deactivate >/dev/null 2>&1 || true
+
+cat <<'MSG'
+Bootstrap complete. Activate the environment with 'source .venv/bin/activate' before running python scripts.
+MSG
+</file>
+
+<file path="scripts/generate_demo_assets.py">
+from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFont
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+OUTPUT_DIR = BASE_DIR / "demo-site" / "assets"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+WIDTH, HEIGHT = 1200, 720
+
+
+def _primary_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    try:
+        return ImageFont.truetype("DejaVuSans-Bold.ttf", size=size)
+    except OSError:
+        return ImageFont.load_default()
+
+
+def _draw_card(title: str, subtitle: str, accent: str, background: str) -> Image.Image:
+    img = Image.new("RGB", (WIDTH, HEIGHT), background)
+    draw = ImageDraw.Draw(img)
+    font_large = _primary_font(72)
+    font_body = _primary_font(38)
+
+    draw.rectangle([(60, 60), (WIDTH - 60, HEIGHT - 60)], outline=accent, width=10)
+    draw.text((100, 120), title, font=font_large, fill=accent)
+    draw.text((100, 240), subtitle, font=font_body, fill="#ffffff")
+    draw.text((100, 320), "Data source: canonical bundle", font=font_body, fill="#ffffff")
+    draw.text((100, 380), "Validation layer: Great Expectations", font=font_body, fill="#ffffff")
+    return img
+
+
+def create_screenshots() -> None:
+    pass_img = _draw_card(
+        "Validation Success",
+        "Score, schema, and certification rules all green",
+        "#2f855a",
+        "#0f172a",
+    )
+    fail_img = _draw_card(
+        "Validation Failure",
+        "Freshness exceeded the 24-hour threshold",
+        "#c53030",
+        "#0f172a",
+    )
+    pass_path = OUTPUT_DIR / "validation-pass.png"
+    fail_path = OUTPUT_DIR / "validation-fail.png"
+    pass_img.save(pass_path, optimize=True)
+    fail_img.save(fail_path, optimize=True)
+
+
+def create_story_gif() -> None:
+    frames: list[Image.Image] = []
+    states = [
+        ("Bad dataset", "Missing candidate join + duplicates", "#c53030"),
+        ("Failed release", "Release decision: Blocked", "#dd6b20"),
+        ("Corrected dataset", "Fresh batch arrives", "#3182ce"),
+        ("Ready release", "Release decision: Ready", "#2f855a"),
+    ]
+    font_large = _primary_font(64)
+    font_small = _primary_font(36)
+
+    for stage, detail, color in states:
+        frame = Image.new("RGB", (WIDTH, HEIGHT), "#020617")
+        draw = ImageDraw.Draw(frame)
+        draw.rectangle([(80, 80), (WIDTH - 80, HEIGHT - 80)], outline=color, width=8)
+        draw.text((120, 160), stage, font=font_large, fill=color)
+        draw.text((120, 280), detail, font=font_small, fill="#e2e8f0")
+        draw.text((120, 360), "Automated CI + GX checkpoint", font=font_small, fill="#94a3b8")
+        frames.append(frame)
+
+    gif_path = OUTPUT_DIR / "workflow.gif"
+    frames[0].save(
+        gif_path,
+        save_all=True,
+        append_images=frames[1:],
+        duration=1600,
+        loop=0,
+        optimize=True,
+    )
+
+
+if __name__ == "__main__":
+    create_screenshots()
+    create_story_gif()
+</file>
+
+<file path="src/ingest/__init__.py">
+
+</file>
+
+<file path="src/rules/__init__.py">
+
+</file>
+
+<file path="src/__init__.py">
+
+</file>
+
+<file path="src/reporting.py">
+"""Release gate exports and machine-readable summaries."""
+
+from __future__ import annotations
+
+import json
+import re
+from collections import Counter
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Sequence
+
+from src.rules.schema_rules import RuleOutcome
+
+STATUS_READY = "Ready"
+STATUS_WARNING_ONLY = "Warning only"
+STATUS_BLOCKED = "Blocked"
+
+ROOT_CAUSE_SCHEMA = "schema_issue"
+ROOT_CAUSE_INTEGRITY = "integrity_issue"
+ROOT_CAUSE_STALE_DATA = "stale_data"
+ROOT_CAUSE_DUPLICATE = "duplicate_record"
+ROOT_CAUSE_INVALID_BUSINESS_RULE = "invalid_business_rule_state"
+
+REMEDIATION_BASE = "docs/rule-severity-matrix.md"
+_SLUGIFY_PATTERN = re.compile(r"[^a-z0-9-]+")
+
+
+def _slugify_rule_id(rule_id: str) -> str:
+    slug = rule_id.strip().lower().replace("_", "-").replace(" ", "-")
+    slug = _SLUGIFY_PATTERN.sub("", slug)
+    return slug.strip("-") or rule_id.lower()
+
+
+def _remediation_link(rule_id: str) -> str:
+    slug = _slugify_rule_id(rule_id)
+    return f"{REMEDIATION_BASE}#{slug}"
+
+
+def infer_root_cause(outcome: RuleOutcome) -> str:
+    rule = outcome.rule_id.lower()
+    if "required-columns" in rule or "-dtype" in rule or "schema" in rule:
+        return ROOT_CAUSE_SCHEMA
+    if "-uniqueness" in rule or "duplicate" in rule or rule.startswith("br-09"):
+        return ROOT_CAUSE_DUPLICATE
+    if rule.startswith("br-07") or "fk" in rule or "integrity" in rule:
+        return ROOT_CAUSE_INTEGRITY
+    if rule.startswith("br-08") or "freshness" in rule:
+        return ROOT_CAUSE_STALE_DATA
+    if rule.startswith("br-05") or rule.startswith("br-06"):
+        return ROOT_CAUSE_INVALID_BUSINESS_RULE
+    return ROOT_CAUSE_INVALID_BUSINESS_RULE
+
+
+@dataclass
+class ReleaseReport:
+    """Encapsulates release gating summaries and exports."""
+
+    outcomes: Sequence[RuleOutcome]
+    timestamp: datetime | None = None
+
+    def __post_init__(self) -> None:
+        if self.timestamp is None:
+            self.timestamp = datetime.now(timezone.utc)
+        # Normalize sequence to list for repeated iteration
+        self._outcomes = list(self.outcomes)
+
+    @property
+    def _failing_outcomes(self) -> list[RuleOutcome]:
+        return [outcome for outcome in self._outcomes if not outcome.passed]
+
+    @property
+    def iso_timestamp(self) -> str:
+        return self.timestamp.isoformat()
+
+    @property
+    def status(self) -> str:
+        failing = self._failing_outcomes
+        if any(outcome.severity == "critical" for outcome in failing):
+            return STATUS_BLOCKED
+        if failing:
+            return STATUS_WARNING_ONLY
+        return STATUS_READY
+
+    def _rule_payload(self, outcome: RuleOutcome) -> dict:
+        return {
+            "rule_id": outcome.rule_id,
+            "description": outcome.description,
+            "passed": outcome.passed,
+            "severity": outcome.severity,
+            "root_cause": infer_root_cause(outcome),
+            "remediation_link": _remediation_link(outcome.rule_id),
+            "details": outcome.details or {},
+        }
+
+    def validation_summary(self) -> dict:
+        failing = self._failing_outcomes
+        return {
+            "generated_at": self.iso_timestamp,
+            "rule_count": len(self._outcomes),
+            "failed_count": len(failing),
+            "rules": [self._rule_payload(outcome) for outcome in self._outcomes],
+        }
+
+    def defect_summary(self) -> dict:
+        defects = [self._rule_payload(outcome) for outcome in self._failing_outcomes]
+        counts = Counter(entry["root_cause"] for entry in defects)
+        return {
+            "generated_at": self.iso_timestamp,
+            "defect_count": len(defects),
+            "defects": defects,
+            "root_cause_counts": dict(counts),
+        }
+
+    def release_decision(self) -> dict:
+        failing = self._failing_outcomes
+        status = self.status
+        decision_reason = self._decision_reason(status, failing)
+        payload = {
+            "status": status,
+            "timestamp": self.iso_timestamp,
+            "decision_reason": decision_reason,
+            "failed_rules": [
+                {
+                    "rule_id": outcome.rule_id,
+                    "severity": outcome.severity,
+                    "root_cause": infer_root_cause(outcome),
+                    "details": outcome.details or {},
+                }
+                for outcome in failing
+            ],
+        }
+        if status == STATUS_BLOCKED:
+            critical_root_causes = sorted(
+                {
+                    infer_root_cause(outcome)
+                    for outcome in failing
+                    if outcome.severity == "critical"
+                }
+            )
+            if critical_root_causes:
+                payload["blocking_root_causes"] = critical_root_causes
+        return payload
+
+    @staticmethod
+    def _decision_reason(status: str, failing: list[RuleOutcome]) -> str:
+        if status == STATUS_BLOCKED:
+            if failing:
+                return f"Critical failure {failing[0].rule_id} blocks release."
+            return "Critical data quality failures block release."
+        if status == STATUS_WARNING_ONLY:
+            return "Warnings or info-level defects were raised; release may proceed with caution."
+        return "All validations passed; release is ready."
+
+    def write_reports(self, directory: Path | str = Path("reports")) -> None:
+        base = Path(directory)
+        base.mkdir(parents=True, exist_ok=True)
+        payloads = [
+            ("validation_summary.json", self.validation_summary()),
+            ("defect_summary.json", self.defect_summary()),
+            ("release_decision.json", self.release_decision()),
+        ]
+        for name, payload in payloads:
+            (base / name).write_text(json.dumps(payload, indent=2))
+</file>
+
+<file path="tests/defect_triage/test_triage_mapping.py">
+from pathlib import Path
+
+import pytest
+
+from src.rules.business_rules import check_pass_fail_certification
+
+
+def load_severity_matrix() -> dict[str, dict[str, str]]:
+    matrix_path = Path(__file__).resolve().parents[2] / "docs" / "rule-severity-matrix.md"
+    lines = matrix_path.read_text().splitlines()
+    table_lines = [line for line in lines if line.strip().startswith("|")]
+    if len(table_lines) < 3:
+        raise RuntimeError("Rule severity matrix table is missing or malformed")
+
+    header_cells = [cell.strip() for cell in table_lines[0].strip("|").split("|")]
+    data_lines = table_lines[2:]
+    matrix: dict[str, dict[str, str]] = {}
+    for line in data_lines:
+        if not line.strip() or line.strip().startswith("| ---"):
+            continue
+        cells = [cell.strip() for cell in line.strip("|").split("|")]
+        if len(cells) != len(header_cells):
+            continue
+        row = dict(zip(header_cells, cells))
+        matrix[row["Rule ID"]] = row
+    return matrix
+
+
+REPORTING_BAD_BUNDLE = (
+    Path(__file__).resolve().parents[2]
+    / "data"
+    / "bad"
+    / "cert-status-inconsistent-with-exam"
+)
+
+
+pytestmark = pytest.mark.defect_triage
+
+
+@pytest.mark.parametrize(
+    "dataset_bundle",
+    [
+        pytest.param(REPORTING_BAD_BUNDLE, id="cert-status-inconsistent"),
+    ],
+    indirect=["dataset_bundle"],
+)
+def test_cert_status_failure_maps_to_consistency_dimension(dataset_bundle):
+    matrix = load_severity_matrix()
+    exam_df = dataset_bundle["exam_results"].df
+    cert_df = dataset_bundle["certification_status"].df
+    outcomes = check_pass_fail_certification(exam_df, cert_df)
+    failing = [outcome for outcome in outcomes if not outcome.passed]
+    assert failing
+    segments = failing[0].rule_id.split("-")
+    root_id = "-".join(segments[:2]) if len(segments) > 1 else segments[0]
+    assert root_id in matrix
+    assert matrix[root_id]["Data Quality Dimension"] == "Consistency"
+</file>
+
+<file path="tests/functional/test_schema_and_business.py">
+import pytest
+
+from src.rules.business_rules import check_exam_candidate_fk, check_pass_fail_certification
+from src.rules.schema_rules import apply_schema_definition, get_schema_definition
+
+
+SCHEMA_TARGETS = ("candidates", "exam_results", "certification_status")
+
+pytestmark = pytest.mark.functional
+
+
+@pytest.mark.parametrize("schema_name", SCHEMA_TARGETS)
+def test_schema_validation_passes_for_canonical_data(schema_name, good_bundle):
+    table = good_bundle[schema_name]
+    _, outcomes = apply_schema_definition(table.df, get_schema_definition(schema_name))
+    required_rule = next(
+        outcome for outcome in outcomes if outcome.rule_id == f"{schema_name}-required-columns"
+    )
+    assert required_rule.passed
+    assert not [
+        outcome for outcome in outcomes if outcome.severity == "critical" and not outcome.passed
+    ]
+
+
+def test_pass_fail_and_candidate_fk_criteria_hold(good_bundle):
+    exam_df = good_bundle["exam_results"].df
+    candidates_df = good_bundle["candidates"].df
+    certification_df = good_bundle["certification_status"].df
+
+    fk_outcome = check_exam_candidate_fk(exam_df, candidates_df)
+    assert fk_outcome.passed
+
+    business_outcomes = check_pass_fail_certification(exam_df, certification_df)
+    assert all(outcome.passed for outcome in business_outcomes)
+</file>
+
+<file path="tests/regression/test_regression_scenarios.py">
+from pathlib import Path
+
+import pytest
+
+from src.rules.business_rules import check_exam_candidate_fk, evaluate_table_freshness
+from src.rules.schema_rules import apply_schema_definition, get_schema_definition
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_ROOT = REPO_ROOT / "data"
+REGRESSION_DIR = DATA_ROOT / "regression"
+
+pytestmark = pytest.mark.regression
+
+
+@pytest.mark.parametrize(
+    "dataset_bundle,expected_prefix",
+    [
+        pytest.param(
+            REGRESSION_DIR / "regression-duplicate-exam-attempt",
+            "exam_results-uniqueness",
+            id="duplicate-exam-attempt",
+        ),
+    ],
+    indirect=["dataset_bundle"],
+)
+def test_regression_duplicate_attempt_triggered(dataset_bundle, expected_prefix):
+    exam_table = dataset_bundle["exam_results"]
+    _, outcomes = apply_schema_definition(
+        exam_table.df,
+        get_schema_definition("exam_results"),
+    )
+    duplicate_issue = next(
+        (
+            outcome
+            for outcome in outcomes
+            if outcome.rule_id.startswith(expected_prefix) and not outcome.passed
+        ),
+        None,
+    )
+    assert duplicate_issue is not None
+    assert not duplicate_issue.passed
+    assert duplicate_issue.severity == "critical"
+
+
+@pytest.mark.parametrize(
+    "dataset_bundle",
+    [
+        pytest.param(
+            REGRESSION_DIR / "regression-lagging-exam-file",
+            id="lagging-exam-file",
+        ),
+    ],
+    indirect=["dataset_bundle"],
+)
+def test_regression_lagging_exam_files_block_release(dataset_bundle):
+    exam_table = dataset_bundle["exam_results"]
+    freshness_outcome = evaluate_table_freshness(
+        exam_table,
+        timestamp_column="file_received_ts",
+        max_allowed_hours=24,
+        warning_hours=48,
+    )
+    assert not freshness_outcome.passed
+    assert freshness_outcome.severity == "critical"
+
+
+@pytest.mark.parametrize(
+    "dataset_bundle",
+    [
+        pytest.param(
+            REGRESSION_DIR / "regression-missing-candidate-join",
+            id="missing-candidate-join",
+        ),
+    ],
+    indirect=["dataset_bundle"],
+)
+def test_regression_missing_candidate_fk(dataset_bundle):
+    exam_table = dataset_bundle["exam_results"]
+    candidates_table = dataset_bundle["candidates"]
+    fk_outcome = check_exam_candidate_fk(exam_table.df, candidates_table.df)
+    assert not fk_outcome.passed
+    assert fk_outcome.severity == "critical"
+</file>
+
+<file path="tests/uat/test_release_decision.py">
+import json
+from pathlib import Path
+
+import pytest
+
+from src.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_WARNING_ONLY
+from src.rules.business_rules import evaluate_table_freshness
+from src.rules.schema_rules import RuleOutcome
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_ROOT = REPO_ROOT / "data"
+
+
+pytestmark = pytest.mark.uat
+
+
+@pytest.mark.parametrize(
+    "dataset_bundle",
+    [
+        pytest.param(
+            DATA_ROOT / "regression" / "regression-lagging-exam-file",
+            id="lagging-exam-file",
+        ),
+    ],
+    indirect=["dataset_bundle"],
+)
+def test_release_decision_blocks_lagging_bundle(dataset_bundle, tmp_path):
+    exam_table = dataset_bundle["exam_results"]
+    freshness_outcome = evaluate_table_freshness(
+        exam_table,
+        timestamp_column="file_received_ts",
+        max_allowed_hours=24,
+        warning_hours=48,
+    )
+    report = ReleaseReport([freshness_outcome])
+    assert report.status == STATUS_BLOCKED
+    reports_dir = tmp_path / "reports"
+    report.write_reports(reports_dir)
+    decision_payload = json.loads((reports_dir / "release_decision.json").read_text())
+    assert decision_payload["status"] == STATUS_BLOCKED
+    assert decision_payload["blocking_root_causes"] == ["stale_data"]
+
+
+def test_release_decision_warns_when_only_warnings():
+    warning_outcome = RuleOutcome(
+        rule_id="BR-04",
+        description="Score exceeds range",
+        passed=False,
+        severity="warning",
+    )
+    report = ReleaseReport([warning_outcome])
+    assert report.status == STATUS_WARNING_ONLY
+    decision_payload = report.release_decision()
+    assert decision_payload["status"] == STATUS_WARNING_ONLY
+    assert "blocking_root_causes" not in decision_payload
+</file>
+
+<file path="tests/unit/test_business_rules.py">
+from datetime import datetime, timezone
+from pathlib import Path
+
+import pandas as pd
+
+from src.ingest.loaders import LoadedTable
+from src.rules.business_rules import (
+    check_pass_fail_certification,
+    check_score_range,
+    check_exam_date_window,
+    evaluate_table_freshness,
+)
+
+
+def test_score_range_warns_for_invalid_entries():
+    df = pd.DataFrame(
+        {
+            "exam_result_id": ["ER-1", "ER-2"],
+            "score": [95, 120],
+            "score_scaled": [95, 120],
+        }
+    )
+    outcome = check_score_range(
+        exam_df=df,
+        column="score",
+        rule_id="BR-04",
+        max_value=100,
+    )
+    assert not outcome.passed
+    assert outcome.severity == "warning"
+    assert outcome.details["out_of_range_count"] == 1
+
+
+def test_exam_date_window_flags_future_dates():
+    reference = datetime(2026, 3, 1, tzinfo=timezone.utc)
+    df = pd.DataFrame(
+        {"exam_result_id": ["ER-1"], "exam_date": ["2027-04-01T00:00:00Z"]}
+    )
+    outcome = check_exam_date_window(
+        exam_df=df,
+        reference_date=reference,
+        months=12,
+        rule_id="BR-06",
+    )
+    assert not outcome.passed
+    assert outcome.severity == "warning"
+    assert outcome.details["out_of_window"] == 1
+
+
+def test_pass_fail_certification_detects_mismatch():
+    exam_df = pd.DataFrame(
+        {
+            "candidate_id": ["C-1"],
+            "exam_result_id": ["ER-1"],
+            "pass_fail": ["Pass"],
+        }
+    )
+    cert_df = pd.DataFrame(
+        {
+            "candidate_id": ["C-1"],
+            "certification_status": ["NeedsReview"],
+            "status_effective_ts": ["2026-02-01T00:00:00Z"],
+        }
+    )
+    outcomes = check_pass_fail_certification(exam_df=exam_df, cert_df=cert_df)
+    outcome = next(o for o in outcomes if o.rule_id.endswith("-pass"))
+    assert not outcome.passed
+    assert outcome.severity == "critical"
+
+
+def test_evaluate_table_freshness_uses_file_timestamp():
+    df = pd.DataFrame(
+        {"file_received_ts": ["2026-01-10T08:00:00Z"], "exam_result_id": ["ER-100"]}
+    )
+    metadata = {"source_path": "tests/unit/test_stub"}
+    table = LoadedTable(
+        name="exam_results",
+        df=df,
+        path=Path("data/regression/regression-lagging-exam-file/exam_results.csv"),
+        modified_at=datetime(2026, 1, 10, tzinfo=timezone.utc),
+        metadata=metadata,
+    )
+    outcome = evaluate_table_freshness(
+        table=table,
+        timestamp_column="file_received_ts",
+        max_allowed_hours=24,
+        warning_hours=48,
+    )
+    assert not outcome.passed
+    assert outcome.severity == "critical"
+</file>
+
+<file path="tests/unit/test_reporting.py">
+"""Unit tests for release reporting helpers."""
+
+from datetime import datetime, timezone
+
+from src.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_READY, STATUS_WARNING_ONLY
+from src.rules.schema_rules import RuleOutcome
+
+FIXED_TIMESTAMP = datetime(2026, 3, 2, 12, 0, tzinfo=timezone.utc)
+
+
+def _outcome(rule_id: str, severity: str, passed: bool = False) -> RuleOutcome:
+    return RuleOutcome(rule_id=rule_id, description="test", severity=severity, passed=passed)
+
+
+def test_release_report_ready_when_all_rules_pass():
+    report = ReleaseReport([], timestamp=FIXED_TIMESTAMP)
+    assert report.status == STATUS_READY
+    summary = report.validation_summary()
+    assert summary["rule_count"] == 0
+    assert summary["failed_count"] == 0
+    assert summary["rules"] == []
+    decision = report.release_decision()
+    assert decision["status"] == STATUS_READY
+    assert decision["failed_rules"] == []
+
+
+def test_release_report_warns_on_non_critical_defects():
+    warning_rule = _outcome("BR-04", severity="warning")
+    report = ReleaseReport([warning_rule], timestamp=FIXED_TIMESTAMP)
+    assert report.status == STATUS_WARNING_ONLY
+    decision = report.release_decision()
+    assert decision["status"] == STATUS_WARNING_ONLY
+    assert "blocking_root_causes" not in decision
+    defect_summary = report.defect_summary()
+    assert defect_summary["defect_count"] == 1
+    assert defect_summary["root_cause_counts"]["invalid_business_rule_state"] == 1
+
+
+def test_release_report_blocks_on_critical_duplicate():
+    critical_rule = _outcome("exam_results-uniqueness-1", severity="critical")
+    report = ReleaseReport([critical_rule], timestamp=FIXED_TIMESTAMP)
+    assert report.status == STATUS_BLOCKED
+    decision = report.release_decision()
+    assert decision["status"] == STATUS_BLOCKED
+    assert decision["blocking_root_causes"] == ["duplicate_record"]
+    assert decision["failed_rules"][0]["root_cause"] == "duplicate_record"
+    defect_summary = report.defect_summary()
+    assert defect_summary["root_cause_counts"] == {"duplicate_record": 1}
+</file>
+
+<file path="tests/unit/test_schema_rules.py">
+import pandas as pd
+
+from src.rules.schema_rules import (
+    check_required_columns,
+    detect_duplicates,
+    normalize_dataframe_dtypes,
+)
+
+
+def test_required_columns_failure_reports_missing_entries():
+    df = pd.DataFrame({"candidate_id": ["1"], "email": ["foo@example.com"]})
+    outcome = check_required_columns(
+        df=df,
+        required_columns=["candidate_id", "first_name", "last_name"],
+        rule_id="schema-missing-columns",
+    )
+    assert not outcome.passed
+    assert outcome.details["missing_columns"] == ["first_name", "last_name"]
+
+
+def test_detect_duplicates_marks_repeated_rows():
+    df = pd.DataFrame({"candidate_id": ["a", "a", "b"], "score": [90, 95, 88]})
+    outcome = detect_duplicates(
+        df=df,
+        subset=["candidate_id"],
+        rule_id="schema-duplicate-report",
+    )
+    assert not outcome.passed
+    assert outcome.details["duplicate_count"] == 2
+    assert outcome.details["subset"] == ["candidate_id"]
+
+
+def test_normalize_dataframe_dtypes_emits_issues_for_bad_values():
+    df = pd.DataFrame({"score": ["100", "bad"]})
+    normalized, issues = normalize_dataframe_dtypes(
+        df=df,
+        dtype_map={"score": "float64"},
+        rule_id_prefix="schema-dtype",
+    )
+    assert len(issues) == 1
+    issue = issues[0]
+    assert issue.rule_id == "schema-dtype-score"
+    assert not issue.passed
+    assert "Could not coerce" in issue.description
+    assert normalized["score"].dtype == object
+</file>
+
+<file path="tests/conftest.py">
+"""Shared fixtures and helpers for the CertGate QA catalog."""
+
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+from typing import Dict, Iterable
+
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from src.ingest.loaders import LoadedTable, load_table
+
+DATA_ROOT = REPO_ROOT / "data"
+
+
+def _load_csv_bundle(bundle_path: Path) -> Dict[str, LoadedTable]:
+    resolved = Path(bundle_path).expanduser().resolve()
+    if not resolved.exists():
+        raise FileNotFoundError(f"Dataset bundle not found: {resolved}")
+    tables: Dict[str, LoadedTable] = {}
+    for csv_path in sorted(resolved.glob("*.csv")):
+        tables[csv_path.stem] = load_table(name=csv_path.stem, path=csv_path)
+    return tables
+
+
+@pytest.fixture(scope="session")
+def good_bundle() -> Dict[str, LoadedTable]:
+    """Load the canonical good dataset bundle once per test session."""
+
+    return _load_csv_bundle(DATA_ROOT / "good")
+
+
+@pytest.fixture
+def dataset_bundle(request) -> Dict[str, LoadedTable]:
+    """Load a dataset bundle supplied via indirect parametrization."""
+
+    bundle_path: Path = request.param
+    return _load_csv_bundle(bundle_path)
+
+
+def bundle_path(*parts: str) -> Path:
+    """Return a resolved bundle path under the repository data directory."""
+
+    return DATA_ROOT.joinpath(*parts).resolve()
+
+
+def parametrized_bundles(kind: str) -> Iterable[Path]:
+    """Return every bundle path for a named data directory."""
+
+    parent = DATA_ROOT / kind
+    return (entry.resolve() for entry in sorted(parent.iterdir()) if entry.is_dir())
+</file>
+
+<file path="pytest.ini">
+[pytest]
+minversion = 7.0
+addopts = --strict-markers --junit-xml=reports/junit.xml
+testpaths = tests
+python_files = test_*.py
+markers =
+    smoke: quick repo health validations that run before anything else.
+    functional: exercise schema and business rules against canonical data.
+    regression: ensure historical bad bundles keep failing in known ways.
+    uat: release-decision guards and end-to-end expectation readiness.
+    defect_triage: maps failed runs back to root-cause/event categories.
+</file>
+
+<file path="requirements.txt">
+great_expectations<0.18
+pandas>=2.2,<4
+pytest>=7.0,<8
+PyYAML>=6.0
+</file>
+
+<file path=".github/workflows/ci.yml">
+name: CertGate CI & Demo
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+      - name: Run pytest suite
+        run: pytest
+      - name: Execute Great Expectations checkpoint
+        run: python scripts/run_great_expectations.py
+      - name: Generate release reports
+        run: python scripts/generate_release_reports.py
+      - name: Upload reports artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports
+      - name: Upload data docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: gx-data-docs
+          path: gx/data_docs/local_site
+
+  publish-pages:
+    needs: test
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download reports artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: reports
+          path: artifacts/reports
+      - name: Download data docs
+        uses: actions/download-artifact@v4
+        with:
+          name: gx-data-docs
+          path: artifacts/data-docs
+      - name: Build Pages payload
+        run: |
+          rm -rf page
+          mkdir -p page
+          cp -R demo-site/* page/
+          mkdir -p page/data-docs
+          cp -R artifacts/data-docs/. page/data-docs/
+          mkdir -p page/reports
+          cp -R artifacts/reports/* page/reports/
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: page
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+</file>
+
+<file path="gx/great_expectations.yml">
+config_version: 3.0
+datasources:
+  pandas_ingest:
+    class_name: Datasource
+    module_name: great_expectations.datasource
+    execution_engine:
+      class_name: PandasExecutionEngine
+      module_name: great_expectations.execution_engine
+    data_connectors:
+      runtime_data_connector:
+        name: runtime_data_connector
+        class_name: RuntimeDataConnector
+        module_name: great_expectations.datasource.data_connector
+        batch_identifiers:
+          - ingest_batch
+stores:
+  expectations_store:
+    class_name: ExpectationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: expectations
+      filepath_suffix: .json
+  validations_store:
+    class_name: ValidationsStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: validations
+  evaluation_parameter_store:
+    class_name: EvaluationParameterStore
+  checkpoint_store:
+    class_name: CheckpointStore
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: checkpoints
+expectations_store_name: expectations_store
+validations_store_name: validations_store
+evaluation_parameter_store_name: evaluation_parameter_store
+checkpoint_store_name: checkpoint_store
+data_docs_sites:
+  local_site:
+    class_name: SiteBuilder
+    store_backend:
+      class_name: TupleFilesystemStoreBackend
+      base_directory: data_docs/local_site
+    site_index_builder:
+      class_name: DefaultSiteIndexBuilder
+validation_operators:
+  action_list_operator:
+    class_name: ActionListValidationOperator
+    action_list:
+      - name: store_validation_result
+        action:
+          class_name: StoreValidationResultAction
+      - name: update_data_docs
+        action:
+          class_name: UpdateDataDocsAction
+plugins_directory:
+notebooks:
+config_variables_file_path:
+anonymous_usage_statistics:
+  data_context_id: 0cd31032-d0ae-465f-b9a1-e42fd76ba463
+  enabled: true
+include_rendered_content:
+  globally: false
+  expectation_suite: false
+  expectation_validation_result: false
+</file>
+
+<file path="reports/defect_summary.json">
+{
+  "generated_at": "2026-03-03T17:42:35.110418+00:00",
+  "defect_count": 5,
+  "defects": [
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "description": "Could not coerce created_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-dtype-created-ts",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "description": "Could not coerce file_received_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-dtype-file-received-ts",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "description": "Could not coerce certified_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-certified-ts",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "description": "Could not coerce status_effective_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-status-effective-ts",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "BR-08",
+      "description": "Freshness exceeds the critical lag threshold.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#br-08",
+      "details": {
+        "lag_hours": 895.46,
+        "reference_time": "2026-03-03T17:42:35.110395+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ],
+  "root_cause_counts": {
+    "schema_issue": 4,
+    "stale_data": 1
+  }
+}
+</file>
+
+<file path="reports/junit.xml">
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="23" time="0.186" timestamp="2026-03-03T12:48:01.125637-05:00" hostname="Josues-MacBook-Pro.local"><testcase classname="tests.defect_triage.test_triage_mapping" name="test_cert_status_failure_maps_to_consistency_dimension[cert-status-inconsistent]" time="0.015" /><testcase classname="tests.functional.test_schema_and_business" name="test_schema_validation_passes_for_canonical_data[candidates]" time="0.007" /><testcase classname="tests.functional.test_schema_and_business" name="test_schema_validation_passes_for_canonical_data[exam_results]" time="0.003" /><testcase classname="tests.functional.test_schema_and_business" name="test_schema_validation_passes_for_canonical_data[certification_status]" time="0.005" /><testcase classname="tests.functional.test_schema_and_business" name="test_pass_fail_and_candidate_fk_criteria_hold" time="0.002" /><testcase classname="tests.regression.test_regression_scenarios" name="test_regression_duplicate_attempt_triggered[duplicate-exam-attempt]" time="0.006" /><testcase classname="tests.regression.test_regression_scenarios" name="test_regression_lagging_exam_files_block_release[lagging-exam-file]" time="0.023" /><testcase classname="tests.regression.test_regression_scenarios" name="test_regression_missing_candidate_fk[missing-candidate-join]" time="0.010" /><testcase classname="tests.smoke.test_environment" name="test_schema_and_rules_import_cleanly" time="0.000" /><testcase classname="tests.smoke.test_environment" name="test_good_files_are_discoverable" time="0.000" /><testcase classname="tests.smoke.test_environment" name="test_checkpoint_references_expectation_suites" time="0.001" /><testcase classname="tests.uat.test_release_decision" name="test_release_decision_blocks_lagging_bundle[lagging-exam-file]" time="0.019" /><testcase classname="tests.uat.test_release_decision" name="test_release_decision_warns_when_only_warnings" time="0.001" /><testcase classname="tests.unit.test_business_rules" name="test_score_range_warns_for_invalid_entries" time="0.001" /><testcase classname="tests.unit.test_business_rules" name="test_exam_date_window_flags_future_dates" time="0.001" /><testcase classname="tests.unit.test_business_rules" name="test_pass_fail_certification_detects_mismatch" time="0.003" /><testcase classname="tests.unit.test_business_rules" name="test_evaluate_table_freshness_uses_file_timestamp" time="0.001" /><testcase classname="tests.unit.test_reporting" name="test_release_report_ready_when_all_rules_pass" time="0.000" /><testcase classname="tests.unit.test_reporting" name="test_release_report_warns_on_non_critical_defects" time="0.000" /><testcase classname="tests.unit.test_reporting" name="test_release_report_blocks_on_critical_duplicate" time="0.000" /><testcase classname="tests.unit.test_schema_rules" name="test_required_columns_failure_reports_missing_entries" time="0.001" /><testcase classname="tests.unit.test_schema_rules" name="test_detect_duplicates_marks_repeated_rows" time="0.001" /><testcase classname="tests.unit.test_schema_rules" name="test_normalize_dataframe_dtypes_emits_issues_for_bad_values" time="0.001" /></testsuite></testsuites>
+</file>
+
+<file path="reports/release_decision.json">
+{
+  "status": "Blocked",
+  "timestamp": "2026-03-03T17:42:35.110418+00:00",
+  "decision_reason": "Critical failure candidates-dtype-created_ts blocks release.",
+  "failed_rules": [
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "BR-08",
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "details": {
+        "lag_hours": 895.46,
+        "reference_time": "2026-03-03T17:42:35.110395+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ],
+  "blocking_root_causes": [
+    "stale_data"
+  ]
+}
+</file>
+
+<file path="reports/validation_summary.json">
+{
+  "generated_at": "2026-03-03T17:42:35.110418+00:00",
+  "rule_count": 18,
+  "failed_count": 5,
+  "rules": [
+    {
+      "rule_id": "candidates-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "description": "Could not coerce created_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-dtype-created-ts",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "candidates-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "candidate_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "candidates-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "email"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "exam_results-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "description": "Could not coerce file_received_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-dtype-file-received-ts",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "exam_result_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "exam_results-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "candidate_id",
+          "exam_code",
+          "attempt_number"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "certification_status-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "description": "Could not coerce certified_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-certified-ts",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "description": "Could not coerce status_effective_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-status-effective-ts",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "cert_status_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "certification_status-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "candidate_id",
+          "certification_level"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "BR-07",
+      "description": "Every exam candidate_id exists in the master list.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#br-07",
+      "details": {
+        "missing_count": 0,
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "BR-07b",
+      "description": "Every certification row references a known candidate.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#br-07b",
+      "details": {
+        "missing_count": 0,
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "BR-05-pass",
+      "description": "Pass exams should map to Certified statuses.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#br-05-pass",
+      "details": {
+        "pass_mismatch_count": 0,
+        "pass_missing_count": 0,
+        "sample_candidates": []
+      }
+    },
+    {
+      "rule_id": "BR-05-fail",
+      "description": "Fail attempts should not result in Certified statuses.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#br-05-fail",
+      "details": {
+        "fail_mismatch_count": 0,
+        "sample_candidates": [],
+        "allowed_fail_statuses": [
+          "Certification Pending",
+          "NeedsReview",
+          "Not Certified"
+        ]
+      }
+    },
+    {
+      "rule_id": "BR-08",
+      "description": "Freshness exceeds the critical lag threshold.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#br-08",
+      "details": {
+        "lag_hours": 895.46,
+        "reference_time": "2026-03-03T17:42:35.110395+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ]
+}
+</file>
+
+<file path="scripts/generate_release_reports.py">
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+from src.ingest.loaders import load_table
+from src.reporting import ReleaseReport
+from src.rules.business_rules import (
+    check_cert_candidate_fk,
+    check_exam_candidate_fk,
+    check_pass_fail_certification,
+    evaluate_table_freshness,
+)
+from src.rules.schema_rules import apply_schema_definition, get_schema_definition
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+DATA_ROOT = BASE_DIR / "data" / "good"
+REPORT_DIR = BASE_DIR / "reports"
+SCHEMA_TARGETS = ("candidates", "exam_results", "certification_status")
+
+
+def _load_table(name: str):
+    schema = get_schema_definition(name)
+    return load_table(
+        name=name,
+        path=DATA_ROOT / schema.file_name,
+        parse_dates=schema.parse_dates,
+        dtype_overrides=schema.dtype_map,
+    )
+
+
+def main() -> None:
+    bundle = {name: _load_table(name) for name in SCHEMA_TARGETS}
+    outcomes = []
+    for name in SCHEMA_TARGETS:
+        definition = get_schema_definition(name)
+        _, schema_outcomes = apply_schema_definition(bundle[name].df, definition)
+        outcomes.extend(schema_outcomes)
+
+    exam_table = bundle["exam_results"].df
+    candidates_table = bundle["candidates"].df
+    cert_table = bundle["certification_status"].df
+
+    outcomes.append(check_exam_candidate_fk(exam_table, candidates_table))
+    outcomes.append(check_cert_candidate_fk(cert_table, candidates_table))
+    outcomes.extend(check_pass_fail_certification(exam_table, cert_table))
+    outcomes.append(
+        evaluate_table_freshness(
+            bundle["exam_results"],
+            timestamp_column="file_received_ts",
+            max_allowed_hours=24,
+            warning_hours=48,
+        )
+    )
+
+    report = ReleaseReport(outcomes)
+    report.write_reports(REPORT_DIR)
+    print("Release reports written to", REPORT_DIR)
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+<file path="src/ingest/loaders.py">
+"""Pandas-based ingestion helpers used by the validation layer.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, Mapping, Optional, Sequence
+
+import pandas as pd
+
+DEFAULT_READ_KWARGS: Dict[str, Any] = {
+    "keep_default_na": True,
+    "na_values": [""],
+    "encoding": "utf-8",
+}
+
+
+@dataclass
+class LoadedTable:
+    """Captures a DataFrame together with ingestion metadata."""
+
+    name: str
+    df: pd.DataFrame
+    path: Path
+    modified_at: datetime
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+def discover_ingest_files(base_dir: Path, file_names: Sequence[str]) -> Dict[str, Path]:
+    """Make sure every named feed file is present under ``base_dir``."""
+
+    base_dir = Path(base_dir)
+    missing: list[Path] = []
+    resolved: Dict[str, Path] = {}
+    for candidate in file_names:
+        path = (base_dir / candidate).expanduser()
+        if path.exists():
+            resolved[candidate] = path
+        else:
+            missing.append(path)
+    if missing:
+        missing_list = ", ".join(str(entry) for entry in missing)
+        raise FileNotFoundError(f"Missing ingest files: {missing_list}")
+    return resolved
+
+
+def _prune_datetime_dtypes(
+    dtype_overrides: Optional[Mapping[str, Any]],
+    parse_dates: Optional[Sequence[str]],
+) -> Optional[Dict[str, Any]]:
+    if not dtype_overrides:
+        return None
+    if not parse_dates:
+        return dict(dtype_overrides)
+    excluded = set(parse_dates)
+    pruned = {key: value for key, value in dtype_overrides.items() if key not in excluded}
+    return pruned or None
+
+
+def load_table(
+    name: str,
+    path: Path,
+    parse_dates: Optional[Sequence[str]] = None,
+    dtype_overrides: Optional[Mapping[str, Any]] = None,
+    metadata: Optional[Mapping[str, Any]] = None,
+    **csv_kwargs: Any,
+) -> LoadedTable:
+    """Load a CSV into a DataFrame while capturing filesystem metadata."""
+
+    resolved_path = Path(path).expanduser()
+    if not resolved_path.exists():
+        raise FileNotFoundError(f"Ingest file not found: {resolved_path}")
+
+    read_kwargs = {**DEFAULT_READ_KWARGS, **csv_kwargs}
+    df = pd.read_csv(
+        resolved_path,
+        parse_dates=list(parse_dates) if parse_dates else None,
+        dtype=_prune_datetime_dtypes(dtype_overrides, parse_dates),
+        **read_kwargs,
+    )
+
+    stat = resolved_path.stat()
+    modified_at = datetime.fromtimestamp(stat.st_mtime, tz=timezone.utc)
+
+    metadata_dict: Dict[str, Any] = {
+        "source_path": str(resolved_path),
+        "file_size": stat.st_size,
+        "loaded_at": datetime.now(timezone.utc).isoformat(),
+    }
+    if metadata:
+        metadata_dict.update({k: v for k, v in metadata.items() if v is not None})
+
+    return LoadedTable(
+        name=name,
+        df=df,
+        path=resolved_path,
+        modified_at=modified_at,
+        metadata=metadata_dict,
+    )
+</file>
+
+<file path="src/rules/business_rules.py">
+"""Pandas-based business logic validations for Tier A."""
+
+from __future__ import annotations
+
+from datetime import datetime, timezone, timedelta
+from typing import Any, Iterable, List, Sequence
+
+import pandas as pd
+
+from ..ingest.loaders import LoadedTable
+from .schema_rules import RuleOutcome, Severity, build_rule_outcome
+
+PASSING_VALUES = {"Pass", "pass", "P"}
+FAILING_VALUES = {"Fail", "fail", "F"}
+CERTIFIED_STATUSES = {"Certified", "Certification Granted"}
+FAIL_ALLOWED_STATUSES = {"NeedsReview", "Certification Pending", "Not Certified"}
+
+
+def _foreign_key_reference(
+    child_df: pd.DataFrame,
+    parent_df: pd.DataFrame,
+    child_column: str,
+    parent_column: str,
+    rule_id: str,
+    description: str,
+    severity: Severity = "critical",
+) -> RuleOutcome:
+    source = child_df[child_column].dropna().unique()
+    parent_values = set(parent_df[parent_column].dropna())
+    missing = sorted({value for value in source if value not in parent_values})
+    passed = not missing
+    details: dict[str, Any] = {"missing_count": len(missing), "missing_values": missing}
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description if passed else description + " Mismatched candidates found.",
+        passed=passed,
+        severity=severity if not passed else "info",
+        details=details,
+    )
+
+
+def check_exam_candidate_fk(
+    exam_df: pd.DataFrame, candidates_df: pd.DataFrame, rule_id: str = "BR-07"
+) -> RuleOutcome:
+    """Ensure every exam result refers back to the candidate master."""
+
+    return _foreign_key_reference(
+        child_df=exam_df,
+        parent_df=candidates_df,
+        child_column="candidate_id",
+        parent_column="candidate_id",
+        rule_id=rule_id,
+        description="Every exam candidate_id exists in the master list.",
+    )
+
+
+def check_cert_candidate_fk(
+    cert_df: pd.DataFrame, candidates_df: pd.DataFrame, rule_id: str = "BR-07b"
+) -> RuleOutcome:
+    """Ensure every certification status row references an existing candidate."""
+
+    return _foreign_key_reference(
+        child_df=cert_df,
+        parent_df=candidates_df,
+        child_column="candidate_id",
+        parent_column="candidate_id",
+        rule_id=rule_id,
+        description="Every certification row references a known candidate.",
+    )
+
+
+def _coerce_timestamp(value: Any) -> datetime | None:
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        ts = value
+    else:
+        ts = pd.to_datetime(value, utc=True, errors="coerce")
+        if pd.isna(ts):
+            return None
+        ts = ts.to_pydatetime()
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    return ts
+
+
+def evaluate_table_freshness(
+    table: LoadedTable,
+    timestamp_column: str | None = None,
+    metadata_timestamp_keys: Sequence[str] | None = None,
+    max_allowed_hours: int = 24,
+    warning_hours: int | None = None,
+    rule_id: str = "BR-08",
+) -> RuleOutcome:
+    metadata_keys = metadata_timestamp_keys or ("file_received_ts", "ingest_time", "status_effective_ts")
+    reported_ts: list[datetime] = []
+
+    if timestamp_column and timestamp_column in table.df.columns:
+        column_ts = pd.to_datetime(table.df[timestamp_column], utc=True, errors="coerce")
+        if not column_ts.dropna().empty:
+            reported_ts.append(column_ts.max().to_pydatetime())
+
+    for key in metadata_keys:
+        candidate = _coerce_timestamp(table.metadata.get(key))
+        if candidate:
+            reported_ts.append(candidate)
+
+    if not reported_ts:
+        data_ts = table.modified_at
+        source_label = "filesystem"
+    else:
+        data_ts = max(reported_ts)
+        source_label = timestamp_column or "metadata"
+
+    reference_ts = _coerce_timestamp(table.metadata.get("ingest_time")) or datetime.now(timezone.utc)
+    warning_window = warning_hours if warning_hours is not None else max_allowed_hours * 2
+    lag_hours = max(0.0, (reference_ts - data_ts).total_seconds() / 3600)
+
+    if lag_hours <= max_allowed_hours:
+        passed = True
+        severity = "info"
+        description = "Freshness is within allowed lag."
+    elif lag_hours <= warning_window:
+        passed = False
+        severity = "warning"
+        description = "Freshness crosses warning threshold."
+    else:
+        passed = False
+        severity = "critical"
+        description = "Freshness exceeds the critical lag threshold."
+
+    details = {
+        "lag_hours": round(lag_hours, 2),
+        "reference_time": reference_ts.isoformat(),
+        "latest_data_time": data_ts.isoformat(),
+        "timestamp_source": source_label,
+        "max_allowed_hours": max_allowed_hours,
+        "warning_hours": warning_window,
+    }
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity=severity,
+        details=details,
+    )
+
+
+def _summarize_candidates(values: Iterable[Any], limit: int = 5) -> list[Any]:
+    return list(dict.fromkeys(values))[:limit]
+
+
+def check_pass_fail_certification(
+    exam_df: pd.DataFrame, cert_df: pd.DataFrame, rule_id_prefix: str = "BR-05"
+) -> List[RuleOutcome]:
+    latest_status = (
+        cert_df.sort_values("status_effective_ts", na_position="last")
+        .drop_duplicates("candidate_id", keep="last")
+        .set_index("candidate_id")
+    )
+    merged = exam_df.join(latest_status[["certification_status"]], on="candidate_id", how="left")
+
+    cert_status = merged["certification_status"].fillna("")
+    pass_mask = merged["pass_fail"].isin(PASSING_VALUES)
+    fail_mask = merged["pass_fail"].isin(FAILING_VALUES)
+
+    pass_mismatch = pass_mask & ~cert_status.isin(CERTIFIED_STATUSES)
+    pass_missing = pass_mask & merged["certification_status"].isna()
+    fail_mismatch = fail_mask & cert_status.isin(CERTIFIED_STATUSES)
+
+    outcomes: List[RuleOutcome] = []
+    pass_failure = pass_mismatch.any() or pass_missing.any()
+    pass_issue = build_rule_outcome(
+        rule_id=f"{rule_id_prefix}-pass",
+        description="Pass exams should map to Certified statuses.",
+        passed=not pass_failure,
+        severity="critical" if pass_failure else "info",
+        details={
+            "pass_mismatch_count": int(pass_mismatch.sum()),
+            "pass_missing_count": int(pass_missing.sum()),
+            "sample_candidates": _summarize_candidates(merged.loc[pass_mismatch | pass_missing, "candidate_id"].tolist()),
+        },
+    )
+    outcomes.append(pass_issue)
+
+    fail_failure = fail_mismatch.any()
+    fail_issue = build_rule_outcome(
+        rule_id=f"{rule_id_prefix}-fail",
+        description="Fail attempts should not result in Certified statuses.",
+        passed=not fail_failure,
+        severity="warning" if fail_failure else "info",
+        details={
+            "fail_mismatch_count": int(fail_mismatch.sum()),
+            "sample_candidates": _summarize_candidates(merged.loc[fail_mismatch, "candidate_id"].tolist()),
+            "allowed_fail_statuses": sorted(FAIL_ALLOWED_STATUSES),
+        },
+    )
+    outcomes.append(fail_issue)
+    return outcomes
+
+
+def check_score_range(
+    exam_df: pd.DataFrame, column: str, rule_id: str, min_value: float = 0.0, max_value: float = 100.0
+) -> RuleOutcome:
+    values = pd.to_numeric(exam_df[column], errors="coerce")
+    invalid = exam_df[column].notna() & values.isna()
+    out_of_bounds = (values < min_value) | (values > max_value)
+    invalid_count = int(invalid.sum())
+    out_of_range_count = int(out_of_bounds.sum())
+    passed = not invalid_count and not out_of_range_count
+    description = (
+        f"Column '{column}' stays within {min_value}-{max_value}." if passed else "Score range violation."
+    )
+    details = {
+        "invalid_format_count": invalid_count,
+        "out_of_range_count": out_of_range_count,
+        "column": column,
+    }
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity="warning" if not passed else "info",
+        details=details,
+    )
+
+
+def check_exam_date_window(
+    exam_df: pd.DataFrame,
+    reference_date: datetime | None = None,
+    months: int = 12,
+    rule_id: str = "BR-06",
+) -> RuleOutcome:
+    reference_date = reference_date or datetime.now(timezone.utc)
+    window_days = int(30.5 * months)
+    window_start = reference_date - timedelta(days=window_days)
+    exam_dates = pd.to_datetime(exam_df["exam_date"], errors="coerce")
+    out_of_window = (exam_dates < window_start) | (exam_dates > reference_date)
+    count = int(out_of_window.sum())
+    passed = count == 0
+    description = (
+        "Exam dates fall within the rolling 12-month window." if passed else "Exam dates are outside the allowed window."
+    )
+    details = {
+        "window_start": window_start.isoformat(),
+        "window_end": reference_date.isoformat(),
+        "window_days": window_days,
+        "out_of_window": count,
+    }
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity="warning" if not passed else "info",
+        details=details,
+    )
+</file>
+
+<file path="src/rules/schema_rules.py">
+"""Schema-centric validators that exercise pandas before GX expectations fire."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Mapping, Sequence, Tuple
+
+import pandas as pd
+
+try:
+    from typing import Literal
+except ImportError:  # pragma: no cover - py39 compatibility
+    from typing_extensions import Literal
+
+Severity = Literal["critical", "warning", "info"]
+
+
+@dataclass
+class RuleOutcome:
+    """Captures the results produced by pandas rule helpers."""
+
+    rule_id: str
+    description: str
+    passed: bool
+    severity: Severity
+    details: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class SchemaDefinition:
+    name: str
+    file_name: str
+    required_columns: Tuple[str, ...]
+    dtype_map: Mapping[str, Any]
+    parse_dates: Tuple[str, ...]
+    uniqueness_constraints: Tuple[Tuple[str, ...], ...] = field(default_factory=tuple)
+
+
+SCHEMA_DEFINITIONS: Dict[str, SchemaDefinition] = {
+    "candidates": SchemaDefinition(
+        name="candidates",
+        file_name="candidates.csv",
+        required_columns=(
+            "candidate_id",
+            "birth_date",
+            "email",
+            "first_name",
+            "last_name",
+            "created_ts",
+            "source_system",
+        ),
+        parse_dates=("birth_date", "created_ts"),
+        dtype_map={
+            "candidate_id": "string",
+            "birth_date": "datetime64[ns]",
+            "email": "string",
+            "first_name": "string",
+            "last_name": "string",
+            "created_ts": "datetime64[ns]",
+            "source_system": "string",
+        },
+        uniqueness_constraints=(("candidate_id",), ("email",)),
+    ),
+    "exam_results": SchemaDefinition(
+        name="exam_results",
+        file_name="exam_results.csv",
+        required_columns=(
+            "exam_result_id",
+            "candidate_id",
+            "exam_code",
+            "exam_date",
+            "attempt_number",
+            "score",
+            "score_scaled",
+            "pass_fail",
+            "exam_location",
+            "file_received_ts",
+        ),
+        parse_dates=("exam_date", "file_received_ts"),
+        dtype_map={
+            "exam_result_id": "string",
+            "candidate_id": "string",
+            "exam_code": "string",
+            "exam_date": "datetime64[ns]",
+            "attempt_number": "Int64",
+            "score": "float64",
+            "score_scaled": "float64",
+            "pass_fail": "string",
+            "exam_location": "string",
+            "file_received_ts": "datetime64[ns]",
+        },
+        uniqueness_constraints=(
+            ("exam_result_id",),
+            ("candidate_id", "exam_code", "attempt_number"),
+        ),
+    ),
+    "certification_status": SchemaDefinition(
+        name="certification_status",
+        file_name="certification_status.csv",
+        required_columns=(
+            "cert_status_id",
+            "candidate_id",
+            "certification_level",
+            "certification_status",
+            "certified_ts",
+            "status_source",
+            "status_effective_ts",
+        ),
+        parse_dates=("certified_ts", "status_effective_ts"),
+        dtype_map={
+            "cert_status_id": "string",
+            "candidate_id": "string",
+            "certification_level": "string",
+            "certification_status": "string",
+            "certified_ts": "datetime64[ns]",
+            "status_source": "string",
+            "status_effective_ts": "datetime64[ns]",
+        },
+        uniqueness_constraints=(
+            ("cert_status_id",),
+            ("candidate_id", "certification_level"),
+        ),
+    ),
+}
+
+
+def build_rule_outcome(
+    rule_id: str,
+    description: str,
+    passed: bool,
+    severity: Severity,
+    details: Mapping[str, Any] | None = None,
+) -> RuleOutcome:
+    return RuleOutcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity=severity,
+        details=dict(details or {}),
+    )
+
+
+def get_schema_definition(name: str) -> SchemaDefinition:
+    """Return the schema definition for a named feed."""
+
+    try:
+        return SCHEMA_DEFINITIONS[name]
+    except KeyError as exc:
+        raise KeyError(f"No schema definition for '{name}'") from exc
+
+
+def check_required_columns(
+    df: pd.DataFrame,
+    required_columns: Sequence[str],
+    rule_id: str,
+    severity: Severity = "critical",
+) -> RuleOutcome:
+    missing = [column for column in required_columns if column not in df.columns]
+    passed = not missing
+    description = (
+        "All required columns are present." if passed else "Missing required columns."
+    )
+    details = {"missing_columns": missing} if missing else {}
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity=severity,
+        details=details,
+    )
+
+
+def normalize_dataframe_dtypes(
+    df: pd.DataFrame,
+    dtype_map: Mapping[str, Any],
+    rule_id_prefix: str,
+    severity: Severity = "warning",
+) -> tuple[pd.DataFrame, List[RuleOutcome]]:
+    normalized = df.copy()
+    issues: List[RuleOutcome] = []
+    for column, target_dtype in dtype_map.items():
+        if column not in normalized.columns:
+            continue
+        try:
+            normalized[column] = normalized[column].astype(target_dtype)
+        except (TypeError, ValueError) as exc:
+            fallback = str(target_dtype).lower()
+            if "datetime" in fallback:
+                normalized[column] = pd.to_datetime(normalized[column], errors="coerce")
+            else:
+                normalized[column] = normalized[column].astype("object")
+            issues.append(
+                build_rule_outcome(
+                    rule_id=f"{rule_id_prefix}-{column}",
+                    description=f"Could not coerce {column} to {target_dtype}.",
+                    passed=False,
+                    severity=severity,
+                    details={"column": column, "target_dtype": str(target_dtype), "error": str(exc)},
+                )
+            )
+    return normalized, issues
+
+
+def detect_duplicates(
+    df: pd.DataFrame,
+    subset: Sequence[str],
+    rule_id: str,
+    severity: Severity = "critical",
+) -> RuleOutcome:
+    duplicates_mask = df.duplicated(subset=list(subset), keep=False)
+    duplicate_count = int(duplicates_mask.sum())
+    passed = duplicate_count == 0
+    description = (
+        "No duplicate rows detected for subset." if passed else "Duplicate rows detected."
+    )
+    details = {
+        "subset": list(subset),
+        "duplicate_count": duplicate_count,
+    }
+    return build_rule_outcome(
+        rule_id=rule_id,
+        description=description,
+        passed=passed,
+        severity=severity,
+        details=details,
+    )
+
+
+def validate_uniqueness_constraints(
+    df: pd.DataFrame,
+    constraints: Sequence[Sequence[str]],
+    rule_id_prefix: str,
+    severity: Severity = "critical",
+) -> List[RuleOutcome]:
+    outcomes: List[RuleOutcome] = []
+    for index, subset in enumerate(constraints, start=1):
+        outcomes.append(
+            detect_duplicates(
+                df=df,
+                subset=subset,
+                rule_id=f"{rule_id_prefix}-unique-{index}",
+                severity=severity,
+            )
+        )
+    return outcomes
+
+
+def apply_schema_definition(
+    df: pd.DataFrame,
+    definition: SchemaDefinition,
+    dtype_rule_prefix: str | None = None,
+    uniqueness_rule_prefix: str | None = None,
+) -> tuple[pd.DataFrame, List[RuleOutcome]]:
+    """Validate a DataFrame against a schema definition."""
+
+    outcomes: List[RuleOutcome] = []
+    outcomes.append(
+        check_required_columns(
+            df=df,
+            required_columns=definition.required_columns,
+            rule_id=f"{definition.name}-required-columns",
+        )
+    )
+    dtype_prefix = dtype_rule_prefix or f"{definition.name}-dtype"
+    normalized, dtype_issues = normalize_dataframe_dtypes(
+        df=df,
+        dtype_map=definition.dtype_map,
+        rule_id_prefix=dtype_prefix,
+    )
+    outcomes.extend(dtype_issues)
+    if definition.uniqueness_constraints:
+        unique_prefix = uniqueness_rule_prefix or f"{definition.name}-uniqueness"
+        outcomes.extend(
+            validate_uniqueness_constraints(
+                df=normalized,
+                constraints=definition.uniqueness_constraints,
+                rule_id_prefix=unique_prefix,
+            )
+        )
+    return normalized, outcomes
+</file>
+
+<file path="tests/smoke/test_environment.py">
+from pathlib import Path
+
+import pytest
+
+from src.ingest.loaders import discover_ingest_files
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+DATA_ROOT = REPO_ROOT / "data"
+EXPECTATIONS_DIR = REPO_ROOT / "gx" / "expectations"
+CHECKPOINT_PATH = REPO_ROOT / "gx" / "checkpoints" / "ingest_validation_checkpoint.yml"
+
+pytestmark = pytest.mark.smoke
+
+
+def test_schema_and_rules_import_cleanly():
+    import src.rules.schema_rules as schema_rules
+    import src.rules.business_rules as business_rules
+
+    # Spot-check that the modules expose the expected helpers.
+    assert schema_rules.SCHEMA_DEFINITIONS
+    assert hasattr(business_rules, "PASSING_VALUES")
+
+
+def test_good_files_are_discoverable():
+    base = DATA_ROOT / "good"
+    discovered = discover_ingest_files(
+        base_dir=base,
+        file_names=["candidates.csv", "exam_results.csv", "certification_status.csv"],
+    )
+    assert set(discovered.keys()) == {
+        "candidates.csv",
+        "exam_results.csv",
+        "certification_status.csv",
+    }
+
+
+def test_checkpoint_references_expectation_suites():
+    suites = []
+    with CHECKPOINT_PATH.open() as checkpoint_file:
+        for line in checkpoint_file:
+            stripped = line.strip()
+            if "expectation_suite_name:" not in stripped:
+                continue
+            _, suite = stripped.split(":", 1)
+            suites.append(suite.strip())
+    assert suites, "checkpoint must declare at least one expectation suite"
+
+    expectation_suffixes = (".yml", ".json")
+    for suite_name in suites:
+        expectation_path = None
+        for suffix in expectation_suffixes:
+            candidate = EXPECTATIONS_DIR / f"{suite_name}{suffix}"
+            if candidate.exists():
+                expectation_path = candidate
+                break
+        assert expectation_path, f"{suite_name} expectation suite missing (expected one of {expectation_suffixes})"
+</file>
+
+<file path="README.md">
+# CertGate Validation Gate
+
+## Why CertGate
+- **Automated release guardrail** for candidate, exam, and certification feeds with data-quality decisions baked into every pipeline run.
+- **Severity-aware gating** links schema, integrity, and freshness checks to explicit release outcomes (`Ready`, `Warning only`, `Blocked`).
+- **Recruiter-ready showcase**: interactive demo site, Great Expectations data docs, and structured `reports/*.json` artifacts explain what happened, when, and why.
+
+## Quick Highlights
+- Guards every ingest using pandas helpers (`src/rules/schema_rules.py`, `src/rules/business_rules.py`) before Great Expectations milestones execute.
+- Reports validation results, defects, and decisions via `src/reporting.py` to create `reports/validation_summary.json`, `reports/defect_summary.json`, and `reports/release_decision.json`.
+- Demo site in `demo-site/` references those artifacts, plus automated screenshots/GIFs generated by `scripts/generate_demo_assets.py`.
+
+## Data Feeds & Schemas
+| Feed | Required columns | Uniqueness constraints | Severity implications |
+| --- | --- | --- | --- |
+| `candidates.csv` | `candidate_id`, `birth_date`, `email`, `first_name`, `last_name`, `created_ts`, `source_system` | `candidate_id`, `email` | Missing columns or duplicates block release (`critical`). See `docs/business-rules.md` for details. |
+| `exam_results.csv` | `exam_result_id`, `candidate_id`, `exam_code`, `exam_date`, `attempt_number`, `score`, `score_scaled`, `pass_fail`, `exam_location`, `file_received_ts` | `exam_result_id`; (`candidate_id`, `exam_code`, `attempt_number`) | Invalid scores, stale exams, or duplicate attempts produce `warning`/`critical` outcomes depending on the rule (`docs/rule-severity-matrix.md`). |
+| `certification_status.csv` | `cert_status_id`, `candidate_id`, `certification_level`, `certification_status`, `certified_ts`, `status_source`, `status_effective_ts` | `cert_status_id`; (`candidate_id`, `certification_level`) | Certification mismatches or overlapping statuses raise `warning`/`critical` defects in `docs/rule-severity-matrix.md`. |
+
+## Validation Architecture
+- **Schema helpers:** `src/rules/schema_rules.py` defines `SchemaDefinition` objects, column expectations, dtype normalization, and uniqueness detection. It emits `RuleOutcome` dataclasses that describe pass/fail status, severity (`critical`/`warning`/`info`), and metadata for downstream reporting.
+- **Business logic:** `src/rules/business_rules.py` adds referential integrity (`BR-07`, `BR-07b`), pass/fail-to-certification mapping (`BR-05`), and freshness analysis (`BR-08`). Each helper returns `RuleOutcome` objects consumed by `ReleaseReport`.
+- **Reporting:** `src/reporting.py` aggregates all outcomes, infers root causes, and writes the `reports/` artifacts (`validation_summary.json`, `defect_summary.json`, `release_decision.json`). These payloads drive automated awareness (e.g., release gates, demos) and link back to `docs/rule-severity-matrix.md` for remediation.
+
+## Automation & Reporting Scripts
+| Script | Purpose | Sample command |
+| --- | --- | --- |
+| `python scripts/run_great_expectations.py` | Executes GX checkpoint `ingest_validation_checkpoint` against canonical `data/good/*.csv` bundles; populates `gx/validations/` and publishes docs via `gx/data_docs/`. | `python scripts/run_great_expectations.py` |
+| `python scripts/generate_release_reports.py` | Loads every schema via `src/ingest/loaders.py`, runs schema/business rule checks, and dumps `reports/` exports via `ReleaseReport`. | `python scripts/generate_release_reports.py` |
+| `python scripts/generate_demo_assets.py` | Creates hero screenshots + animated workflow GIF used by `demo-site/`. | `python scripts/generate_demo_assets.py` |
+- **Artifacts:** `reports/release_decision.json` is the single-source gate status, while `reports/validation_summary.json` and `reports/defect_summary.json` enumerate every evaluated rule plus root causes (schema/integrity/freshness/duplicates/business-rule drift). The `demo-site/` reads these files at runtime, so any script rerun refreshes the showcase.
+- **Great Expectations docs:** After `run_great_expectations.py`, `gx/data_docs/index.html` and suite-specific pages (`candidates_suite`, `exam_results_suite`, `cert_status_suite`, `freshness_suite`) become inspectable via browser.
+
+## Testing & QA Layers
+- **Unit tests** (`tests/unit/`) verify helper logic for `schema_rules`, `business_rules`, and `reporting` using parametrized fixtures and synthetic slices from `data/`.
+- **Functional/regression/uat layers** (folders under `tests/functional`, `tests/regression`, `tests/uat`) exercise multi-file flows, failure modes, and integration with `Great Expectations` checkpoints. Each layer runs against tailored datasets (`data/good/`, `data/bad/`, `data/regression/`) described in `docs/test-plan.md`.
+- **Synthetic datasets:** `data/bad/` contains curated failure cases (duplicate candidates, missing candidate join, future exam dates, etc.), while `data/regression/` captures multi-feed interactions to stress cross-file rules. `docs/defect-log.md` chronicles recurring failures and remediation history.
+- **Artifacts & CI:** Every test run emits `reports/junit.xml`, `reports/validation_summary.json`, and `reports/release_decision.json`. Packaging these artifacts allows downstream workflows (CI, demo site, release automation) to assert severity levels against the rule severity matrix in `docs/rule-severity-matrix.md`.
+
+## Demo & Stakeholder Storytelling
+- The static `demo-site/` mirrors what a recruiter sees: status pills, rule counts, artifact links, and a defect table backed by real report JSON files. Visitors can click through the Great Expectations data docs and download release artifacts directly.
+- Visual assets include failures/passes (`demo-site/assets/*.png`) plus an animated narrative GIF (`workflow.gif`) generated by `scripts/generate_demo_assets.py`. Use these in presentations to show how the gating cycle moves from blocked runs to ready releases.
+
+## Getting Started
+Great Expectations (<0.18) used in this project is officially supported on Python 3.10–3.13. Python 3.14+ still fails early (the bundled Pydantic v1 dependency raises `Subscripted generics cannot be used with class and instance checks` during initialization), so `scripts/run_great_expectations.py` now exits immediately when run with an unsupported interpreter and asks you to rebuild the `.venv` with Python 3.10–3.13 before rerunning.
+
+Installing packages via `python3.13 -m pip install ...` without a virtual environment will raise `error: externally-managed-environment` per [PEP 668](https://peps.python.org/pep-0668/) because Homebrew locks its system interpreter. Use the bootstrap helper below so `pip` runs inside `.venv`.
+
+1. **Bootstrap dependencies:** `PYTHON_CMD=python3.13 ./scripts/bootstrap.sh` (or simply `./scripts/bootstrap.sh` if your default `python3` resolves to a supported interpreter between 3.10 and 3.13). The helper now enforces that range, refuses to create a `.venv` with Python 3.14+, and recreates the environment if it detects an existing `.venv` built with an unsupported interpreter. Upgrades `pip` and installs everything from `requirements.txt` inside the virtual environment.
+
+   > ⚠️ If you still see `error: externally-managed-environment` after activating `.venv`, it means `python3.13` is still pointing at the Homebrew-managed interpreter. Re-run the bootstrap step so `.venv/bin/python3.13` exists, then activate and install using the virtual‑environment interpreter (e.g., `python -m pip install -r requirements.txt` or `.venv/bin/python3.13 -m pip install -r requirements.txt`). Avoid invoking the global `python3.13` once the venv is active unless you explicitly point at `.venv/bin/python3.13`, otherwise PEP 668 will block the install.
+2. **Activate the virtual environment:** `source .venv/bin/activate`.
+3. **Run schema + business guards:** <br>`python scripts/generate_release_reports.py` produces `reports/*.json` capturing every rule outcome.
+4. **Run Great Expectations checkpoint:** <br>`python scripts/run_great_expectations.py` (requires `great_expectations` config in `gx/`).
+5. **Refresh demo assets (optional):** <br>`python scripts/generate_demo_assets.py` regenerates hero visuals for the demo site.
+6. **Inspect outputs:** <br>`demo-site/index.html` loads `reports/*.json`; `gx/data_docs/index.html` exposes validation results; `docs/rule-severity-matrix.md` explains severity/resolution steps; `docs/business-rules.md` and `docs/test-plan.md` provide deeper domain context.
+
+## Why This Belongs on Your Portfolio
+- Shows end-to-end automation: data ingestion, schema/semantic rules, reporting, and storytelling assets for stakeholders.
+- Highlights familiarity with pandas, Great Expectations, structured defects, and release gating automation (critical for data/QA engineer roles).
+- Demonstrates ability to align QA automation with business expectations, severity matrices, and actionable documentation for reviewers.
+
+## Related Documentation
+- `docs/business-rules.md` – Complete data-contract reference that feeds every expectation.
+- `docs/rule-severity-matrix.md` – Maps each rule to severity, symptoms, and remediation guidance referenced by `ReleaseReport` links.
+- `docs/test-plan.md` – QA layers, regression scenarios, synthetic data usage, and release artifact descriptions.
+- `docs/defect-log.md` – Traceability for historical failures surfaced by automation.
+</file>
+
+<file path="gx/checkpoints/ingest_validation_checkpoint.yml">
+name: ingest_validation_checkpoint
+config_version: 1.0
+class_name: SimpleCheckpoint
+run_name_template: "%Y%m%d-%H%M%S-ingest-validation"
+action_list:
+  - name: store_validation_result
+    action:
+      class_name: StoreValidationResultAction
+  - name: store_evaluation_params
+    action:
+      class_name: StoreEvaluationParametersAction
+  - name: update_data_docs
+    action:
+      class_name: UpdateDataDocsAction
+# expectation_suite_name: candidates_suite
+# expectation_suite_name: exam_results_suite
+# expectation_suite_name: cert_status_suite
+# expectation_suite_name: freshness_suite
+</file>
+
+<file path="scripts/run_great_expectations.py">
+from __future__ import annotations
+
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
+SUPPORTED_PYTHON_MIN = (3, 10)
+SUPPORTED_PYTHON_MAX = (3, 13)
+
+
+def _ensure_python_supported() -> None:
+    version = sys.version_info[:2]
+    if SUPPORTED_PYTHON_MIN <= version <= SUPPORTED_PYTHON_MAX:
+        return
+    version_str = f"{version[0]}.{version[1]}"
+    base_message = (
+        "Great Expectations (<0.18) is tested on Python 3.10→3.13, "
+        f"but you are running Python {version_str}."
+    )
+    if version > SUPPORTED_PYTHON_MAX:
+        raise SystemExit(
+            base_message
+            + " Python 3.14+ is not supported yet because the bundled Pydantic v1 dependency "
+            "issues `issubclass` checks against typing generics and raises "
+            "\"Subscripted generics cannot be used with class and instance checks\" "
+            "on Python 3.14+. Recreate your `.venv` with a supported interpreter (for example "
+            "`PYTHON_CMD=python3.13 ./scripts/bootstrap.sh`) before rerunning this script."
+        )
+    raise SystemExit(base_message + " Please use a supported interpreter before rerunning this script.")
+
+
+import pandas as pd
+
+if TYPE_CHECKING:
+    from great_expectations.core.batch import RuntimeBatchRequest
+
+from src.ingest.loaders import load_table
+from src.rules.schema_rules import get_schema_definition
+
+DATA_ROOT = BASE_DIR / "data" / "good"
+GX_ROOT = BASE_DIR / "gx"
+
+SCHEMA_TARGETS = (
+    "candidates",
+    "exam_results",
+    "certification_status",
+)
+
+ACTION_LIST = [
+    {
+        "name": "store_validation_result",
+        "action": {"class_name": "StoreValidationResultAction"},
+    },
+    {
+        "name": "store_evaluation_parameters",
+        "action": {"class_name": "StoreEvaluationParametersAction"},
+    },
+    {
+        "name": "update_data_docs",
+        "action": {"class_name": "UpdateDataDocsAction"},
+    },
+]
+
+VALIDATION_RUN_CONFIGS = (
+    {
+        "table_key": "candidates",
+        "expectation_suite_name": "candidates_suite",
+        "batch_identifier": "candidates",
+    },
+    {
+        "table_key": "exam_results",
+        "expectation_suite_name": "exam_results_suite",
+        "batch_identifier": "exams",
+    },
+    {
+        "table_key": "certification_status",
+        "expectation_suite_name": "cert_status_suite",
+        "batch_identifier": "certifications",
+    },
+    {
+        "table_key": "exam_results",
+        "expectation_suite_name": "freshness_suite",
+        "batch_identifier": "freshness",
+    },
+)
+
+EXPECTATION_SUITE_NAMES = tuple(
+    config["expectation_suite_name"] for config in VALIDATION_RUN_CONFIGS
+)
+
+
+def _load_dataframe(table_key: str) -> pd.DataFrame:
+    definition = get_schema_definition(table_key)
+    table_path = DATA_ROOT / definition.file_name
+    loaded = load_table(
+        name=table_key,
+        path=table_path,
+        parse_dates=definition.parse_dates,
+        dtype_overrides=definition.dtype_map,
+    )
+    return loaded.df
+
+
+def _to_datetime(value: pd.Timestamp | datetime | str) -> datetime:
+    if pd.isna(value):
+        raise ValueError("Timestamp value is missing")
+    if isinstance(value, pd.Timestamp):
+        return value.to_pydatetime()
+    if isinstance(value, str):
+        return pd.to_datetime(value).to_pydatetime()
+    if isinstance(value, datetime):
+        return value
+    raise ValueError(f"Unable to interpret {value!r} as datetime")  # type: ignore[unreachable]
+
+
+def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchRequest:
+    from great_expectations.core.batch import RuntimeBatchRequest
+
+    return RuntimeBatchRequest(
+        datasource_name="pandas_ingest",
+        data_connector_name="runtime_data_connector",
+        data_asset_name="ingest_batch",
+        runtime_parameters={"batch_data": df},
+        batch_identifiers={"ingest_batch": identifier},
+    )
+
+
+def main() -> None:
+    _ensure_python_supported()
+    from great_expectations.data_context import DataContext
+
+    context = DataContext(context_root_dir=str(GX_ROOT))
+
+    table_dfs = {
+        table_key: _load_dataframe(table_key) for table_key in SCHEMA_TARGETS
+    }
+    exam_df = table_dfs["exam_results"]
+
+    evaluation_params = {
+        "min_exam_date": _to_datetime(exam_df["exam_date"].min()),
+        "max_exam_date": _to_datetime(exam_df["exam_date"].max()),
+        "min_file_received_ts": _to_datetime(
+            exam_df["file_received_ts"].min()
+        ),
+        "max_file_received_ts": _to_datetime(
+            exam_df["file_received_ts"].max()
+        ),
+    }
+
+    validations = [
+        {
+            "batch_request": _build_batch_request(
+                table_dfs[config["table_key"]], config["batch_identifier"]
+            ),
+            "expectation_suite_name": config["expectation_suite_name"],
+        }
+        for config in VALIDATION_RUN_CONFIGS
+    ]
+
+    result = context.run_checkpoint(
+        checkpoint_name="ingest_validation_checkpoint",
+        validations=validations,
+        evaluation_parameters=evaluation_params,
+        action_list=ACTION_LIST,
+    )
+    print("Great Expectations checkpoint executed:", result.name)
+
+
+if __name__ == "__main__":
+    main()
+</file>
+
+</files>
