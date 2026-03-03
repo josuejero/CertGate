@@ -38,11 +38,19 @@ def test_checkpoint_references_expectation_suites():
     suites = []
     with CHECKPOINT_PATH.open() as checkpoint_file:
         for line in checkpoint_file:
-            if line.strip().startswith("expectation_suite_name:"):
-                _, suite = line.split(":", 1)
-                suites.append(suite.strip())
+            stripped = line.strip()
+            if "expectation_suite_name:" not in stripped:
+                continue
+            _, suite = stripped.split(":", 1)
+            suites.append(suite.strip())
     assert suites, "checkpoint must declare at least one expectation suite"
 
+    expectation_suffixes = (".yml", ".json")
     for suite_name in suites:
-        expectation_path = EXPECTATIONS_DIR / f"{suite_name}.yml"
-        assert expectation_path.exists(), f"{suite_name} expectation suite missing"
+        expectation_path = None
+        for suffix in expectation_suffixes:
+            candidate = EXPECTATIONS_DIR / f"{suite_name}{suffix}"
+            if candidate.exists():
+                expectation_path = candidate
+                break
+        assert expectation_path, f"{suite_name} expectation suite missing (expected one of {expectation_suffixes})"
