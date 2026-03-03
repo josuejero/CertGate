@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CertGate QA Demo</title>
+    <meta
+      name="description"
+      content="Automated CertGate QA pipeline with Great Expectations data docs, release decision exports, and recruiter-ready summary."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Recruiter-ready QA demo</p>
+        <h1>CertGate public QA showcase</h1>
+        <p>
+          Live snapshot of the automated gating run: pytest layers, Great Expectations checkpoints,
+          and structured release exports. Every workflow refresh pushes a clickable page for the hiring
+          team to inspect.</p>
+      </div>
+      <div>
+        <a class="demo-link" id="demo-link" href="#" target="_blank" rel="noopener">Live demo link</a>
+        <p class="hero-meta" id="demo-url">Loading link...</p>
+      </div>
+    </header>
+    <main>
+      <section class="status-panel">
+        <article class="card status-card">
+          <span class="status-pill" id="status-pill" data-status="loading">Loading...</span>
+          <h2 id="status-text">Fetching validation data...</h2>
+          <p id="status-timestamp"></p>
+          <p id="status-reason"></p>
+          <ul id="fail-list"><li>Waiting for the latest release decision.</li></ul>
+        </article>
+        <article class="card">
+          <p class="section-title">Validation coverage</p>
+          <div class="stats-grid">
+            <div class="stat">
+              <p class="stat-label">Rules evaluated</p>
+              <p class="stat-value" id="rule-count">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Failures</p>
+              <p class="stat-value" id="failed-count">—</p>
+            </div>
+            <div class="stat">
+              <p class="stat-label">Generated</p>
+              <p class="stat-value" id="generated-at">—</p>
+            </div>
+          </div>
+        </article>
+      </section>
+      <section class="overview card">
+        <p class="section-title">Project overview</p>
+        <p>
+          CertGate combines schema and business-rule automation to guard releases for the candidate,
+          examination, and certification feeds. Pytest layers exercise every helper and regression
+          scenario, while Great Expectations keeps data docs and checkpoints live for recruiters.
+        </p>
+      </section>
+      <section class="rule-categories">
+        <article class="rule-card">
+          <h3>Schema &amp; completeness</h3>
+          <p>Ensure required columns, dtypes, and unique identifiers before a batch ever lands in production.</p>
+        </article>
+        <article class="rule-card">
+          <h3>Consistency &amp; integrity</h3>
+          <p>Candidate joins, pass/fail status mappings, and certification uniqueness guard the business logic.</p>
+        </article>
+        <article class="rule-card">
+          <h3>Freshness &amp; timeliness</h3>
+          <p>Metadata and timestamps verify that data arrives within the 24-hour window or flags a warning.</p>
+        </article>
+      </section>
+      <section class="data-docs card">
+        <p class="section-title">Great Expectations data docs</p>
+        <p>Click through the GX site to see every expectation suite and validation result that underpins this demo.</p>
+        <ul class="link-list">
+          <li><a href="data-docs/index.html" target="_blank" rel="noopener">Data docs index</a></li>
+          <li><a href="data-docs/candidates_suite/index.html" target="_blank" rel="noopener">Candidate suite</a></li>
+          <li><a href="data-docs/exam_results_suite/index.html" target="_blank" rel="noopener">Exam results suite</a></li>
+          <li><a href="data-docs/cert_status_suite/index.html" target="_blank" rel="noopener">Certification suite</a></li>
+        </ul>
+      </section>
+      <section class="artifacts card">
+        <p class="section-title">Raw artifacts</p>
+        <ul>
+          <li><a href="reports/release_decision.json" target="_blank">release_decision.json</a></li>
+          <li><a href="reports/validation_summary.json" target="_blank">validation_summary.json</a></li>
+          <li><a href="reports/defect_summary.json" target="_blank">defect_summary.json</a></li>
+          <li><a href="reports/junit.xml" target="_blank">junit.xml</a></li>
+        </ul>
+      </section>
+      <section class="screenshots">
+        <p class="section-title">Validation highlights</p>
+        <div class="screenshots-grid">
+          <article class="screenshot-card">
+            <img src="assets/validation-fail.png" alt="Failed validation highlight" />
+            <p>Failed validation captures the critical freshness lag that currently blocks release.</p>
+          </article>
+          <article class="screenshot-card">
+            <img src="assets/validation-pass.png" alt="Passing validation highlight" />
+            <p>The passing capture shows clean schema, scoring, and pass/fail business logic.</p>
+          </article>
+          <article class="screenshot-card">
+            <img src="assets/workflow.gif" alt="Animated workflow GIF" />
+            <p>GIF: bad dataset → blocked release → corrected bundle → ready for release.</p>
+          </article>
+        </div>
+      </section>
+      <section class="card">
+        <p class="section-title">Defect summary</p>
+        <div id="defect-legend" class="legend-stack"></div>
+        <div class="table-wrapper">
+          <table class="defect-table">
+            <thead>
+              <tr>
+                <th>Rule ID</th>
+                <th>Severity</th>
+                <th>Description</th>
+                <th>Root cause</th>
+                <th>Remediation</th>
+              </tr>
+            </thead>
+            <tbody id="defect-table-body">
+              <tr>
+                <td colspan="5">Loading defects...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <footer class="footer-note">
+      Latest artifacts pulled from the CI workflow and deployed to GitHub Pages.
+    </footer>
+    <script>
+      const reportPaths = {
+        release: "reports/release_decision.json",
+        validation: "reports/validation_summary.json",
+        defects: "reports/defect_summary.json",
+      };
+
+      const friendlyCauses = {
+        schema_issue: "Schema issues",
+        integrity_issue: "Integrity",
+        stale_data: "Freshness",
+        duplicate_record: "Duplicate records",
+        invalid_business_rule_state: "Business rule drift",
+      };
+
+      function getTimestampLabel(timestamp) {
+        try {
+          return new Date(timestamp).toLocaleString(undefined, {
+            dateStyle: "medium",
+            timeStyle: "short",
+          });
+        } catch (error) {
+          return timestamp || "n/a";
+        }
+      }
+
+      async function fetchJson(path) {
+        const response = await fetch(path);
+        if (!response.ok) {
+          throw new Error(`Failed to load ${path}: ${response.status}`);
+        }
+        return response.json();
+      }
+
+      function renderStatus(decision, validation) {
+        const statusText = document.getElementById("status-text");
+        const statusPill = document.getElementById("status-pill");
+        statusText.textContent = decision.status;
+        statusPill.textContent = decision.status;
+        statusPill.dataset.status = decision.status.toLowerCase();
+        document.getElementById("status-reason").textContent = decision.decision_reason;
+        document.getElementById("status-timestamp").textContent = `Run: ${getTimestampLabel(
+          decision.timestamp
+        )}`;
+        const failList = document.getElementById("fail-list");
+        failList.innerHTML = "";
+        if (!decision.failed_rules.length) {
+          failList.innerHTML = "<li>No blocking defects.</li>";
+        } else {
+          decision.failed_rules.forEach((rule) => {
+            const li = document.createElement("li");
+            li.textContent = `${rule.rule_id} (${rule.severity}): ${rule.root_cause}`;
+            failList.appendChild(li);
+          });
+        }
+        document.getElementById("rule-count").textContent = validation.rule_count;
+        document.getElementById("failed-count").textContent = validation.failed_count;
+        document.getElementById("generated-at").textContent = getTimestampLabel(validation.generated_at);
+      }
+
+      function renderDefects(defectData) {
+        const tbody = document.getElementById("defect-table-body");
+        tbody.innerHTML = "";
+        if (!defectData.defects.length) {
+          tbody.innerHTML = "<tr><td colspan=5>No defects found.</td></tr>";
+        } else {
+          for (const defect of defectData.defects) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+            <td>${defect.rule_id}</td>
+            <td>${defect.severity}</td>
+            <td>${defect.description}</td>
+            <td>${friendlyCauses[defect.root_cause] || defect.root_cause}</td>
+            <td><a href="${defect.remediation_link}" target="_blank">rule matrix</a></td>
+          `;
+            tbody.appendChild(row);
+          }
+        }
+        const legend = document.getElementById("defect-legend");
+        legend.innerHTML = "";
+        if (defectData.root_cause_counts) {
+          Object.entries(defectData.root_cause_counts).forEach(([key, value]) => {
+            const pill = document.createElement("span");
+            pill.className = "legend-pill";
+            pill.textContent = `${friendlyCauses[key] || key}: ${value}`;
+            legend.appendChild(pill);
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const currentUrl = window.location.href;
+        const demoLink = document.getElementById("demo-link");
+        demoLink.href = currentUrl;
+        document.getElementById("demo-url").textContent = currentUrl;
+
+        Promise.all([
+          fetchJson(reportPaths.release),
+          fetchJson(reportPaths.validation),
+          fetchJson(reportPaths.defects),
+        ])
+          .then(([decision, validation, defects]) => {
+            renderStatus(decision, validation);
+            renderDefects(defects);
+          })
+          .catch((error) => {
+            console.error(error);
+            document.getElementById("status-text").textContent = "Artifacts pending";
+            document.getElementById("status-reason").textContent =
+              "Run the workflow to populate the demo payloads.";
+          });
+      });
+    </script>
+  </body>
+</html>

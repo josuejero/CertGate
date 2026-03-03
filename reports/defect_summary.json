@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-03-03T19:21:07.474639+00:00",
+  "defect_count": 5,
+  "defects": [
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "description": "Could not coerce created_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-dtype-created-ts",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "description": "Could not coerce file_received_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-dtype-file-received-ts",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "description": "Could not coerce certified_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-certified-ts",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "description": "Could not coerce status_effective_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-status-effective-ts",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "BR-08",
+      "description": "Freshness exceeds the critical lag threshold.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#br-08",
+      "details": {
+        "lag_hours": 897.1,
+        "reference_time": "2026-03-03T19:21:07.474613+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ],
+  "root_cause_counts": {
+    "schema_issue": 4,
+    "stale_data": 1
+  }
+}

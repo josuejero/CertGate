@@ -1,0 +1,243 @@
+{
+  "generated_at": "2026-03-03T19:21:07.474639+00:00",
+  "rule_count": 18,
+  "failed_count": 5,
+  "rules": [
+    {
+      "rule_id": "candidates-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "candidates-dtype-created_ts",
+      "description": "Could not coerce created_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-dtype-created-ts",
+      "details": {
+        "column": "created_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "candidates-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "candidate_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "candidates-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#candidates-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "email"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "exam_results-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "exam_results-dtype-file_received_ts",
+      "description": "Could not coerce file_received_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-dtype-file-received-ts",
+      "details": {
+        "column": "file_received_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "exam_results-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "exam_result_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "exam_results-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#exam-results-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "candidate_id",
+          "exam_code",
+          "attempt_number"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "certification_status-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-required-columns",
+      "details": {}
+    },
+    {
+      "rule_id": "certification_status-dtype-certified_ts",
+      "description": "Could not coerce certified_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-certified-ts",
+      "details": {
+        "column": "certified_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-dtype-status_effective_ts",
+      "description": "Could not coerce status_effective_ts to datetime64[ns].",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-dtype-status-effective-ts",
+      "details": {
+        "column": "status_effective_ts",
+        "target_dtype": "datetime64[ns]",
+        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
+      }
+    },
+    {
+      "rule_id": "certification_status-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "cert_status_id"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "certification_status-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#certification-status-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "candidate_id",
+          "certification_level"
+        ],
+        "duplicate_count": 0
+      }
+    },
+    {
+      "rule_id": "BR-07",
+      "description": "Every exam candidate_id exists in the master list.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#br-07",
+      "details": {
+        "missing_count": 0,
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "BR-07b",
+      "description": "Every certification row references a known candidate.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#br-07b",
+      "details": {
+        "missing_count": 0,
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "BR-05-pass",
+      "description": "Pass exams should map to Certified statuses.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#br-05-pass",
+      "details": {
+        "pass_mismatch_count": 0,
+        "pass_missing_count": 0,
+        "sample_candidates": []
+      }
+    },
+    {
+      "rule_id": "BR-05-fail",
+      "description": "Fail attempts should not result in Certified statuses.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#br-05-fail",
+      "details": {
+        "fail_mismatch_count": 0,
+        "sample_candidates": [],
+        "allowed_fail_statuses": [
+          "Certification Pending",
+          "NeedsReview",
+          "Not Certified"
+        ]
+      }
+    },
+    {
+      "rule_id": "BR-08",
+      "description": "Freshness exceeds the critical lag threshold.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#br-08",
+      "details": {
+        "lag_hours": 897.1,
+        "reference_time": "2026-03-03T19:21:07.474613+00:00",
+        "latest_data_time": "2026-01-25T10:15:00+00:00",
+        "timestamp_source": "file_received_ts",
+        "max_allowed_hours": 24,
+        "warning_hours": 48
+      }
+    }
+  ]
+}
