@@ -36,7 +36,7 @@ def _load_dataframe(table_key: str) -> pd.DataFrame:
 
 def _to_datetime(value: pd.Timestamp | datetime | str) -> datetime:
     if pd.isna(value):
-        raise ValueError(\"Timestamp value is missing\" )
+        raise ValueError("Timestamp value is missing")
     if isinstance(value, pd.Timestamp):
         return value.to_pydatetime()
     if isinstance(value, str):
