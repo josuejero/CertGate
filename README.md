@@ -55,6 +55,10 @@ Installing packages via `python3.13 -m pip install ...` without a virtual enviro
 5. **Refresh demo assets (optional):** <br>`python scripts/generate_demo_assets.py` regenerates hero visuals for the demo site.
 6. **Inspect outputs:** <br>`demo-site/index.html` loads `reports/*.json`; `gx/data_docs/index.html` exposes validation results; `docs/rule-severity-matrix.md` explains severity/resolution steps; `docs/business-rules.md` and `docs/test-plan.md` provide deeper domain context.
 
+## Reusing the CertGate library
+- `python -m certgate` or `scripts/generate_release_reports.py` now delegate to `certgate.cli.main`, which wires the ingestion helpers, schema/business rule suite, and reporting helpers to recreate the release artifacts from any named bundle under `data/`.
+- Import `certgate.pipeline.ReleaseGatePipeline` (together with `PipelineConfig`, `SchemaTargetConfig`, etc.) to orchestrate the same workflow programmatically and optionally add custom business checks.
+
 ## Why This Belongs on Your Portfolio
 - Shows end-to-end automation: data ingestion, schema/semantic rules, reporting, and storytelling assets for stakeholders.
 - Highlights familiarity with pandas, Great Expectations, structured defects, and release gating automation (critical for data/QA engineer roles).

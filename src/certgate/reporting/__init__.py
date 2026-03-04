@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Sequence
 
-from src.rules.schema_rules import RuleOutcome
+from certgate.rules.schema import RuleOutcome
 
 STATUS_READY = "Ready"
 STATUS_WARNING_ONLY = "Warning only"
@@ -162,3 +162,13 @@ class ReleaseReport:
         ]
         for name, payload in payloads:
             (base / name).write_text(json.dumps(payload, indent=2))
+
+
+@dataclass(frozen=True)
+class ReportWriter:
+    """Helper that writes every CertGate report payload to disk."""
+
+    directory: Path | str = Path("reports")
+
+    def write(self, report: ReleaseReport) -> None:
+        report.write_reports(self.directory)

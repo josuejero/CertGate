@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from src.rules.business_rules import check_exam_candidate_fk, evaluate_table_freshness
-from src.rules.schema_rules import apply_schema_definition, get_schema_definition
+from certgate.rules.business import check_exam_candidate_fk, evaluate_table_freshness
+from certgate.rules.schema import apply_schema_definition, get_schema_definition
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = REPO_ROOT / "data"

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from src.rules.business_rules import check_pass_fail_certification
+from certgate.rules.business import check_pass_fail_certification
 
 
 def load_severity_matrix() -> dict[str, dict[str, str]]:

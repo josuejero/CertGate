@@ -9,10 +9,13 @@ from typing import Dict, Iterable
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+SRC_ROOT = REPO_ROOT / "src"
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
 
-from src.ingest.loaders import LoadedTable, load_table
+from certgate.ingest.loaders import LoadedTable, load_table
 
 DATA_ROOT = REPO_ROOT / "data"
 

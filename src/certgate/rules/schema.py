@@ -123,6 +123,22 @@ SCHEMA_DEFINITIONS: Dict[str, SchemaDefinition] = {
     ),
 }
 
+SCHEMA_TARGETS: Tuple[str, ...] = tuple(SCHEMA_DEFINITIONS.keys())
+
+__all__ = [
+    "RuleOutcome",
+    "SchemaDefinition",
+    "SCHEMA_DEFINITIONS",
+    "SCHEMA_TARGETS",
+    "build_rule_outcome",
+    "get_schema_definition",
+    "check_required_columns",
+    "normalize_dataframe_dtypes",
+    "detect_duplicates",
+    "validate_uniqueness_constraints",
+    "apply_schema_definition",
+]
+
 
 def build_rule_outcome(
     rule_id: str,

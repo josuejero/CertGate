@@ -6,8 +6,9 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-if str(BASE_DIR) not in sys.path:
-    sys.path.insert(0, str(BASE_DIR))
+SRC_ROOT = BASE_DIR / "src"
+if str(SRC_ROOT) not in sys.path:
+    sys.path.insert(0, str(SRC_ROOT))
 
 SUPPORTED_PYTHON_MIN = (3, 10)
 SUPPORTED_PYTHON_MAX = (3, 13)
@@ -39,8 +40,8 @@ import pandas as pd
 if TYPE_CHECKING:
     from great_expectations.core.batch import RuntimeBatchRequest
 
-from src.ingest.loaders import load_table
-from src.rules.schema_rules import get_schema_definition
+from certgate.ingest.loaders import load_table
+from certgate.rules.schema import get_schema_definition
 
 DATA_ROOT = BASE_DIR / "data" / "good"
 GX_ROOT = BASE_DIR / "gx"

@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.ingest.loaders import LoadedTable
-from src.rules.business_rules import (
+from certgate.ingest.loaders import LoadedTable
+from certgate.rules.business import (
     check_pass_fail_certification,
     check_score_range,
     check_exam_date_window,

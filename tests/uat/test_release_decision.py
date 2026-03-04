@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pytest
 
-from src.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_WARNING_ONLY
-from src.rules.business_rules import evaluate_table_freshness
-from src.rules.schema_rules import RuleOutcome
+from certgate.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_WARNING_ONLY
+from certgate.rules.business import evaluate_table_freshness
+from certgate.rules.schema import RuleOutcome
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = REPO_ROOT / "data"

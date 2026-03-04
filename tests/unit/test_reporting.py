@@ -2,8 +2,13 @@
 
 from datetime import datetime, timezone
 
-from src.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_READY, STATUS_WARNING_ONLY
-from src.rules.schema_rules import RuleOutcome
+from certgate.reporting import (
+    ReleaseReport,
+    STATUS_BLOCKED,
+    STATUS_READY,
+    STATUS_WARNING_ONLY,
+)
+from certgate.rules.schema import RuleOutcome
 
 FIXED_TIMESTAMP = datetime(2026, 3, 2, 12, 0, tzinfo=timezone.utc)
 

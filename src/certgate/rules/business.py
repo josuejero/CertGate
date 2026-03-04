@@ -8,7 +8,7 @@ from typing import Any, Iterable, List, Sequence
 import pandas as pd
 
 from ..ingest.loaders import LoadedTable
-from .schema_rules import RuleOutcome, Severity, build_rule_outcome
+from .schema import RuleOutcome, Severity, build_rule_outcome
 
 PASSING_VALUES = {"Pass", "pass", "P"}
 FAILING_VALUES = {"Fail", "fail", "F"}

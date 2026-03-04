@@ -1,7 +1,10 @@
 import pytest
+from pathlib import Path
 
-from src.rules.business_rules import check_exam_candidate_fk, check_pass_fail_certification
-from src.rules.schema_rules import apply_schema_definition, get_schema_definition
+from certgate.pipeline import PipelineConfig, ReleaseGatePipeline
+from certgate.reporting import STATUS_BLOCKED
+from certgate.rules.business import check_exam_candidate_fk, check_pass_fail_certification
+from certgate.rules.schema import apply_schema_definition, get_schema_definition
 
 
 SCHEMA_TARGETS = ("candidates", "exam_results", "certification_status")
@@ -32,3 +35,16 @@ def test_pass_fail_and_candidate_fk_criteria_hold(good_bundle):
 
     business_outcomes = check_pass_fail_certification(exam_df, certification_df)
     assert all(outcome.passed for outcome in business_outcomes)
+
+
+def test_pipeline_status_for_good_bundle(tmp_path):
+    repo_root = Path(__file__).resolve().parents[2]
+    config = PipelineConfig(
+        data_root=repo_root / "data",
+        bundle="good",
+        reports_dir=tmp_path / "reports",
+    )
+    pipeline = ReleaseGatePipeline(config)
+    report = pipeline.run()
+    assert report.status == STATUS_BLOCKED
+    pipeline.write_reports(report_dir=tmp_path / "reports")

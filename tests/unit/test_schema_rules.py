@@ -1,6 +1,6 @@
 import pandas as pd
 
-from src.rules.schema_rules import (
+from certgate.rules.schema import (
     check_required_columns,
     detect_duplicates,
     normalize_dataframe_dtypes,

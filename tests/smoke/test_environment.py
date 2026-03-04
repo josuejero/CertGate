@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from src.ingest.loaders import discover_ingest_files
+from certgate.ingest import discover_ingest_files
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = REPO_ROOT / "data"
@@ -13,8 +13,8 @@ pytestmark = pytest.mark.smoke
 
 
 def test_schema_and_rules_import_cleanly():
-    import src.rules.schema_rules as schema_rules
-    import src.rules.business_rules as business_rules
+    import certgate.rules.schema as schema_rules
+    import certgate.rules.business as business_rules
 
     # Spot-check that the modules expose the expected helpers.
     assert schema_rules.SCHEMA_DEFINITIONS
