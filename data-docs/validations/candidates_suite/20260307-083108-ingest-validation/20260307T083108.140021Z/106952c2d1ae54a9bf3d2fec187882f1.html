@@ -611,7 +611,7 @@ $(function() {
         <p>To automatically generate a notebook that does this run:</p>
         <div class="input-group mb-3">
           
-            <input type="text" class="form-control edit-command" readonly value="great_expectations suite edit freshness_suite">
+            <input type="text" class="form-control edit-command" readonly value="great_expectations suite edit candidates_suite">
           
             <div class="input-group-append">
                 <button class="btn btn-primary copy-edit-command" type="button"><i class="far fa-clipboard"></i> Copy</button>
@@ -638,7 +638,7 @@ $(function() {
         <a href="../../../../index.html">
           <img
             class="NO-CACHE"
-            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20260306T083726.892498Z&dataContextId=0cd31032-d0ae-465f-b9a1-e42fd76ba463"
+            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20260307T083108.637021Z&dataContextId=0cd31032-d0ae-465f-b9a1-e42fd76ba463"
             alt="Great Expectations"
             style="width: auto; height: 50px"
           />
@@ -647,7 +647,7 @@ $(function() {
       
         <ol class="ge-breadcrumbs breadcrumb d-md-inline-flex bg-light ml-2 mr-0 mt-0 mb-0 pt-0 pb-0 d-none">
             <li class="ge-breadcrumbs-item breadcrumb-item"><a href="../../../../index.html">Home</a></li>
-            <li class="ge-breadcrumbs-item breadcrumb-item active" aria-current="page">Validations / freshness_suite / ingest_batch / 20260306-083725-ingest-validation / 2026-03-06T08:37:25Z</li>
+            <li class="ge-breadcrumbs-item breadcrumb-item active" aria-current="page">Validations / candidates_suite / ingest_batch / 20260307-083108-ingest-validation / 2026-03-07T08:31:08Z</li>
         </ol>
       
     </nav>
@@ -768,7 +768,25 @@ $(function() {
             <li class="nav-item col-12">
               <a class="nav-link ge-navigation-sidebar-link ml-1" href="#section-2"
                  style="white-space: normal; word-break: break-all;overflow-wrap: normal;">
-                file_received_ts
+                Table-Level Expectations
+              </a>
+            </li>
+          
+        
+          
+            <li class="nav-item col-12">
+              <a class="nav-link ge-navigation-sidebar-link ml-1" href="#section-3"
+                 style="white-space: normal; word-break: break-all;overflow-wrap: normal;">
+                candidate_id
+              </a>
+            </li>
+          
+        
+          
+            <li class="nav-item col-12">
+              <a class="nav-link ge-navigation-sidebar-link ml-1" href="#section-4"
+                 style="white-space: normal; word-break: break-all;overflow-wrap: normal;">
+                email
               </a>
             </li>
           
@@ -801,7 +819,7 @@ $(function() {
         <div id="section-1-content-block-1-subheader" >
           
                 <span class="mb-0 mt-1" >
-                    <span class="h6" >Expectation Suite:</span> <a href="../../../../expectations/freshness_suite.html" >freshness_suite</a><br> Data asset: ingest_batch<br> <span class="h6" >Status:</span> <i class="fas fa-times text-danger" aria-hidden="true"></i> Failed
+                    <span class="h6" >Expectation Suite:</span> <a href="../../../../expectations/candidates_suite.html" >candidates_suite</a><br> Data asset: ingest_batch<br> <span class="h6" >Status:</span> <i class="fas fa-check-circle text-success" aria-hidden="true"></i> Succeeded
                 </span>
             
         </div>
@@ -864,10 +882,10 @@ $(function() {
 
     <tbody>
       <tr>
-          <td id="section-1-content-block-2-cell-1-1" ><div class="show-scrollbars">Evaluated Expectations</div></td><td id="section-1-content-block-2-cell-1-2" ><div class="show-scrollbars">2</div></td></tr><tr>
-          <td id="section-1-content-block-2-cell-2-1" ><div class="show-scrollbars">Successful Expectations</div></td><td id="section-1-content-block-2-cell-2-2" ><div class="show-scrollbars">1</div></td></tr><tr>
-          <td id="section-1-content-block-2-cell-3-1" ><div class="show-scrollbars">Unsuccessful Expectations</div></td><td id="section-1-content-block-2-cell-3-2" ><div class="show-scrollbars">1</div></td></tr><tr>
-          <td id="section-1-content-block-2-cell-4-1" ><div class="show-scrollbars">Success Percent</div></td><td id="section-1-content-block-2-cell-4-2" ><div class="show-scrollbars">50%</div></td></tr></tbody>
+          <td id="section-1-content-block-2-cell-1-1" ><div class="show-scrollbars">Evaluated Expectations</div></td><td id="section-1-content-block-2-cell-1-2" ><div class="show-scrollbars">5</div></td></tr><tr>
+          <td id="section-1-content-block-2-cell-2-1" ><div class="show-scrollbars">Successful Expectations</div></td><td id="section-1-content-block-2-cell-2-2" ><div class="show-scrollbars">5</div></td></tr><tr>
+          <td id="section-1-content-block-2-cell-3-1" ><div class="show-scrollbars">Unsuccessful Expectations</div></td><td id="section-1-content-block-2-cell-3-2" ><div class="show-scrollbars">0</div></td></tr><tr>
+          <td id="section-1-content-block-2-cell-4-1" ><div class="show-scrollbars">Success Percent</div></td><td id="section-1-content-block-2-cell-4-2" ><div class="show-scrollbars">100%</div></td></tr></tbody>
 </table>
 
 </div>
@@ -893,13 +911,13 @@ $(function() {
 <div id="section-1-content-block-3-parent" >
   
     <p class="m-0">
-      <a data-toggle="collapse" href="#section-1-content-block-3-collapse-body-54c1eaec-c066-45ed-9ffd-3ce667d67ef7" aria-expanded="false" aria-controls="section-1-content-block-3-collapse-body" >
+      <a data-toggle="collapse" href="#section-1-content-block-3-collapse-body-60490aaa-d990-4b0e-b7a5-f6afec088a85" aria-expanded="false" aria-controls="section-1-content-block-3-collapse-body" >
         Show more info...
       </a>
     </p>
   
 
-  <div id=section-1-content-block-3-collapse-body-54c1eaec-c066-45ed-9ffd-3ce667d67ef7 class="card card-body collapse m-2" >
+  <div id=section-1-content-block-3-collapse-body-60490aaa-d990-4b0e-b7a5-f6afec088a85 class="card card-body collapse m-2" >
     
     
     
@@ -957,8 +975,8 @@ $(function() {
     <tbody>
       <tr>
           <td id="section-1-content-block-3-collapse-item-1-cell-1-1" ><div class="show-scrollbars">Great Expectations Version</div></td><td id="section-1-content-block-3-collapse-item-1-cell-1-2" ><div class="show-scrollbars">0.17.23</div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-1-cell-2-1" ><div class="show-scrollbars">Run Name</div></td><td id="section-1-content-block-3-collapse-item-1-cell-2-2" ><div class="show-scrollbars">20260306-083725-ingest-validation</div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-1-cell-3-1" ><div class="show-scrollbars">Run Time</div></td><td id="section-1-content-block-3-collapse-item-1-cell-3-2" ><div class="show-scrollbars">2026-03-06T08:37:25Z</div></td></tr></tbody>
+          <td id="section-1-content-block-3-collapse-item-1-cell-2-1" ><div class="show-scrollbars">Run Name</div></td><td id="section-1-content-block-3-collapse-item-1-cell-2-2" ><div class="show-scrollbars">20260307-083108-ingest-validation</div></td></tr><tr>
+          <td id="section-1-content-block-3-collapse-item-1-cell-3-1" ><div class="show-scrollbars">Run Time</div></td><td id="section-1-content-block-3-collapse-item-1-cell-3-2" ><div class="show-scrollbars">2026-03-07T08:31:08Z</div></td></tr></tbody>
 </table>
     
       
@@ -1020,7 +1038,7 @@ $(function() {
                 </span>
             </div></td><td id="section-1-content-block-3-collapse-item-2-cell-1-2" class="" ><div class="show-scrollbars">
                 <span >
-                    <span style="word-break:break-all;" >20260306T083726.709312Z</span>
+                    <span style="word-break:break-all;" >20260307T083108.142488Z</span>
                 </span>
             </div></td></tr><tr>
           <td id="section-1-content-block-3-collapse-item-2-cell-2-1" class="pr-3" ><div class="show-scrollbars">
@@ -1029,7 +1047,7 @@ $(function() {
                 </span>
             </div></td><td id="section-1-content-block-3-collapse-item-2-cell-2-2" class="" ><div class="show-scrollbars">
                 <span >
-                    <span style="word-break:break-all;" >2dcf5d7869b97343d4c7283da03e6281</span>
+                    <span style="word-break:break-all;" >693783ba964b5c2539efa11be53e07b0</span>
                 </span>
             </div></td></tr></tbody>
 </table>
@@ -1125,7 +1143,7 @@ $(function() {
         <div>
           
                 <h5 class="m-0" >
-                    file_received_ts
+                    Table-Level Expectations
                 </h5>
             
         </div>
@@ -1135,7 +1153,7 @@ $(function() {
 </div>
         
 
-<div id="section-2-content-block-2" class="ml-2 mr-2 mt-0 mb-0 table-responsive" >
+<div id="section-2-content-block-2" class="ml-2 mr-2 mt-0 mb-0 table-responsive hide-succeeded-validations-column-section-target-child" >
 
     
 
@@ -1181,61 +1199,197 @@ $(function() {
 
     <tbody>
       <tr>
-          <td id="section-2-content-block-2-cell-1-1" ><div class="show-scrollbars">
-                <span >
-                    <i class="fas fa-exclamation-triangle text-warning" ></i>
-                </span>
-            </div></td><td id="section-2-content-block-2-cell-1-2" ><div class="show-scrollbars">
-                <span >
-                    values must be greater than or equal to <span class="badge badge-secondary" >$PARAMETER.min_file_received_ts</span> and less than or equal to <span class="badge badge-secondary" >$PARAMETER.max_file_received_ts</span>.
-                </span>
-            
-                <strong class="text-danger" >
-                    <br><br><span class="badge badge-danger mb-2" >expect_column_values_to_be_between</span> raised an exception:<br><code >min_value cannot be greater than max_value</code>
-                </strong>
-            
-
-
-  
-  
-
-
-
-
-
-
-<div id="section-2-content-block-2-cell-1-2-content-2-parent" >
-  
-    <p class="m-0">
-      <a data-toggle="collapse" href="#section-2-content-block-2-cell-1-2-content-2-collapse-body-54c1eaec-c066-45ed-9ffd-3ce667d67ef7" aria-expanded="false" aria-controls="section-2-content-block-2-cell-1-2-content-2-collapse-body" >
-        Show exception traceback...
-      </a>
-    </p>
-  
-
-  <div id=section-2-content-block-2-cell-1-2-content-2-collapse-body-54c1eaec-c066-45ed-9ffd-3ce667d67ef7 class="collapse m-2" >
-    
-    
-    
-      
-      
-      
-                <code >
-                    Traceback (most recent call last):<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/execution_engine/execution_engine.py", line 548, in _process_direct_and_bundled_metric_computation_configurations<br>    ] = metric_computation_configuration.metric_fn(  # type: ignore[misc] # F not callable<br>        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/expectations/metrics/metric_provider.py", line 100, in inner_func<br>    return metric_fn(*args, **kwargs)<br>           ^^^^^^^^^^^^^^^^^^^^^^^^^^<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/expectations/metrics/map_metric_provider/column_condition_partial.py", line 119, in inner_func<br>    meets_expectation_series = metric_fn(<br>                               ^^^^^^^^^^<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/expectations/metrics/column_map_metrics/column_values_between.py", line 76, in _pandas<br>    raise ValueError("min_value cannot be greater than max_value")<br>ValueError: min_value cannot be greater than max_value<br><br>The above exception was the direct cause of the following exception:<br><br>Traceback (most recent call last):<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/validator/validation_graph.py", line 285, in _resolve<br>    self._execution_engine.resolve_metrics(<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/execution_engine/execution_engine.py", line 283, in resolve_metrics<br>    return self._process_direct_and_bundled_metric_computation_configurations(<br>           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/great_expectations/execution_engine/execution_engine.py", line 552, in _process_direct_and_bundled_metric_computation_configurations<br>    raise gx_exceptions.MetricResolutionError(<br>great_expectations.exceptions.exceptions.MetricResolutionError: min_value cannot be greater than max_value<br>
-                </code>
-            
-    
-  </div>
-</div></div></td><td id="section-2-content-block-2-cell-1-3" ><div class="show-scrollbars">--</div></td></tr><tr>
-          <td id="section-2-content-block-2-cell-2-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
+          <td id="section-2-content-block-2-cell-1-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
                 <span >
                     <i class="fas fa-check-circle text-success" ></i>
                 </span>
-            </div></td><td id="section-2-content-block-2-cell-2-2" ><div class="show-scrollbars">
+            </div></td><td id="section-2-content-block-2-cell-1-2" ><div class="show-scrollbars">
+                <span >
+                    Must have these columns in this order: <span class="badge badge-secondary" >candidate_id</span>, <span class="badge badge-secondary" >birth_date</span>, <span class="badge badge-secondary" >email</span>, <span class="badge badge-secondary" >first_name</span>, <span class="badge badge-secondary" >last_name</span>, <span class="badge badge-secondary" >created_ts</span>, <span class="badge badge-secondary" >source_system</span>
+                </span>
+            </div></td><td id="section-2-content-block-2-cell-1-3" ><div class="show-scrollbars">['candidate_id', 'birth_date', 'email', 'first_name', 'last_name', 'created_ts', 'source_system']</div></td></tr></tbody>
+</table>
+
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-3" class="ge-section container-fluid mb-1 pb-1 pl-sm-3 px-0">
+    <div class="row" >
+        
+
+<div id="section-3-content-block-1" class="col-12 p-0" >
+
+    <div id="section-3-content-block-1-header" class="alert alert-secondary" >
+        <div>
+          
+                <h5 class="m-0" >
+                    candidate_id
+                </h5>
+            
+        </div>
+      
+    </div>
+
+</div>
+        
+
+<div id="section-3-content-block-2" class="ml-2 mr-2 mt-0 mb-0 table-responsive hide-succeeded-validations-column-section-target-child" >
+
+    
+
+
+
+<table
+  id="section-3-content-block-2-body"
+  class="table" 
+  data-toggle="table"
+  data-search="True" data-icon-size="sm" 
+>
+    
+    
+    
+      
+    
+      <thead >
+        <tr>
+            
+                
+                <th
+                  data-sortable="True" 
+                >
+                  Status
+                </th>
+            
+                
+                <th
+                  
+                >
+                  Expectation
+                </th>
+            
+                
+                <th
+                  
+                >
+                  Observed Value
+                </th>
+            
+        </tr>
+      </thead>
+
+    <tbody>
+      <tr>
+          <td id="section-3-content-block-2-cell-1-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
+                <span >
+                    <i class="fas fa-check-circle text-success" ></i>
+                </span>
+            </div></td><td id="section-3-content-block-2-cell-1-2" ><div class="show-scrollbars">
                 <span >
                     values must never be null.
                 </span>
-            </div></td><td id="section-2-content-block-2-cell-2-3" ><div class="show-scrollbars">100% not null</div></td></tr></tbody>
+            </div></td><td id="section-3-content-block-2-cell-1-3" ><div class="show-scrollbars">100% not null</div></td></tr><tr>
+          <td id="section-3-content-block-2-cell-2-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
+                <span >
+                    <i class="fas fa-check-circle text-success" ></i>
+                </span>
+            </div></td><td id="section-3-content-block-2-cell-2-2" ><div class="show-scrollbars">
+                <span >
+                    values must be unique.
+                </span>
+            </div></td><td id="section-3-content-block-2-cell-2-3" ><div class="show-scrollbars">0% unexpected</div></td></tr></tbody>
+</table>
+
+</div>
+        
+    </div>
+</div>
+        
+          <div id="section-4" class="ge-section container-fluid mb-1 pb-1 pl-sm-3 px-0">
+    <div class="row" >
+        
+
+<div id="section-4-content-block-1" class="col-12 p-0" >
+
+    <div id="section-4-content-block-1-header" class="alert alert-secondary" >
+        <div>
+          
+                <h5 class="m-0" >
+                    email
+                </h5>
+            
+        </div>
+      
+    </div>
+
+</div>
+        
+
+<div id="section-4-content-block-2" class="ml-2 mr-2 mt-0 mb-0 table-responsive hide-succeeded-validations-column-section-target-child" >
+
+    
+
+
+
+<table
+  id="section-4-content-block-2-body"
+  class="table" 
+  data-toggle="table"
+  data-search="True" data-icon-size="sm" 
+>
+    
+    
+    
+      
+    
+      <thead >
+        <tr>
+            
+                
+                <th
+                  data-sortable="True" 
+                >
+                  Status
+                </th>
+            
+                
+                <th
+                  
+                >
+                  Expectation
+                </th>
+            
+                
+                <th
+                  
+                >
+                  Observed Value
+                </th>
+            
+        </tr>
+      </thead>
+
+    <tbody>
+      <tr>
+          <td id="section-4-content-block-2-cell-1-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
+                <span >
+                    <i class="fas fa-check-circle text-success" ></i>
+                </span>
+            </div></td><td id="section-4-content-block-2-cell-1-2" ><div class="show-scrollbars">
+                <span >
+                    values must never be null.
+                </span>
+            </div></td><td id="section-4-content-block-2-cell-1-3" ><div class="show-scrollbars">100% not null</div></td></tr><tr>
+          <td id="section-4-content-block-2-cell-2-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
+                <span >
+                    <i class="fas fa-check-circle text-success" ></i>
+                </span>
+            </div></td><td id="section-4-content-block-2-cell-2-2" ><div class="show-scrollbars">
+                <span >
+                    values must be unique.
+                </span>
+            </div></td><td id="section-4-content-block-2-cell-2-3" ><div class="show-scrollbars">0% unexpected</div></td></tr></tbody>
 </table>
 
 </div>
