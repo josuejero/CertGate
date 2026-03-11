@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-10T08:41:31.320585+00:00",
+  "generated_at": "2026-03-11T08:40:50.867298+00:00",
   "defect_count": 5,
   "defects": [
     {
@@ -62,8 +62,8 @@
       "root_cause": "stale_data",
       "remediation_link": "docs/rule-severity-matrix.md#br-08",
       "details": {
-        "lag_hours": 1054.44,
-        "reference_time": "2026-03-10T08:41:31.320549+00:00",
+        "lag_hours": 1078.43,
+        "reference_time": "2026-03-11T08:40:50.867272+00:00",
         "latest_data_time": "2026-01-25T10:15:00+00:00",
         "timestamp_source": "file_received_ts",
         "max_allowed_hours": 24,
