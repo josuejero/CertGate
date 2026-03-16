@@ -1,6 +1,6 @@
 {
   "status": "Blocked",
-  "timestamp": "2026-03-15T08:36:45.064353+00:00",
+  "timestamp": "2026-03-16T08:56:40.149526+00:00",
   "decision_reason": "Critical failure candidates-dtype-created_ts blocks release.",
   "failed_rules": [
     {
@@ -48,8 +48,8 @@
       "severity": "critical",
       "root_cause": "stale_data",
       "details": {
-        "lag_hours": 1174.36,
-        "reference_time": "2026-03-15T08:36:45.064327+00:00",
+        "lag_hours": 1198.69,
+        "reference_time": "2026-03-16T08:56:40.149499+00:00",
         "latest_data_time": "2026-01-25T10:15:00+00:00",
         "timestamp_source": "file_received_ts",
         "max_allowed_hours": 24,
