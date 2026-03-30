@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-29T08:39:18.298425+00:00",
+  "generated_at": "2026-03-30T09:12:00.512906+00:00",
   "rule_count": 18,
   "failed_count": 5,
   "rules": [
@@ -231,8 +231,8 @@
       "root_cause": "stale_data",
       "remediation_link": "docs/rule-severity-matrix.md#br-08",
       "details": {
-        "lag_hours": 1510.41,
-        "reference_time": "2026-03-29T08:39:18.298398+00:00",
+        "lag_hours": 1534.95,
+        "reference_time": "2026-03-30T09:12:00.512881+00:00",
         "latest_data_time": "2026-01-25T10:15:00+00:00",
         "timestamp_source": "file_received_ts",
         "max_allowed_hours": 24,
