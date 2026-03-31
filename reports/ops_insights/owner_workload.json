@@ -1,0 +1,46 @@
+[
+  {
+    "owner_id": "O-101",
+    "owner_name": "Ben Ortiz",
+    "team": "AE",
+    "manager": "Henry Moss",
+    "is_active": true,
+    "leads_owned": 3,
+    "accounts_owned": 2,
+    "open_opportunities": 2,
+    "open_pipeline_amount": 117000.0
+  },
+  {
+    "owner_id": "O-102",
+    "owner_name": "Cara Singh",
+    "team": "Enterprise",
+    "manager": "Henry Moss",
+    "is_active": true,
+    "leads_owned": 2,
+    "accounts_owned": 2,
+    "open_opportunities": 1,
+    "open_pipeline_amount": 180000.0
+  },
+  {
+    "owner_id": "O-100",
+    "owner_name": "Alice Chen",
+    "team": "SDR",
+    "manager": "Gina Alvarez",
+    "is_active": true,
+    "leads_owned": 1,
+    "accounts_owned": 1,
+    "open_opportunities": 0,
+    "open_pipeline_amount": 0.0
+  },
+  {
+    "owner_id": "O-103",
+    "owner_name": "Darius Cole",
+    "team": "Ops",
+    "manager": "Ivy Hart",
+    "is_active": false,
+    "leads_owned": 0,
+    "accounts_owned": 0,
+    "open_opportunities": 0,
+    "open_pipeline_amount": 0.0
+  }
+]

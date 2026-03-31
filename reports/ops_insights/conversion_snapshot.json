@@ -1,0 +1,56 @@
+[
+  {
+    "metric_group": "lead_lifecycle",
+    "metric_name": "Lead",
+    "record_count": 1,
+    "total_amount": NaN
+  },
+  {
+    "metric_group": "lead_lifecycle",
+    "metric_name": "MQL",
+    "record_count": 1,
+    "total_amount": NaN
+  },
+  {
+    "metric_group": "lead_lifecycle",
+    "metric_name": "Opportunity",
+    "record_count": 2,
+    "total_amount": NaN
+  },
+  {
+    "metric_group": "lead_lifecycle",
+    "metric_name": "SQL",
+    "record_count": 1,
+    "total_amount": NaN
+  },
+  {
+    "metric_group": "lead_lifecycle",
+    "metric_name": "Subscriber",
+    "record_count": 1,
+    "total_amount": NaN
+  },
+  {
+    "metric_group": "opportunity_stage",
+    "metric_name": "Closed Won",
+    "record_count": 1,
+    "total_amount": 250000.0
+  },
+  {
+    "metric_group": "opportunity_stage",
+    "metric_name": "Discovery",
+    "record_count": 1,
+    "total_amount": 22000.0
+  },
+  {
+    "metric_group": "opportunity_stage",
+    "metric_name": "Negotiation",
+    "record_count": 1,
+    "total_amount": 95000.0
+  },
+  {
+    "metric_group": "opportunity_stage",
+    "metric_name": "Proposal",
+    "record_count": 1,
+    "total_amount": 180000.0
+  }
+]

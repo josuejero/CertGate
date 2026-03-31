@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-03-31T15:25:52.642078+00:00",
+  "bundle_name": "good",
+  "table_counts": {
+    "leads": 6,
+    "accounts": 5,
+    "opportunities": 4,
+    "activities": 9,
+    "owners": 4
+  },
+  "records_scanned": 28,
+  "defect_count": 0,
+  "severity_counts": {
+    "critical": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "top_affected_owners": [],
+  "top_affected_stages": [],
+  "defects": [],
+  "root_cause_counts": {}
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "bundle_name": "good",
+    "records_scanned": 28,
+    "duplicate_domains": 0,
+    "stale_opportunities": 0,
+    "open_opportunities_with_no_next_step": 0,
+    "inactive_owner_mappings": 0
+  }
+]

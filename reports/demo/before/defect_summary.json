@@ -1,0 +1,471 @@
+{
+  "generated_at": "2026-03-31T15:25:52.578647+00:00",
+  "bundle_name": "bad/demo-before-cleanup",
+  "table_counts": {
+    "leads": 5,
+    "accounts": 5,
+    "opportunities": 3,
+    "activities": 4,
+    "owners": 4
+  },
+  "records_scanned": 21,
+  "defect_count": 15,
+  "severity_counts": {
+    "critical": 8,
+    "warning": 7,
+    "info": 0
+  },
+  "top_affected_owners": [
+    {
+      "name": "Cara Singh",
+      "count": 9
+    },
+    {
+      "name": "Ben Ortiz",
+      "count": 4
+    },
+    {
+      "name": "Darius Cole",
+      "count": 4
+    },
+    {
+      "name": "Alice Chen",
+      "count": 2
+    },
+    {
+      "name": "O-999",
+      "count": 1
+    }
+  ],
+  "top_affected_stages": [
+    {
+      "name": "Negotiation",
+      "count": 4
+    },
+    {
+      "name": "Proposal",
+      "count": 3
+    },
+    {
+      "name": "Closed Won",
+      "count": 1
+    }
+  ],
+  "defects": [
+    {
+      "rule_id": "leads-uniqueness-unique-2",
+      "description": "Duplicate rows detected for subset.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "email"
+        ],
+        "duplicate_count": 2,
+        "affected_count": 2,
+        "sample_values": [
+          {
+            "email": "emma.park@northwindbio.com"
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "accounts-uniqueness-unique-2",
+      "description": "Duplicate rows detected for subset.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "company_domain"
+        ],
+        "duplicate_count": 2,
+        "affected_count": 2,
+        "sample_values": [
+          {
+            "company_domain": "harborhealth.io"
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-lead-owner-fk",
+      "description": "Every lead owner_id resolves to an active owner record. Missing references detected.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-owner-fk",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "lead_id": "L-9004",
+            "owner_id": "O-999",
+            "email": "liam.diaz@solsticeretail.com"
+          }
+        ],
+        "owner_issue_counts": {
+          "O-999": 1
+        },
+        "stage_issue_counts": {},
+        "missing_values": [
+          "O-999"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-activity-object-reference",
+      "description": "Activities reference missing or unsupported CRM objects.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-activity-object-reference",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "activity_id": "ACT-9003",
+            "object_type": "opportunity",
+            "object_id": "OP-404",
+            "owner_id": "O-101"
+          }
+        ],
+        "owner_issue_counts": {
+          "Ben Ortiz": 1
+        },
+        "stage_issue_counts": {},
+        "allowed_object_types": [
+          "account",
+          "lead",
+          "opportunity"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-email-multiple-accounts",
+      "description": "Lead emails are linked to multiple accounts.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-email-multiple-accounts",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "lead_id": "L-9001",
+            "email": "emma.park@northwindbio.com",
+            "account_id": "A-9001",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9002",
+            "email": "emma.park@northwindbio.com",
+            "account_id": "A-9002",
+            "owner_id": "O-101"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1,
+          "Ben Ortiz": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-domain-multiple-reps",
+      "description": "Company domains are split across multiple reps.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-domain-multiple-reps",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "lead_id": "L-9002",
+            "company_domain": "harborhealth.io",
+            "owner_id": "O-101"
+          },
+          {
+            "lead_id": "L-9005",
+            "company_domain": "harborhealth.io",
+            "owner_id": "O-100"
+          }
+        ],
+        "owner_issue_counts": {
+          "Ben Ortiz": 1,
+          "Alice Chen": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-closed-won-amount",
+      "description": "Closed Won opportunities have missing or non-positive amounts.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-closed-won-amount",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9001",
+            "stage": "Closed Won",
+            "amount": 0.0,
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Closed Won": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-close-date-chronology",
+      "description": "Opportunity close dates precede created_at.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-close-date-chronology",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9003",
+            "created_at": "2026-02-20T12:00:00+00:00",
+            "close_date": "2026-02-01T00:00:00+00:00",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Proposal": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-inactive-owner-open-opportunity",
+      "description": "Open opportunities are assigned to inactive owners.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-inactive-owner-open-opportunity",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "owner_id": "O-103",
+            "stage": "Negotiation"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-enterprise-employee-count",
+      "description": "Enterprise accounts are missing employee_count.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-enterprise-employee-count",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "account_id": "A-9004",
+            "account_name": "Atlas Schools",
+            "segment": "Enterprise",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-open-opportunity-next-step",
+      "description": "Open opportunities are missing next_step.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-open-opportunity-next-step",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "owner_id": "O-103",
+            "next_step": null
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-lead-recent-touch",
+      "description": "Active MQL/SQL/Opportunity leads are missing recent touches.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-recent-touch",
+      "details": {
+        "affected_count": 4,
+        "sample_records": [
+          {
+            "lead_id": "L-9001",
+            "lifecycle_stage": "SQL",
+            "last_activity_at": "2026-03-12T12:00:00+00:00",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9002",
+            "lifecycle_stage": "Opportunity",
+            "last_activity_at": "2026-03-12T10:00:00+00:00",
+            "owner_id": "O-101"
+          },
+          {
+            "lead_id": "L-9003",
+            "lifecycle_stage": "Opportunity",
+            "last_activity_at": "2026-03-01T08:00:00+00:00",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9005",
+            "lifecycle_stage": "MQL",
+            "last_activity_at": "2026-03-07T09:00:00+00:00",
+            "owner_id": "O-100"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 2,
+          "Ben Ortiz": 1,
+          "Alice Chen": 1
+        },
+        "stage_issue_counts": {},
+        "threshold": "2026-03-14T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-opportunity-recent-touch",
+      "description": "Open opportunities are missing recent touches.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-opportunity-recent-touch",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "latest_activity_at": "NaT",
+            "owner_id": "O-103"
+          },
+          {
+            "opportunity_id": "OP-9003",
+            "stage": "Proposal",
+            "latest_activity_at": "NaT",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1,
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1,
+          "Proposal": 1
+        },
+        "threshold": "2026-03-14T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-stale-opportunity-stage",
+      "description": "Open opportunities have stale stage ages.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-stale-opportunity-stage",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "last_stage_change_at": "2026-03-01T10:00:00+00:00",
+            "owner_id": "O-103"
+          },
+          {
+            "opportunity_id": "OP-9003",
+            "stage": "Proposal",
+            "last_stage_change_at": "2026-03-05T14:00:00+00:00",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1,
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1,
+          "Proposal": 1
+        },
+        "threshold": "2026-03-07T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-lead-account-domain-mismatch",
+      "description": "Linked lead and account domains disagree.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-account-domain-mismatch",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "lead_id": "L-9003",
+            "account_id": "A-9004",
+            "company_domain_lead": "atlasdistrict.org",
+            "company_domain_account": "atlasschools.org",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {}
+      }
+    }
+  ],
+  "root_cause_counts": {
+    "duplicate_record": 4,
+    "integrity_issue": 3,
+    "invalid_business_rule_state": 5,
+    "stale_data": 3
+  }
+}
