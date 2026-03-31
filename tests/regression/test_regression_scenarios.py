@@ -2,8 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from certgate.rules.business import check_exam_candidate_fk, evaluate_table_freshness
-from certgate.rules.schema import apply_schema_definition, get_schema_definition
+from certgate.config import PipelineConfig
+from certgate.pipeline import ReleaseGatePipeline
+from certgate.reporting import STATUS_BLOCKED, STATUS_WARNING_ONLY
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_ROOT = REPO_ROOT / "data"
@@ -13,70 +14,49 @@ pytestmark = pytest.mark.regression
 
 
 @pytest.mark.parametrize(
-    "dataset_bundle,expected_prefix",
+    "bundle_name,expected_status,expected_rules",
     [
-        pytest.param(
-            REGRESSION_DIR / "regression-duplicate-exam-attempt",
-            "exam_results-uniqueness",
-            id="duplicate-exam-attempt",
-        ),
-    ],
-    indirect=["dataset_bundle"],
-)
-def test_regression_duplicate_attempt_triggered(dataset_bundle, expected_prefix):
-    exam_table = dataset_bundle["exam_results"]
-    _, outcomes = apply_schema_definition(
-        exam_table.df,
-        get_schema_definition("exam_results"),
-    )
-    duplicate_issue = next(
+        ("duplicate-lead-email", STATUS_BLOCKED, {"leads-uniqueness-unique-2"}),
+        ("duplicate-account-domain", STATUS_BLOCKED, {"accounts-uniqueness-unique-2"}),
+        ("email-multiple-accounts", STATUS_BLOCKED, {"crm-email-multiple-accounts"}),
         (
-            outcome
-            for outcome in outcomes
-            if outcome.rule_id.startswith(expected_prefix) and not outcome.passed
+            "missing-owner-reference",
+            STATUS_BLOCKED,
+            {
+                "crm-lead-owner-fk",
+                "crm-opportunity-account-fk",
+                "crm-activity-object-reference",
+            },
         ),
-        None,
-    )
-    assert duplicate_issue is not None
-    assert not duplicate_issue.passed
-    assert duplicate_issue.severity == "critical"
-
-
-@pytest.mark.parametrize(
-    "dataset_bundle",
-    [
-        pytest.param(
-            REGRESSION_DIR / "regression-lagging-exam-file",
-            id="lagging-exam-file",
+        (
+            "inactive-owner-open-opportunity",
+            STATUS_BLOCKED,
+            {"crm-inactive-owner-open-opportunity"},
         ),
-    ],
-    indirect=["dataset_bundle"],
-)
-def test_regression_lagging_exam_files_block_release(dataset_bundle):
-    exam_table = dataset_bundle["exam_results"]
-    freshness_outcome = evaluate_table_freshness(
-        exam_table,
-        timestamp_column="file_received_ts",
-        max_allowed_hours=24,
-        warning_hours=48,
-    )
-    assert not freshness_outcome.passed
-    assert freshness_outcome.severity == "critical"
-
-
-@pytest.mark.parametrize(
-    "dataset_bundle",
-    [
-        pytest.param(
-            REGRESSION_DIR / "regression-missing-candidate-join",
-            id="missing-candidate-join",
+        (
+            "missing-employee-count-enterprise",
+            STATUS_WARNING_ONLY,
+            {"crm-enterprise-employee-count"},
+        ),
+        ("missing-next-step", STATUS_WARNING_ONLY, {"crm-open-opportunity-next-step"}),
+        ("stale-opportunity-stage", STATUS_WARNING_ONLY, {"crm-stale-opportunity-stage"}),
+        (
+            "lead-account-domain-mismatch",
+            STATUS_WARNING_ONLY,
+            {"crm-lead-account-domain-mismatch"},
         ),
     ],
-    indirect=["dataset_bundle"],
 )
-def test_regression_missing_candidate_fk(dataset_bundle):
-    exam_table = dataset_bundle["exam_results"]
-    candidates_table = dataset_bundle["candidates"]
-    fk_outcome = check_exam_candidate_fk(exam_table.df, candidates_table.df)
-    assert not fk_outcome.passed
-    assert fk_outcome.severity == "critical"
+def test_regression_bundle_triggers_expected_rules(bundle_name, expected_status, expected_rules):
+    pipeline = ReleaseGatePipeline(
+        PipelineConfig(
+            data_root=DATA_ROOT,
+            bundle=f"regression/{bundle_name}",
+            reports_dir=REPO_ROOT / "reports",
+            sql_dir=REPO_ROOT / "sql",
+        )
+    )
+    report = pipeline.run(bundle_name=f"regression/{bundle_name}")
+    assert report.status == expected_status
+    failing_ids = {outcome.rule_id for outcome in report.failing_outcomes}
+    assert expected_rules.issubset(failing_ids)

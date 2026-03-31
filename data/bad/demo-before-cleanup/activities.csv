@@ -1,0 +1,5 @@
+activity_id,object_type,object_id,activity_type,activity_at,owner_id,outcome
+ACT-9001,lead,L-9001,email,2026-03-12T12:00:00Z,O-102,Replied
+ACT-9002,opportunity,OP-9001,meeting,2026-03-28T14:00:00Z,O-102,Completed
+ACT-9003,opportunity,OP-404,email,2026-03-20T13:00:00Z,O-101,Replied
+ACT-9004,lead,L-9005,call,2026-03-07T09:00:00Z,O-100,Connected

@@ -5,14 +5,22 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Dict, Sequence
 
-from .loaders import LoadedTable, discover_ingest_files, load_table
-from ..rules.schema import SCHEMA_DEFINITIONS, SCHEMA_TARGETS, get_schema_definition
+from .loaders import (
+    LoadedTable,
+    attach_bundle_metadata,
+    derive_bundle_reference_time,
+    discover_ingest_files,
+    load_table,
+)
+from ..rules.schema import SCHEMA_TARGETS, get_schema_definition
 
 __all__ = [
     "LoadedTable",
-    "load_table",
+    "attach_bundle_metadata",
+    "derive_bundle_reference_time",
     "discover_ingest_files",
     "load_bundle",
+    "load_table",
 ]
 
 
@@ -34,5 +42,9 @@ def load_bundle(
             path=bundle_path / definition.file_name,
             parse_dates=definition.parse_dates,
             dtype_overrides=definition.dtype_map,
+            metadata={"timestamp_columns": definition.reference_timestamp_columns},
         )
+
+    reference_time = derive_bundle_reference_time(loaded)
+    attach_bundle_metadata(loaded, bundle_name=bundle, reference_time=reference_time)
     return loaded

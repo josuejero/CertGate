@@ -1,0 +1,20 @@
+{
+  "bundle_name": "good",
+  "generated_at": "2026-03-30T23:43:24.932299+00:00",
+  "records_scanned": 28,
+  "critical_issues": 0,
+  "warning_issues": 0,
+  "duplicate_domains": 0,
+  "stale_opportunities_over_threshold": 0,
+  "open_opportunities_with_no_next_step": 0,
+  "inactive_owner_mappings": 0,
+  "recommended_actions_by_owner": [],
+  "recommended_actions_by_team": [],
+  "week_over_week_improvement": {
+    "baseline_bundle": "bad/demo-before-cleanup",
+    "critical_issue_reduction": 8,
+    "warning_issue_reduction": 7,
+    "duplicate_domain_reduction": 1,
+    "stale_opportunity_reduction": 2
+  }
+}

@@ -1,0 +1,4 @@
+opportunity_id,account_id,owner_id,stage,amount,created_at,close_date,last_stage_change_at,next_step,forecast_category
+OP-9001,A-9001,O-102,Closed Won,0,2026-03-11T13:30:00Z,2026-03-28T00:00:00Z,2026-03-28T14:00:00Z,Contract signed,Closed
+OP-9002,A-9002,O-103,Negotiation,80000,2026-02-10T15:00:00Z,2026-04-20T00:00:00Z,2026-03-01T10:00:00Z,,Commit
+OP-9003,A-9004,O-102,Proposal,160000,2026-02-20T12:00:00Z,2026-02-01T00:00:00Z,2026-03-05T14:00:00Z,Confirm procurement,Best Case

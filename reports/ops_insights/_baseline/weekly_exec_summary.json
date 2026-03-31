@@ -1,0 +1,10 @@
+[
+  {
+    "bundle_name": "bad/demo-before-cleanup",
+    "records_scanned": 21,
+    "duplicate_domains": 1,
+    "stale_opportunities": 2,
+    "open_opportunities_with_no_next_step": 1,
+    "inactive_owner_mappings": 1
+  }
+]

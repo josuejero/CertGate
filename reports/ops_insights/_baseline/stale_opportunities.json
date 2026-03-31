@@ -1,0 +1,20 @@
+[
+  {
+    "opportunity_id": "OP-9002",
+    "account_id": "A-9002",
+    "owner_id": "O-103",
+    "stage": "Negotiation",
+    "amount": 80000.0,
+    "last_stage_change_at": "2026-03-01T05:00:00-05:00",
+    "days_in_stage": 27
+  },
+  {
+    "opportunity_id": "OP-9003",
+    "account_id": "A-9004",
+    "owner_id": "O-102",
+    "stage": "Proposal",
+    "amount": 160000.0,
+    "last_stage_change_at": "2026-03-05T09:00:00-05:00",
+    "days_in_stage": 23
+  }
+]

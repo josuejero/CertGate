@@ -3,53 +3,28 @@ from pathlib import Path
 
 import pytest
 
-from certgate.reporting import ReleaseReport, STATUS_BLOCKED, STATUS_WARNING_ONLY
-from certgate.rules.business import evaluate_table_freshness
-from certgate.rules.schema import RuleOutcome
+from certgate.config import PipelineConfig
+from certgate.pipeline import ReleaseGatePipeline
+from certgate.reporting import STATUS_BLOCKED, STATUS_READY
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DATA_ROOT = REPO_ROOT / "data"
-
 
 pytestmark = pytest.mark.uat
 
 
-@pytest.mark.parametrize(
-    "dataset_bundle",
-    [
-        pytest.param(
-            DATA_ROOT / "regression" / "regression-lagging-exam-file",
-            id="lagging-exam-file",
-        ),
-    ],
-    indirect=["dataset_bundle"],
-)
-def test_release_decision_blocks_lagging_bundle(dataset_bundle, tmp_path):
-    exam_table = dataset_bundle["exam_results"]
-    freshness_outcome = evaluate_table_freshness(
-        exam_table,
-        timestamp_column="file_received_ts",
-        max_allowed_hours=24,
-        warning_hours=48,
+def test_demo_artifacts_show_before_blocked_and_after_ready(tmp_path: Path):
+    pipeline = ReleaseGatePipeline(
+        PipelineConfig(
+            data_root=REPO_ROOT / "data",
+            reports_dir=tmp_path,
+            sql_dir=REPO_ROOT / "sql",
+        )
     )
-    report = ReleaseReport([freshness_outcome])
-    assert report.status == STATUS_BLOCKED
-    reports_dir = tmp_path / "reports"
-    report.write_reports(reports_dir)
-    decision_payload = json.loads((reports_dir / "release_decision.json").read_text())
-    assert decision_payload["status"] == STATUS_BLOCKED
-    assert decision_payload["blocking_root_causes"] == ["stale_data"]
+    pipeline.run(bundle_name="good")
+    pipeline.write_demo_artifacts(report_dir=tmp_path)
 
+    before = json.loads((tmp_path / "demo" / "before" / "release_decision.json").read_text())
+    after = json.loads((tmp_path / "demo" / "after" / "release_decision.json").read_text())
 
-def test_release_decision_warns_when_only_warnings():
-    warning_outcome = RuleOutcome(
-        rule_id="BR-04",
-        description="Score exceeds range",
-        passed=False,
-        severity="warning",
-    )
-    report = ReleaseReport([warning_outcome])
-    assert report.status == STATUS_WARNING_ONLY
-    decision_payload = report.release_decision()
-    assert decision_payload["status"] == STATUS_WARNING_ONLY
-    assert "blocking_root_causes" not in decision_payload
+    assert before["status"] == STATUS_BLOCKED
+    assert after["status"] == STATUS_READY

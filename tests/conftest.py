@@ -1,10 +1,10 @@
-"""Shared fixtures and helpers for the CertGate QA catalog."""
+"""Shared fixtures and helpers for the CertGate CRM catalog."""
 
 from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Dict, Iterable
+from typing import Iterable
 
 import pytest
 
@@ -15,34 +15,25 @@ if str(REPO_ROOT) not in sys.path:
 if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
-from certgate.ingest.loaders import LoadedTable, load_table
+from certgate.ingest import load_bundle
 
 DATA_ROOT = REPO_ROOT / "data"
 
 
-def _load_csv_bundle(bundle_path: Path) -> Dict[str, LoadedTable]:
-    resolved = Path(bundle_path).expanduser().resolve()
-    if not resolved.exists():
-        raise FileNotFoundError(f"Dataset bundle not found: {resolved}")
-    tables: Dict[str, LoadedTable] = {}
-    for csv_path in sorted(resolved.glob("*.csv")):
-        tables[csv_path.stem] = load_table(name=csv_path.stem, path=csv_path)
-    return tables
-
-
 @pytest.fixture(scope="session")
-def good_bundle() -> Dict[str, LoadedTable]:
-    """Load the canonical good dataset bundle once per test session."""
+def good_bundle():
+    """Load the canonical CRM bundle once per test session."""
 
-    return _load_csv_bundle(DATA_ROOT / "good")
+    return load_bundle(DATA_ROOT, "good")
 
 
 @pytest.fixture
-def dataset_bundle(request) -> Dict[str, LoadedTable]:
+def dataset_bundle(request):
     """Load a dataset bundle supplied via indirect parametrization."""
 
-    bundle_path: Path = request.param
-    return _load_csv_bundle(bundle_path)
+    bundle_path = Path(request.param).resolve()
+    relative = bundle_path.relative_to(DATA_ROOT)
+    return load_bundle(DATA_ROOT, str(relative))
 
 
 def bundle_path(*parts: str) -> Path:

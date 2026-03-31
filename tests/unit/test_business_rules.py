@@ -1,90 +1,123 @@
 from datetime import datetime, timezone
-from pathlib import Path
 
 import pandas as pd
 
-from certgate.ingest.loaders import LoadedTable
 from certgate.rules.business import (
-    check_pass_fail_certification,
-    check_score_range,
-    check_exam_date_window,
-    evaluate_table_freshness,
+    check_activity_object_references,
+    check_inactive_owner_open_opportunities,
+    check_recent_touches,
+    check_same_email_multiple_accounts,
+    check_stale_opportunity_stage,
 )
 
 
-def test_score_range_warns_for_invalid_entries():
-    df = pd.DataFrame(
+def _owners_df() -> pd.DataFrame:
+    return pd.DataFrame(
         {
-            "exam_result_id": ["ER-1", "ER-2"],
-            "score": [95, 120],
-            "score_scaled": [95, 120],
+            "owner_id": ["O-1", "O-2"],
+            "owner_name": ["Owner One", "Owner Two"],
+            "owner_email": ["one@example.com", "two@example.com"],
+            "team": ["AE", "SDR"],
+            "manager": ["Mgr", "Mgr"],
+            "is_active": [True, False],
         }
     )
-    outcome = check_score_range(
-        exam_df=df,
-        column="score",
-        rule_id="BR-04",
-        max_value=100,
+
+
+def test_same_email_multiple_accounts_detects_conflict():
+    leads_df = pd.DataFrame(
+        {
+            "lead_id": ["L-1", "L-2"],
+            "email": ["same@example.com", "same@example.com"],
+            "account_id": ["A-1", "A-2"],
+            "owner_id": ["O-1", "O-2"],
+        }
     )
+    outcome = check_same_email_multiple_accounts(leads_df, _owners_df())
     assert not outcome.passed
-    assert outcome.severity == "warning"
-    assert outcome.details["out_of_range_count"] == 1
+    assert outcome.severity == "critical"
+    assert outcome.details["affected_count"] == 2
 
 
-def test_exam_date_window_flags_future_dates():
-    reference = datetime(2026, 3, 1, tzinfo=timezone.utc)
-    df = pd.DataFrame(
-        {"exam_result_id": ["ER-1"], "exam_date": ["2027-04-01T00:00:00Z"]}
-    )
-    outcome = check_exam_date_window(
-        exam_df=df,
-        reference_date=reference,
-        months=12,
-        rule_id="BR-06",
-    )
-    assert not outcome.passed
-    assert outcome.severity == "warning"
-    assert outcome.details["out_of_window"] == 1
-
-
-def test_pass_fail_certification_detects_mismatch():
-    exam_df = pd.DataFrame(
+def test_activity_reference_detects_missing_object():
+    activities_df = pd.DataFrame(
         {
-            "candidate_id": ["C-1"],
-            "exam_result_id": ["ER-1"],
-            "pass_fail": ["Pass"],
+            "activity_id": ["ACT-1"],
+            "object_type": ["opportunity"],
+            "object_id": ["OP-404"],
+            "activity_type": ["email"],
+            "activity_at": ["2026-03-01T00:00:00Z"],
+            "owner_id": ["O-1"],
+            "outcome": ["Sent"],
         }
     )
-    cert_df = pd.DataFrame(
-        {
-            "candidate_id": ["C-1"],
-            "certification_status": ["NeedsReview"],
-            "status_effective_ts": ["2026-02-01T00:00:00Z"],
-        }
+    outcome = check_activity_object_references(
+        activities_df=activities_df,
+        leads_df=pd.DataFrame({"lead_id": ["L-1"]}),
+        accounts_df=pd.DataFrame({"account_id": ["A-1"]}),
+        opportunities_df=pd.DataFrame({"opportunity_id": ["OP-1"]}),
+        owners_df=_owners_df(),
     )
-    outcomes = check_pass_fail_certification(exam_df=exam_df, cert_df=cert_df)
-    outcome = next(o for o in outcomes if o.rule_id.endswith("-pass"))
     assert not outcome.passed
     assert outcome.severity == "critical"
 
 
-def test_evaluate_table_freshness_uses_file_timestamp():
-    df = pd.DataFrame(
-        {"file_received_ts": ["2026-01-10T08:00:00Z"], "exam_result_id": ["ER-100"]}
+def test_inactive_owner_on_open_opportunity_blocks():
+    opportunities_df = pd.DataFrame(
+        {
+            "opportunity_id": ["OP-1"],
+            "owner_id": ["O-2"],
+            "stage": ["Negotiation"],
+        }
     )
-    metadata = {"source_path": "tests/unit/test_stub"}
-    table = LoadedTable(
-        name="exam_results",
-        df=df,
-        path=Path("data/regression/regression-lagging-exam-file/exam_results.csv"),
-        modified_at=datetime(2026, 1, 10, tzinfo=timezone.utc),
-        metadata=metadata,
-    )
-    outcome = evaluate_table_freshness(
-        table=table,
-        timestamp_column="file_received_ts",
-        max_allowed_hours=24,
-        warning_hours=48,
-    )
+    outcome = check_inactive_owner_open_opportunities(opportunities_df, _owners_df())
     assert not outcome.passed
     assert outcome.severity == "critical"
+
+
+def test_recent_touch_and_stale_stage_use_explicit_reference_time():
+    reference_time = datetime(2026, 3, 30, tzinfo=timezone.utc)
+    leads_df = pd.DataFrame(
+        {
+            "lead_id": ["L-1"],
+            "lifecycle_stage": ["SQL"],
+            "last_activity_at": [pd.Timestamp("2026-03-01T00:00:00Z")],
+            "owner_id": ["O-1"],
+        }
+    )
+    opportunities_df = pd.DataFrame(
+        {
+            "opportunity_id": ["OP-1"],
+            "stage": ["Proposal"],
+            "last_stage_change_at": [pd.Timestamp("2026-03-01T00:00:00Z")],
+            "owner_id": ["O-1"],
+        }
+    )
+    activities_df = pd.DataFrame(
+        {
+            "activity_id": ["ACT-1"],
+            "object_type": ["opportunity"],
+            "object_id": ["OP-1"],
+            "activity_type": ["email"],
+            "activity_at": [pd.Timestamp("2026-03-05T00:00:00Z")],
+            "owner_id": ["O-1"],
+            "outcome": ["Sent"],
+        }
+    )
+    recent_touch_outcomes = check_recent_touches(
+        leads_df=leads_df,
+        opportunities_df=opportunities_df,
+        activities_df=activities_df,
+        owners_df=_owners_df(),
+        reference_time=reference_time,
+        recent_touch_days=14,
+    )
+    stale_stage = check_stale_opportunity_stage(
+        opportunities_df=opportunities_df,
+        owners_df=_owners_df(),
+        reference_time=reference_time,
+        stale_stage_days=21,
+    )
+    assert all(not outcome.passed for outcome in recent_touch_outcomes)
+    assert not stale_stage.passed
+    assert stale_stage.severity == "warning"

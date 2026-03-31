@@ -638,7 +638,7 @@ $(function() {
         <a href="../index.html">
           <img
             class="NO-CACHE"
-            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20260303T174140.949697Z&dataContextId=0cd31032-d0ae-465f-b9a1-e42fd76ba463"
+            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20260330T234426.388604Z&dataContextId=0cd31032-d0ae-465f-b9a1-e42fd76ba463"
             alt="Great Expectations"
             style="width: auto; height: 50px"
           />
@@ -740,7 +740,7 @@ $(function() {
             <li class="nav-item col-12">
               <a class="nav-link ge-navigation-sidebar-link ml-1" href="#section-2"
                  style="white-space: normal; word-break: break-all;overflow-wrap: normal;">
-                file_received_ts
+                last_stage_change_at
               </a>
             </li>
           
@@ -856,7 +856,7 @@ $(function() {
         <p >This Expectation suite currently contains 2 total Expectations across 1 columns.</p>
       
     
-        <p >Timestamp freshness expectations used by nightly gating.</p>
+        <p >Bundle-relative timestamp expectations used by the CRM integrity gate.</p>
       
     </div>
 
@@ -875,7 +875,7 @@ $(function() {
         <div>
           
                 <h5 class="m-0" >
-                    file_received_ts
+                    last_stage_change_at
                 </h5>
             
         </div>
@@ -911,7 +911,7 @@ $(function() {
         
         <li >
                 <span >
-                    values must be greater than or equal to <span class="badge badge-secondary" >$PARAMETER.min_file_received_ts</span> and less than or equal to <span class="badge badge-secondary" >$PARAMETER.max_file_received_ts</span>.
+                    values must be greater than or equal to <span class="badge badge-secondary" >$PARAMETER.bundle_min_timestamp</span> and less than or equal to <span class="badge badge-secondary" >$PARAMETER.bundle_max_timestamp</span>.
                 </span>
             </li>
     

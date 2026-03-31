@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import json
 import re
-from collections import Counter
-from dataclasses import dataclass
+from collections import Counter, defaultdict
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Sequence
+from typing import Any, Mapping, Sequence
 
 from certgate.rules.schema import RuleOutcome
 
@@ -33,23 +33,43 @@ def _slugify_rule_id(rule_id: str) -> str:
 
 
 def _remediation_link(rule_id: str) -> str:
-    slug = _slugify_rule_id(rule_id)
-    return f"{REMEDIATION_BASE}#{slug}"
+    return f"{REMEDIATION_BASE}#{_slugify_rule_id(rule_id)}"
 
 
 def infer_root_cause(outcome: RuleOutcome) -> str:
     rule = outcome.rule_id.lower()
-    if "required-columns" in rule or "-dtype" in rule or "schema" in rule:
+    if any(token in rule for token in ("required-columns", "-dtype-", "-nulls-", "values")):
         return ROOT_CAUSE_SCHEMA
-    if "-uniqueness" in rule or "duplicate" in rule or rule.startswith("br-09"):
+    if any(token in rule for token in ("duplicate", "uniqueness", "multiple-accounts", "domain-multiple")):
         return ROOT_CAUSE_DUPLICATE
-    if rule.startswith("br-07") or "fk" in rule or "integrity" in rule:
+    if any(token in rule for token in ("-fk", "reference", "domain-mismatch")):
         return ROOT_CAUSE_INTEGRITY
-    if rule.startswith("br-08") or "freshness" in rule:
+    if any(token in rule for token in ("stale", "recent-touch", "freshness")):
         return ROOT_CAUSE_STALE_DATA
-    if rule.startswith("br-05") or rule.startswith("br-06"):
-        return ROOT_CAUSE_INVALID_BUSINESS_RULE
     return ROOT_CAUSE_INVALID_BUSINESS_RULE
+
+
+def _sum_named_counts(outcomes: Sequence[RuleOutcome], detail_key: str) -> list[dict[str, Any]]:
+    counts: defaultdict[str, int] = defaultdict(int)
+    for outcome in outcomes:
+        detail_counts = outcome.details.get(detail_key, {})
+        if not isinstance(detail_counts, Mapping):
+            continue
+        for name, count in detail_counts.items():
+            counts[str(name)] += int(count)
+    return [
+        {"name": name, "count": count}
+        for name, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+    ]
+
+
+def _severity_counts(outcomes: Sequence[RuleOutcome]) -> dict[str, int]:
+    counts = Counter(outcome.severity for outcome in outcomes if not outcome.passed)
+    return {
+        "critical": int(counts.get("critical", 0)),
+        "warning": int(counts.get("warning", 0)),
+        "info": int(counts.get("info", 0)),
+    }
 
 
 @dataclass
@@ -57,16 +77,17 @@ class ReleaseReport:
     """Encapsulates release gating summaries and exports."""
 
     outcomes: Sequence[RuleOutcome]
+    bundle_name: str = "good"
+    table_counts: Mapping[str, int] = field(default_factory=dict)
     timestamp: datetime | None = None
 
     def __post_init__(self) -> None:
         if self.timestamp is None:
             self.timestamp = datetime.now(timezone.utc)
-        # Normalize sequence to list for repeated iteration
         self._outcomes = list(self.outcomes)
 
     @property
-    def _failing_outcomes(self) -> list[RuleOutcome]:
+    def failing_outcomes(self) -> list[RuleOutcome]:
         return [outcome for outcome in self._outcomes if not outcome.passed]
 
     @property
@@ -74,15 +95,31 @@ class ReleaseReport:
         return self.timestamp.isoformat()
 
     @property
+    def records_scanned(self) -> int:
+        return int(sum(self.table_counts.values()))
+
+    @property
+    def severity_counts(self) -> dict[str, int]:
+        return _severity_counts(self._outcomes)
+
+    @property
+    def top_affected_owners(self) -> list[dict[str, Any]]:
+        return _sum_named_counts(self.failing_outcomes, "owner_issue_counts")[:5]
+
+    @property
+    def top_affected_stages(self) -> list[dict[str, Any]]:
+        return _sum_named_counts(self.failing_outcomes, "stage_issue_counts")[:5]
+
+    @property
     def status(self) -> str:
-        failing = self._failing_outcomes
+        failing = self.failing_outcomes
         if any(outcome.severity == "critical" for outcome in failing):
             return STATUS_BLOCKED
         if failing:
             return STATUS_WARNING_ONLY
         return STATUS_READY
 
-    def _rule_payload(self, outcome: RuleOutcome) -> dict:
+    def _rule_payload(self, outcome: RuleOutcome) -> dict[str, Any]:
         return {
             "rule_id": outcome.rule_id,
             "description": outcome.description,
@@ -93,32 +130,50 @@ class ReleaseReport:
             "details": outcome.details or {},
         }
 
-    def validation_summary(self) -> dict:
-        failing = self._failing_outcomes
+    def validation_summary(self) -> dict[str, Any]:
+        failing = self.failing_outcomes
         return {
             "generated_at": self.iso_timestamp,
+            "bundle_name": self.bundle_name,
+            "table_counts": dict(self.table_counts),
+            "records_scanned": self.records_scanned,
             "rule_count": len(self._outcomes),
             "failed_count": len(failing),
+            "severity_counts": self.severity_counts,
+            "top_affected_owners": self.top_affected_owners,
+            "top_affected_stages": self.top_affected_stages,
             "rules": [self._rule_payload(outcome) for outcome in self._outcomes],
         }
 
-    def defect_summary(self) -> dict:
-        defects = [self._rule_payload(outcome) for outcome in self._failing_outcomes]
+    def defect_summary(self) -> dict[str, Any]:
+        defects = [self._rule_payload(outcome) for outcome in self.failing_outcomes]
         counts = Counter(entry["root_cause"] for entry in defects)
         return {
             "generated_at": self.iso_timestamp,
+            "bundle_name": self.bundle_name,
+            "table_counts": dict(self.table_counts),
+            "records_scanned": self.records_scanned,
             "defect_count": len(defects),
+            "severity_counts": self.severity_counts,
+            "top_affected_owners": self.top_affected_owners,
+            "top_affected_stages": self.top_affected_stages,
             "defects": defects,
             "root_cause_counts": dict(counts),
         }
 
-    def release_decision(self) -> dict:
-        failing = self._failing_outcomes
+    def release_decision(self) -> dict[str, Any]:
+        failing = self.failing_outcomes
         status = self.status
         decision_reason = self._decision_reason(status, failing)
         payload = {
             "status": status,
             "timestamp": self.iso_timestamp,
+            "bundle_name": self.bundle_name,
+            "records_scanned": self.records_scanned,
+            "table_counts": dict(self.table_counts),
+            "severity_counts": self.severity_counts,
+            "top_affected_owners": self.top_affected_owners,
+            "top_affected_stages": self.top_affected_stages,
             "decision_reason": decision_reason,
             "failed_rules": [
                 {
@@ -145,12 +200,19 @@ class ReleaseReport:
     @staticmethod
     def _decision_reason(status: str, failing: list[RuleOutcome]) -> str:
         if status == STATUS_BLOCKED:
-            if failing:
-                return f"Critical failure {failing[0].rule_id} blocks release."
-            return "Critical data quality failures block release."
+            critical_failure = next(
+                (outcome for outcome in failing if outcome.severity == "critical"),
+                None,
+            )
+            if critical_failure is not None:
+                return f"Critical failure {critical_failure.rule_id} blocks CRM sync."
+            return "Critical data quality failures block CRM sync."
         if status == STATUS_WARNING_ONLY:
-            return "Warnings or info-level defects were raised; release may proceed with caution."
-        return "All validations passed; release is ready."
+            first_failure = failing[0] if failing else None
+            if first_failure is not None:
+                return f"Non-blocking issue {first_failure.rule_id} requires follow-up."
+            return "Warnings were raised; CRM sync may proceed with follow-up."
+        return "All validations passed; CRM sync is ready."
 
     def write_reports(self, directory: Path | str = Path("reports")) -> None:
         base = Path(directory)
@@ -172,3 +234,18 @@ class ReportWriter:
 
     def write(self, report: ReleaseReport) -> None:
         report.write_reports(self.directory)
+
+
+__all__ = [
+    "ROOT_CAUSE_DUPLICATE",
+    "ROOT_CAUSE_INTEGRITY",
+    "ROOT_CAUSE_INVALID_BUSINESS_RULE",
+    "ROOT_CAUSE_SCHEMA",
+    "ROOT_CAUSE_STALE_DATA",
+    "ReleaseReport",
+    "ReportWriter",
+    "STATUS_BLOCKED",
+    "STATUS_READY",
+    "STATUS_WARNING_ONLY",
+    "infer_root_cause",
+]

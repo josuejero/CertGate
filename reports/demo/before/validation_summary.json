@@ -1,0 +1,1608 @@
+{
+  "generated_at": "2026-03-30T23:43:25.230350+00:00",
+  "bundle_name": "bad/demo-before-cleanup",
+  "table_counts": {
+    "leads": 5,
+    "accounts": 5,
+    "opportunities": 3,
+    "activities": 4,
+    "owners": 4
+  },
+  "records_scanned": 21,
+  "rule_count": 93,
+  "failed_count": 15,
+  "severity_counts": {
+    "critical": 8,
+    "warning": 7,
+    "info": 0
+  },
+  "top_affected_owners": [
+    {
+      "name": "Cara Singh",
+      "count": 9
+    },
+    {
+      "name": "Ben Ortiz",
+      "count": 4
+    },
+    {
+      "name": "Darius Cole",
+      "count": 4
+    },
+    {
+      "name": "Alice Chen",
+      "count": 2
+    },
+    {
+      "name": "O-999",
+      "count": 1
+    }
+  ],
+  "top_affected_stages": [
+    {
+      "name": "Negotiation",
+      "count": 4
+    },
+    {
+      "name": "Proposal",
+      "count": 3
+    },
+    {
+      "name": "Closed Won",
+      "count": 1
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "leads-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-required-columns",
+      "details": {
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "leads-nulls-lead_id",
+      "description": "Column 'lead_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-nulls-lead-id",
+      "details": {
+        "column": "lead_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "leads-nulls-email",
+      "description": "Column 'email' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-nulls-email",
+      "details": {
+        "column": "email",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "leads-dtype-lead_id",
+      "description": "Column 'lead_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-lead-id",
+      "details": {
+        "column": "lead_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-email",
+      "description": "Column 'email' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-email",
+      "details": {
+        "column": "email",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-first_name",
+      "description": "Column 'first_name' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-first-name",
+      "details": {
+        "column": "first_name",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-last_name",
+      "description": "Column 'last_name' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-last-name",
+      "details": {
+        "column": "last_name",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-company_name",
+      "description": "Column 'company_name' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-company-name",
+      "details": {
+        "column": "company_name",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-company_domain",
+      "description": "Column 'company_domain' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-company-domain",
+      "details": {
+        "column": "company_domain",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-job_title",
+      "description": "Column 'job_title' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-job-title",
+      "details": {
+        "column": "job_title",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-owner_id",
+      "description": "Column 'owner_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-owner-id",
+      "details": {
+        "column": "owner_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-lead_source",
+      "description": "Column 'lead_source' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-lead-source",
+      "details": {
+        "column": "lead_source",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-lifecycle_stage",
+      "description": "Column 'lifecycle_stage' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-lifecycle-stage",
+      "details": {
+        "column": "lifecycle_stage",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-lead_status",
+      "description": "Column 'lead_status' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-lead-status",
+      "details": {
+        "column": "lead_status",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-created_at",
+      "description": "Column 'created_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-created-at",
+      "details": {
+        "column": "created_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-last_activity_at",
+      "description": "Column 'last_activity_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-last-activity-at",
+      "details": {
+        "column": "last_activity_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-dtype-account_id",
+      "description": "Column 'account_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-dtype-account-id",
+      "details": {
+        "column": "account_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "lead_id"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "leads-uniqueness-unique-2",
+      "description": "Duplicate rows detected for subset.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#leads-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "email"
+        ],
+        "duplicate_count": 2,
+        "affected_count": 2,
+        "sample_values": [
+          {
+            "email": "emma.park@northwindbio.com"
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "accounts-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-required-columns",
+      "details": {
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "accounts-nulls-account_id",
+      "description": "Column 'account_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-nulls-account-id",
+      "details": {
+        "column": "account_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "accounts-nulls-company_domain",
+      "description": "Column 'company_domain' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-nulls-company-domain",
+      "details": {
+        "column": "company_domain",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-account_id",
+      "description": "Column 'account_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-account-id",
+      "details": {
+        "column": "account_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-account_name",
+      "description": "Column 'account_name' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-account-name",
+      "details": {
+        "column": "account_name",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-company_domain",
+      "description": "Column 'company_domain' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-company-domain",
+      "details": {
+        "column": "company_domain",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-employee_count",
+      "description": "Column 'employee_count' is parseable as Int64.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-employee-count",
+      "details": {
+        "column": "employee_count",
+        "target_dtype": "Int64",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-industry",
+      "description": "Column 'industry' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-industry",
+      "details": {
+        "column": "industry",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-segment",
+      "description": "Column 'segment' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-segment",
+      "details": {
+        "column": "segment",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-owner_id",
+      "description": "Column 'owner_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-owner-id",
+      "details": {
+        "column": "owner_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-created_at",
+      "description": "Column 'created_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-created-at",
+      "details": {
+        "column": "created_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-dtype-last_activity_at",
+      "description": "Column 'last_activity_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-dtype-last-activity-at",
+      "details": {
+        "column": "last_activity_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "account_id"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "accounts-uniqueness-unique-2",
+      "description": "Duplicate rows detected for subset.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#accounts-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "company_domain"
+        ],
+        "duplicate_count": 2,
+        "affected_count": 2,
+        "sample_values": [
+          {
+            "company_domain": "harborhealth.io"
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "opportunities-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-required-columns",
+      "details": {
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "opportunities-nulls-opportunity_id",
+      "description": "Column 'opportunity_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-nulls-opportunity-id",
+      "details": {
+        "column": "opportunity_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "opportunities-nulls-account_id",
+      "description": "Column 'account_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-nulls-account-id",
+      "details": {
+        "column": "account_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "opportunities-nulls-owner_id",
+      "description": "Column 'owner_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-nulls-owner-id",
+      "details": {
+        "column": "owner_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "opportunities-nulls-stage",
+      "description": "Column 'stage' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-nulls-stage",
+      "details": {
+        "column": "stage",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-opportunity_id",
+      "description": "Column 'opportunity_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-opportunity-id",
+      "details": {
+        "column": "opportunity_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-account_id",
+      "description": "Column 'account_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-account-id",
+      "details": {
+        "column": "account_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-owner_id",
+      "description": "Column 'owner_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-owner-id",
+      "details": {
+        "column": "owner_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-stage",
+      "description": "Column 'stage' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-stage",
+      "details": {
+        "column": "stage",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-amount",
+      "description": "Column 'amount' is parseable as float64.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-amount",
+      "details": {
+        "column": "amount",
+        "target_dtype": "float64",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-created_at",
+      "description": "Column 'created_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-created-at",
+      "details": {
+        "column": "created_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-close_date",
+      "description": "Column 'close_date' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-close-date",
+      "details": {
+        "column": "close_date",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-last_stage_change_at",
+      "description": "Column 'last_stage_change_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-last-stage-change-at",
+      "details": {
+        "column": "last_stage_change_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-next_step",
+      "description": "Column 'next_step' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-next-step",
+      "details": {
+        "column": "next_step",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-dtype-forecast_category",
+      "description": "Column 'forecast_category' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-dtype-forecast-category",
+      "details": {
+        "column": "forecast_category",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "opportunities-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#opportunities-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "opportunity_id"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-required-columns",
+      "details": {
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "activities-nulls-activity_id",
+      "description": "Column 'activity_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-nulls-activity-id",
+      "details": {
+        "column": "activity_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "activities-nulls-object_type",
+      "description": "Column 'object_type' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-nulls-object-type",
+      "details": {
+        "column": "object_type",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "activities-nulls-object_id",
+      "description": "Column 'object_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-nulls-object-id",
+      "details": {
+        "column": "object_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "activities-nulls-owner_id",
+      "description": "Column 'owner_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-nulls-owner-id",
+      "details": {
+        "column": "owner_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "activities-dtype-activity_id",
+      "description": "Column 'activity_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-activity-id",
+      "details": {
+        "column": "activity_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-object_type",
+      "description": "Column 'object_type' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-object-type",
+      "details": {
+        "column": "object_type",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-object_id",
+      "description": "Column 'object_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-object-id",
+      "details": {
+        "column": "object_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-activity_type",
+      "description": "Column 'activity_type' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-activity-type",
+      "details": {
+        "column": "activity_type",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-activity_at",
+      "description": "Column 'activity_at' is parseable as datetime64[ns, UTC].",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-activity-at",
+      "details": {
+        "column": "activity_at",
+        "target_dtype": "datetime64[ns, UTC]",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-owner_id",
+      "description": "Column 'owner_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-owner-id",
+      "details": {
+        "column": "owner_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-dtype-outcome",
+      "description": "Column 'outcome' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-dtype-outcome",
+      "details": {
+        "column": "outcome",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "activities-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#activities-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "activity_id"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-required-columns",
+      "description": "All required columns are present.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-required-columns",
+      "details": {
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "owners-nulls-owner_id",
+      "description": "Column 'owner_id' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-nulls-owner-id",
+      "details": {
+        "column": "owner_id",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "owners-nulls-owner_email",
+      "description": "Column 'owner_email' contains no null primary-key values.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-nulls-owner-email",
+      "details": {
+        "column": "owner_email",
+        "null_count": 0,
+        "affected_count": 0
+      }
+    },
+    {
+      "rule_id": "owners-dtype-owner_id",
+      "description": "Column 'owner_id' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-owner-id",
+      "details": {
+        "column": "owner_id",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-dtype-owner_name",
+      "description": "Column 'owner_name' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-owner-name",
+      "details": {
+        "column": "owner_name",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-dtype-owner_email",
+      "description": "Column 'owner_email' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-owner-email",
+      "details": {
+        "column": "owner_email",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-dtype-team",
+      "description": "Column 'team' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-team",
+      "details": {
+        "column": "team",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-dtype-manager",
+      "description": "Column 'manager' is parseable as string.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-manager",
+      "details": {
+        "column": "manager",
+        "target_dtype": "string",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-dtype-is_active",
+      "description": "Column 'is_active' is parseable as boolean.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-dtype-is-active",
+      "details": {
+        "column": "is_active",
+        "target_dtype": "boolean",
+        "invalid_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-uniqueness-unique-1",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-uniqueness-unique-1",
+      "details": {
+        "subset": [
+          "owner_id"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "owners-uniqueness-unique-2",
+      "description": "No duplicate rows detected for subset.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#owners-uniqueness-unique-2",
+      "details": {
+        "subset": [
+          "owner_email"
+        ],
+        "duplicate_count": 0,
+        "affected_count": 0,
+        "sample_values": []
+      }
+    },
+    {
+      "rule_id": "crm-lifecycle-values",
+      "description": "Lead lifecycle values stay within the supported CRM order.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lifecycle-values",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "allowed_values": [
+          "Subscriber",
+          "Lead",
+          "MQL",
+          "SQL",
+          "Opportunity",
+          "Customer"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-opportunity-stage-values",
+      "description": "Opportunity stages stay within the supported CRM order.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "schema_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-opportunity-stage-values",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "allowed_values": [
+          "Discovery",
+          "Qualification",
+          "Proposal",
+          "Negotiation",
+          "Closed Won",
+          "Closed Lost"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-lead-owner-fk",
+      "description": "Every lead owner_id resolves to an active owner record. Missing references detected.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-owner-fk",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "lead_id": "L-9004",
+            "owner_id": "O-999",
+            "email": "liam.diaz@solsticeretail.com"
+          }
+        ],
+        "owner_issue_counts": {
+          "O-999": 1
+        },
+        "stage_issue_counts": {},
+        "missing_values": [
+          "O-999"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-account-owner-fk",
+      "description": "Every account owner_id resolves to an owner record.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-account-owner-fk",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "crm-opportunity-owner-fk",
+      "description": "Every opportunity owner_id resolves to an owner record.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-opportunity-owner-fk",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "crm-activity-owner-fk",
+      "description": "Every activity owner_id resolves to an owner record.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-activity-owner-fk",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "crm-opportunity-account-fk",
+      "description": "Every opportunity account_id resolves to an account record.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-opportunity-account-fk",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "crm-lead-account-fk",
+      "description": "Every linked lead account_id resolves to an account record.",
+      "passed": true,
+      "severity": "info",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-account-fk",
+      "details": {
+        "affected_count": 0,
+        "sample_records": [],
+        "owner_issue_counts": {},
+        "stage_issue_counts": {},
+        "missing_values": []
+      }
+    },
+    {
+      "rule_id": "crm-activity-object-reference",
+      "description": "Activities reference missing or unsupported CRM objects.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-activity-object-reference",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "activity_id": "ACT-9003",
+            "object_type": "opportunity",
+            "object_id": "OP-404",
+            "owner_id": "O-101"
+          }
+        ],
+        "owner_issue_counts": {
+          "Ben Ortiz": 1
+        },
+        "stage_issue_counts": {},
+        "allowed_object_types": [
+          "account",
+          "lead",
+          "opportunity"
+        ]
+      }
+    },
+    {
+      "rule_id": "crm-email-multiple-accounts",
+      "description": "Lead emails are linked to multiple accounts.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-email-multiple-accounts",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "lead_id": "L-9001",
+            "email": "emma.park@northwindbio.com",
+            "account_id": "A-9001",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9002",
+            "email": "emma.park@northwindbio.com",
+            "account_id": "A-9002",
+            "owner_id": "O-101"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1,
+          "Ben Ortiz": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-domain-multiple-reps",
+      "description": "Company domains are split across multiple reps.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "duplicate_record",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-domain-multiple-reps",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "lead_id": "L-9002",
+            "company_domain": "harborhealth.io",
+            "owner_id": "O-101"
+          },
+          {
+            "lead_id": "L-9005",
+            "company_domain": "harborhealth.io",
+            "owner_id": "O-100"
+          }
+        ],
+        "owner_issue_counts": {
+          "Ben Ortiz": 1,
+          "Alice Chen": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-closed-won-amount",
+      "description": "Closed Won opportunities have missing or non-positive amounts.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-closed-won-amount",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9001",
+            "stage": "Closed Won",
+            "amount": 0.0,
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Closed Won": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-close-date-chronology",
+      "description": "Opportunity close dates precede created_at.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-close-date-chronology",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9003",
+            "created_at": "2026-02-20T12:00:00+00:00",
+            "close_date": "2026-02-01T00:00:00+00:00",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Proposal": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-inactive-owner-open-opportunity",
+      "description": "Open opportunities are assigned to inactive owners.",
+      "passed": false,
+      "severity": "critical",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-inactive-owner-open-opportunity",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "owner_id": "O-103",
+            "stage": "Negotiation"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-enterprise-employee-count",
+      "description": "Enterprise accounts are missing employee_count.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-enterprise-employee-count",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "account_id": "A-9004",
+            "account_name": "Atlas Schools",
+            "segment": "Enterprise",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {}
+      }
+    },
+    {
+      "rule_id": "crm-open-opportunity-next-step",
+      "description": "Open opportunities are missing next_step.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "invalid_business_rule_state",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-open-opportunity-next-step",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "owner_id": "O-103",
+            "next_step": null
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1
+        }
+      }
+    },
+    {
+      "rule_id": "crm-lead-recent-touch",
+      "description": "Active MQL/SQL/Opportunity leads are missing recent touches.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-recent-touch",
+      "details": {
+        "affected_count": 4,
+        "sample_records": [
+          {
+            "lead_id": "L-9001",
+            "lifecycle_stage": "SQL",
+            "last_activity_at": "2026-03-12T12:00:00+00:00",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9002",
+            "lifecycle_stage": "Opportunity",
+            "last_activity_at": "2026-03-12T10:00:00+00:00",
+            "owner_id": "O-101"
+          },
+          {
+            "lead_id": "L-9003",
+            "lifecycle_stage": "Opportunity",
+            "last_activity_at": "2026-03-01T08:00:00+00:00",
+            "owner_id": "O-102"
+          },
+          {
+            "lead_id": "L-9005",
+            "lifecycle_stage": "MQL",
+            "last_activity_at": "2026-03-07T09:00:00+00:00",
+            "owner_id": "O-100"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 2,
+          "Ben Ortiz": 1,
+          "Alice Chen": 1
+        },
+        "stage_issue_counts": {},
+        "threshold": "2026-03-14T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-opportunity-recent-touch",
+      "description": "Open opportunities are missing recent touches.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-opportunity-recent-touch",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "latest_activity_at": "NaT",
+            "owner_id": "O-103"
+          },
+          {
+            "opportunity_id": "OP-9003",
+            "stage": "Proposal",
+            "latest_activity_at": "NaT",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1,
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1,
+          "Proposal": 1
+        },
+        "threshold": "2026-03-14T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-stale-opportunity-stage",
+      "description": "Open opportunities have stale stage ages.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "stale_data",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-stale-opportunity-stage",
+      "details": {
+        "affected_count": 2,
+        "sample_records": [
+          {
+            "opportunity_id": "OP-9002",
+            "stage": "Negotiation",
+            "last_stage_change_at": "2026-03-01T10:00:00+00:00",
+            "owner_id": "O-103"
+          },
+          {
+            "opportunity_id": "OP-9003",
+            "stage": "Proposal",
+            "last_stage_change_at": "2026-03-05T14:00:00+00:00",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Darius Cole": 1,
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {
+          "Negotiation": 1,
+          "Proposal": 1
+        },
+        "threshold": "2026-03-07T14:00:00+00:00"
+      }
+    },
+    {
+      "rule_id": "crm-lead-account-domain-mismatch",
+      "description": "Linked lead and account domains disagree.",
+      "passed": false,
+      "severity": "warning",
+      "root_cause": "integrity_issue",
+      "remediation_link": "docs/rule-severity-matrix.md#crm-lead-account-domain-mismatch",
+      "details": {
+        "affected_count": 1,
+        "sample_records": [
+          {
+            "lead_id": "L-9003",
+            "account_id": "A-9004",
+            "company_domain_lead": "atlasdistrict.org",
+            "company_domain_account": "atlasschools.org",
+            "owner_id": "O-102"
+          }
+        ],
+        "owner_issue_counts": {
+          "Cara Singh": 1
+        },
+        "stage_issue_counts": {}
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+lead_id,email,first_name,last_name,company_name,company_domain,job_title,owner_id,lead_source,lifecycle_stage,lead_status,created_at,last_activity_at,account_id
+L-9001,emma.park@northwindbio.com,Emma,Park,Northwind Bio,northwindbio.com,IT Director,O-102,Webinar,SQL,Open,2026-03-10T13:00:00Z,2026-03-12T12:00:00Z,A-9001
+L-9002,emma.park@northwindbio.com,Emma,Park,Harbor Health,harborhealth.io,CIO,O-101,Referral,Opportunity,Working,2026-03-12T09:00:00Z,2026-03-12T10:00:00Z,A-9002
+L-9003,mia.patel@atlasschools.org,Mia,Patel,Atlas Schools,atlasdistrict.org,CTO,O-102,Outbound,Opportunity,Qualified,2026-03-01T08:00:00Z,2026-03-01T08:00:00Z,A-9004
+L-9004,liam.diaz@solsticeretail.com,Liam,Diaz,Solstice Retail,solsticeretail.com,Store Systems Lead,O-999,Event,Lead,New,2026-03-21T14:00:00Z,2026-03-21T14:00:00Z,A-9005
+L-9005,noah.kim@harborhealth.io,Noah,Kim,Harbor Health,harborhealth.io,CIO,O-100,Referral,MQL,Nurturing,2026-03-05T09:00:00Z,2026-03-07T09:00:00Z,A-9003

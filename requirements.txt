@@ -1,4 +1,6 @@
+duckdb>=1.1,<2
 great_expectations<0.18
 pandas>=2.2,<4
+Pillow>=10,<12
 pytest>=7.0,<8
 PyYAML>=6.0

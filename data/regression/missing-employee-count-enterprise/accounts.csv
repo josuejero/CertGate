@@ -1,0 +1,6 @@
+account_id,account_name,company_domain,employee_count,industry,segment,owner_id,created_at,last_activity_at
+A-1001,Northwind Bio,northwindbio.com,850,Biotech,Enterprise,O-102,2026-02-03T14:00:00Z,2026-03-29T16:00:00Z
+A-1002,Harbor Health,harborhealth.io,240,Healthcare,Mid-Market,O-101,2026-02-10T15:00:00Z,2026-03-28T18:00:00Z
+A-1003,BluePeak Systems,bluepeaksystems.com,120,Software,SMB,O-101,2026-03-01T13:00:00Z,2026-03-26T19:00:00Z
+A-1004,Solstice Retail,solsticeretail.com,60,Retail,SMB,O-100,2026-03-05T12:30:00Z,2026-03-25T15:30:00Z
+A-1005,Atlas Schools,atlasschools.org,,Education,Enterprise,O-102,2026-01-18T10:00:00Z,2026-03-30T17:00:00Z

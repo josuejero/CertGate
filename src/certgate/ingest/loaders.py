@@ -1,5 +1,4 @@
-"""Pandas-based ingestion helpers used by the validation layer.
-"""
+"""Pandas-based ingestion helpers used by the validation layer."""
 
 from __future__ import annotations
 
@@ -59,6 +58,17 @@ def _prune_datetime_dtypes(
     return pruned or None
 
 
+def _coerce_timestamp(value: Any) -> datetime | None:
+    if value is None:
+        return None
+    ts = pd.to_datetime(value, utc=True, errors="coerce")
+    if pd.isna(ts):
+        return None
+    if isinstance(ts, pd.Timestamp):
+        return ts.to_pydatetime()
+    return ts
+
+
 def load_table(
     name: str,
     path: Path,
@@ -99,3 +109,43 @@ def load_table(
         modified_at=modified_at,
         metadata=metadata_dict,
     )
+
+
+def derive_bundle_reference_time(tables: Mapping[str, LoadedTable]) -> datetime:
+    """Return a stable bundle-relative timestamp for temporal checks."""
+
+    candidates: list[datetime] = []
+    for table in tables.values():
+        timestamp_columns = tuple(table.metadata.get("timestamp_columns", ()))
+        for column in timestamp_columns:
+            if column not in table.df.columns:
+                continue
+            series = pd.to_datetime(table.df[column], utc=True, errors="coerce").dropna()
+            if not series.empty:
+                candidates.append(series.max().to_pydatetime())
+
+    if not candidates:
+        modified_times = [table.modified_at for table in tables.values()]
+        if modified_times:
+            return max(modified_times)
+        return datetime.now(timezone.utc)
+    return max(candidates)
+
+
+def attach_bundle_metadata(
+    tables: Mapping[str, LoadedTable],
+    bundle_name: str,
+    reference_time: datetime,
+) -> None:
+    for table in tables.values():
+        table.metadata["bundle_name"] = bundle_name
+        table.metadata["bundle_reference_time"] = reference_time.isoformat()
+
+
+__all__ = [
+    "LoadedTable",
+    "attach_bundle_metadata",
+    "derive_bundle_reference_time",
+    "discover_ingest_files",
+    "load_table",
+]

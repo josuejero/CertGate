@@ -1,0 +1,5 @@
+owner_id,owner_name,owner_email,team,manager,is_active
+O-100,Alice Chen,alice.chen@certgate.dev,SDR,Gina Alvarez,true
+O-101,Ben Ortiz,ben.ortiz@certgate.dev,AE,Henry Moss,true
+O-102,Cara Singh,cara.singh@certgate.dev,Enterprise,Henry Moss,true
+O-103,Darius Cole,darius.cole@certgate.dev,Ops,Ivy Hart,false

@@ -16,41 +16,47 @@ def test_schema_and_rules_import_cleanly():
     import certgate.rules.schema as schema_rules
     import certgate.rules.business as business_rules
 
-    # Spot-check that the modules expose the expected helpers.
-    assert schema_rules.SCHEMA_DEFINITIONS
-    assert hasattr(business_rules, "PASSING_VALUES")
+    assert set(schema_rules.SCHEMA_DEFINITIONS) == {
+        "leads",
+        "accounts",
+        "opportunities",
+        "activities",
+        "owners",
+    }
+    assert business_rules.LEAD_LIFECYCLE_ORDER[-1] == "Customer"
 
 
 def test_good_files_are_discoverable():
     base = DATA_ROOT / "good"
     discovered = discover_ingest_files(
         base_dir=base,
-        file_names=["candidates.csv", "exam_results.csv", "certification_status.csv"],
+        file_names=[
+            "leads.csv",
+            "accounts.csv",
+            "opportunities.csv",
+            "activities.csv",
+            "owners.csv",
+        ],
     )
     assert set(discovered.keys()) == {
-        "candidates.csv",
-        "exam_results.csv",
-        "certification_status.csv",
+        "leads.csv",
+        "accounts.csv",
+        "opportunities.csv",
+        "activities.csv",
+        "owners.csv",
     }
 
 
-def test_checkpoint_references_expectation_suites():
-    suites = []
-    with CHECKPOINT_PATH.open() as checkpoint_file:
-        for line in checkpoint_file:
-            stripped = line.strip()
-            if "expectation_suite_name:" not in stripped:
-                continue
-            _, suite = stripped.split(":", 1)
-            suites.append(suite.strip())
-    assert suites, "checkpoint must declare at least one expectation suite"
-
-    expectation_suffixes = (".yml", ".json")
-    for suite_name in suites:
-        expectation_path = None
-        for suffix in expectation_suffixes:
-            candidate = EXPECTATIONS_DIR / f"{suite_name}{suffix}"
-            if candidate.exists():
-                expectation_path = candidate
-                break
-        assert expectation_path, f"{suite_name} expectation suite missing (expected one of {expectation_suffixes})"
+def test_checkpoint_references_crm_expectation_suites():
+    checkpoint_text = CHECKPOINT_PATH.read_text()
+    expected_suites = (
+        "leads_suite",
+        "accounts_suite",
+        "opportunities_suite",
+        "activities_suite",
+        "owners_suite",
+        "freshness_suite",
+    )
+    for suite_name in expected_suites:
+        assert suite_name in checkpoint_text
+        assert (EXPECTATIONS_DIR / f"{suite_name}.json").exists()

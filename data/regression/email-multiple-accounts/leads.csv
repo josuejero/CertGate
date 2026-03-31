@@ -1,0 +1,7 @@
+lead_id,email,first_name,last_name,company_name,company_domain,job_title,owner_id,lead_source,lifecycle_stage,lead_status,created_at,last_activity_at,account_id
+L-1001,emma.park@northwindbio.com,Emma,Park,Northwind Bio,northwindbio.com,IT Director,O-102,Webinar,SQL,Open,2026-03-10T13:00:00Z,2026-03-29T12:00:00Z,A-1001
+L-1002,noah.kim@harborhealth.io,Noah,Kim,Harbor Health,harborhealth.io,CIO,O-101,Referral,Opportunity,Working,2026-03-02T09:00:00Z,2026-03-28T10:00:00Z,A-1002
+L-1003,ava.ross@bluepeaksystems.com,Ava,Ross,BluePeak Systems,bluepeaksystems.com,Ops Manager,O-101,Inbound,MQL,Nurturing,2026-03-12T11:00:00Z,2026-03-24T09:30:00Z,A-1003
+L-1004,liam.diaz@solsticeretail.com,Liam,Diaz,Solstice Retail,solsticeretail.com,Store Systems Lead,O-100,Event,Lead,New,2026-03-21T14:00:00Z,2026-03-25T14:30:00Z,A-1004
+L-1005,mia.patel@atlasschools.org,Mia,Patel,Atlas Schools,atlasschools.org,CTO,O-102,Outbound,Opportunity,Qualified,2026-03-01T08:00:00Z,2026-03-30T16:30:00Z,A-1005
+L-1006,noah.kim@harborhealth.io,Oliver,Shaw,Atlas Schools,atlasschools.org,VP Infrastructure,O-102,Outbound,SQL,Working,2026-03-27T15:00:00Z,2026-03-30T16:00:00Z,A-1005

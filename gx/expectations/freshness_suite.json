@@ -2,30 +2,30 @@
   "expectation_suite_name": "freshness_suite",
   "data_asset_type": "pandas",
   "meta": {
-    "notes": "Timestamp freshness expectations used by nightly gating.",
+    "notes": "Bundle-relative timestamp expectations used by the CRM integrity gate.",
     "contributors": [
-      "CertGate QA"
+      "CertGate CRM Integrity Gate"
     ],
     "great_expectations_version": "0.17.0"
   },
   "ge_cloud_id": null,
   "evaluation_parameters": {
-    "min_file_received_ts": null,
-    "max_file_received_ts": null
+    "bundle_min_timestamp": null,
+    "bundle_max_timestamp": null
   },
   "expectations": [
     {
       "expectation_type": "expect_column_values_to_not_be_null",
       "kwargs": {
-        "column": "file_received_ts"
+        "column": "last_stage_change_at"
       }
     },
     {
       "expectation_type": "expect_column_values_to_be_between",
       "kwargs": {
-        "column": "file_received_ts",
-        "min_value": "$PARAMETER.min_file_received_ts",
-        "max_value": "$PARAMETER.max_file_received_ts"
+        "column": "last_stage_change_at",
+        "min_value": "$PARAMETER.bundle_min_timestamp",
+        "max_value": "$PARAMETER.bundle_max_timestamp"
       }
     }
   ]

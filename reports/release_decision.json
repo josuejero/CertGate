@@ -1,63 +1,22 @@
 {
-  "status": "Blocked",
-  "timestamp": "2026-03-03T17:42:35.110418+00:00",
-  "decision_reason": "Critical failure candidates-dtype-created_ts blocks release.",
-  "failed_rules": [
-    {
-      "rule_id": "candidates-dtype-created_ts",
-      "severity": "warning",
-      "root_cause": "schema_issue",
-      "details": {
-        "column": "created_ts",
-        "target_dtype": "datetime64[ns]",
-        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
-      }
-    },
-    {
-      "rule_id": "exam_results-dtype-file_received_ts",
-      "severity": "warning",
-      "root_cause": "schema_issue",
-      "details": {
-        "column": "file_received_ts",
-        "target_dtype": "datetime64[ns]",
-        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
-      }
-    },
-    {
-      "rule_id": "certification_status-dtype-certified_ts",
-      "severity": "warning",
-      "root_cause": "schema_issue",
-      "details": {
-        "column": "certified_ts",
-        "target_dtype": "datetime64[ns]",
-        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
-      }
-    },
-    {
-      "rule_id": "certification_status-dtype-status_effective_ts",
-      "severity": "warning",
-      "root_cause": "schema_issue",
-      "details": {
-        "column": "status_effective_ts",
-        "target_dtype": "datetime64[ns]",
-        "error": "Cannot use .astype to convert from timezone-aware dtype to timezone-naive dtype. Use obj.tz_localize(None) or obj.tz_convert('UTC').tz_localize(None) instead."
-      }
-    },
-    {
-      "rule_id": "BR-08",
-      "severity": "critical",
-      "root_cause": "stale_data",
-      "details": {
-        "lag_hours": 895.46,
-        "reference_time": "2026-03-03T17:42:35.110395+00:00",
-        "latest_data_time": "2026-01-25T10:15:00+00:00",
-        "timestamp_source": "file_received_ts",
-        "max_allowed_hours": 24,
-        "warning_hours": 48
-      }
-    }
-  ],
-  "blocking_root_causes": [
-    "stale_data"
-  ]
+  "status": "Ready",
+  "timestamp": "2026-03-30T23:43:24.932299+00:00",
+  "bundle_name": "good",
+  "records_scanned": 28,
+  "table_counts": {
+    "leads": 6,
+    "accounts": 5,
+    "opportunities": 4,
+    "activities": 9,
+    "owners": 4
+  },
+  "severity_counts": {
+    "critical": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "top_affected_owners": [],
+  "top_affected_stages": [],
+  "decision_reason": "All validations passed; CRM sync is ready.",
+  "failed_rules": []
 }

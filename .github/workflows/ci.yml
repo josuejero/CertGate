@@ -1,4 +1,4 @@
-name: CertGate CI & Demo
+name: CertGate CRM Integrity Gate CI & Demo
 
 on:
   push:
@@ -26,8 +26,10 @@ jobs:
         run: pytest
       - name: Execute Great Expectations checkpoint
         run: python scripts/run_great_expectations.py
-      - name: Generate release reports
+      - name: Generate CRM integrity artifacts
         run: python scripts/generate_release_reports.py
+      - name: Generate demo visuals
+        run: python scripts/generate_demo_assets.py
       - name: Upload reports artifacts
         uses: actions/upload-artifact@v4
         with:

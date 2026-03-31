@@ -1,0 +1,5 @@
+opportunity_id,account_id,owner_id,stage,amount,created_at,close_date,last_stage_change_at,next_step,forecast_category
+OP-2001,A-1001,O-102,Proposal,180000,2026-03-11T13:30:00Z,2026-04-15T00:00:00Z,2026-03-24T17:00:00Z,Security review scheduled,Best Case
+OP-2002,A-1002,O-101,Negotiation,95000,2026-03-04T15:00:00Z,2026-04-02T00:00:00Z,2026-02-20T16:30:00Z,Finalize pricing addendum,Commit
+OP-2003,A-1005,O-102,Closed Won,250000,2026-02-20T12:00:00Z,2026-03-28T00:00:00Z,2026-03-28T14:00:00Z,Customer kickoff complete,Closed
+OP-2004,A-1003,O-101,Discovery,22000,2026-03-18T16:00:00Z,2026-04-30T00:00:00Z,2026-03-23T11:00:00Z,Intro with security team,Pipeline

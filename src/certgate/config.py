@@ -1,8 +1,9 @@
-"""Configuration dataclasses that describe the CertGate pipeline targets and thresholds."""
+"""Configuration models for the CertGate CRM integrity pipeline."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 from typing import Callable, Mapping, Sequence, Tuple
 
@@ -18,19 +19,20 @@ class SchemaTargetConfig:
     name: str
     dtype_rule_prefix: str | None = None
     uniqueness_rule_prefix: str | None = None
+    null_rule_prefix: str | None = None
 
 
 @dataclass(frozen=True)
-class FreshnessConfig:
-    timestamp_column: str | None = "file_received_ts"
-    metadata_timestamp_keys: tuple[str, ...] = (
-        "file_received_ts",
-        "ingest_time",
-        "status_effective_ts",
-    )
-    max_allowed_hours: int = 24
-    warning_hours: int | None = None
-    rule_id: str = "BR-08"
+class TemporalRuleConfig:
+    reference_time: datetime | None = None
+    recent_touch_days: int = 14
+    stale_stage_days: int = 21
+
+
+@dataclass(frozen=True)
+class DemoConfig:
+    before_bundle: str = "bad/demo-before-cleanup"
+    after_bundle: str = "good"
 
 
 @dataclass(frozen=True)
@@ -44,19 +46,23 @@ class PipelineConfig:
     data_root: Path = Path("data")
     bundle: str = "good"
     reports_dir: Path = Path("reports")
+    sql_dir: Path = Path("sql")
     schema_targets: Tuple[SchemaTargetConfig, ...] = field(
         default_factory=lambda: tuple(
             SchemaTargetConfig(name=target) for target in SCHEMA_TARGETS
         )
     )
-    freshness: FreshnessConfig = field(default_factory=FreshnessConfig)
+    temporal: TemporalRuleConfig = field(default_factory=TemporalRuleConfig)
+    demo: DemoConfig = field(default_factory=DemoConfig)
     business_rules: Tuple[BusinessRuleConfig, ...] = field(default_factory=tuple)
 
+
 __all__ = [
-    "SchemaTargetConfig",
-    "FreshnessConfig",
-    "BusinessRuleConfig",
-    "PipelineConfig",
     "BusinessRuleCallable",
+    "BusinessRuleConfig",
+    "DemoConfig",
+    "PipelineConfig",
+    "SchemaTargetConfig",
     "TablesMapping",
+    "TemporalRuleConfig",
 ]

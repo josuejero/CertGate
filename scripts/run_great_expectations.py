@@ -27,10 +27,9 @@ def _ensure_python_supported() -> None:
         raise SystemExit(
             base_message
             + " Python 3.14+ is not supported yet because the bundled Pydantic v1 dependency "
-            "issues `issubclass` checks against typing generics and raises "
-            "\"Subscripted generics cannot be used with class and instance checks\" "
-            "on Python 3.14+. Recreate your `.venv` with a supported interpreter (for example "
-            "`PYTHON_CMD=python3.13 ./scripts/bootstrap.sh`) before rerunning this script."
+            "issues `issubclass` checks against typing generics. Recreate your `.venv` with "
+            "a supported interpreter (for example `PYTHON_CMD=python3.13 ./scripts/bootstrap.sh`) "
+            "before rerunning this script."
         )
     raise SystemExit(base_message + " Please use a supported interpreter before rerunning this script.")
 
@@ -40,16 +39,17 @@ import pandas as pd
 if TYPE_CHECKING:
     from great_expectations.core.batch import RuntimeBatchRequest
 
-from certgate.ingest.loaders import load_table
-from certgate.rules.schema import get_schema_definition
+from certgate.ingest import load_bundle
 
-DATA_ROOT = BASE_DIR / "data" / "good"
+DATA_ROOT = BASE_DIR / "data"
 GX_ROOT = BASE_DIR / "gx"
 
 SCHEMA_TARGETS = (
-    "candidates",
-    "exam_results",
-    "certification_status",
+    "leads",
+    "accounts",
+    "opportunities",
+    "activities",
+    "owners",
 )
 
 ACTION_LIST = [
@@ -69,54 +69,36 @@ ACTION_LIST = [
 
 VALIDATION_RUN_CONFIGS = (
     {
-        "table_key": "candidates",
-        "expectation_suite_name": "candidates_suite",
-        "batch_identifier": "candidates",
+        "table_key": "leads",
+        "expectation_suite_name": "leads_suite",
+        "batch_identifier": "leads",
     },
     {
-        "table_key": "exam_results",
-        "expectation_suite_name": "exam_results_suite",
-        "batch_identifier": "exams",
+        "table_key": "accounts",
+        "expectation_suite_name": "accounts_suite",
+        "batch_identifier": "accounts",
     },
     {
-        "table_key": "certification_status",
-        "expectation_suite_name": "cert_status_suite",
-        "batch_identifier": "certifications",
+        "table_key": "opportunities",
+        "expectation_suite_name": "opportunities_suite",
+        "batch_identifier": "opportunities",
     },
     {
-        "table_key": "exam_results",
+        "table_key": "activities",
+        "expectation_suite_name": "activities_suite",
+        "batch_identifier": "activities",
+    },
+    {
+        "table_key": "owners",
+        "expectation_suite_name": "owners_suite",
+        "batch_identifier": "owners",
+    },
+    {
+        "table_key": "opportunities",
         "expectation_suite_name": "freshness_suite",
         "batch_identifier": "freshness",
     },
 )
-
-EXPECTATION_SUITE_NAMES = tuple(
-    config["expectation_suite_name"] for config in VALIDATION_RUN_CONFIGS
-)
-
-
-def _load_dataframe(table_key: str) -> pd.DataFrame:
-    definition = get_schema_definition(table_key)
-    table_path = DATA_ROOT / definition.file_name
-    loaded = load_table(
-        name=table_key,
-        path=table_path,
-        parse_dates=definition.parse_dates,
-        dtype_overrides=definition.dtype_map,
-    )
-    return loaded.df
-
-
-def _to_datetime(value: pd.Timestamp | datetime | str) -> datetime:
-    if pd.isna(value):
-        raise ValueError("Timestamp value is missing")
-    if isinstance(value, pd.Timestamp):
-        return value.to_pydatetime()
-    if isinstance(value, str):
-        return pd.to_datetime(value).to_pydatetime()
-    if isinstance(value, datetime):
-        return value
-    raise ValueError(f"Unable to interpret {value!r} as datetime")  # type: ignore[unreachable]
 
 
 def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchRequest:
@@ -131,26 +113,35 @@ def _build_batch_request(df: pd.DataFrame, identifier: str) -> RuntimeBatchReque
     )
 
 
+def _bundle_time_bounds(tables: dict[str, pd.DataFrame]) -> tuple[datetime, datetime]:
+    timestamps: list[pd.Timestamp] = []
+    for table_name in ("leads", "accounts", "opportunities", "activities"):
+        frame = tables[table_name]
+        for column in frame.columns:
+            if not column.endswith("_at") and not column.endswith("_date"):
+                continue
+            series = pd.to_datetime(frame[column], utc=True, errors="coerce").dropna()
+            if not series.empty:
+                timestamps.append(series.min())
+                timestamps.append(series.max())
+
+    if not timestamps:
+        raise ValueError("Unable to derive bundle time bounds for Great Expectations.")
+    return min(timestamps).to_pydatetime(), max(timestamps).to_pydatetime()
+
+
 def main() -> None:
     _ensure_python_supported()
     from great_expectations.data_context import DataContext
 
     context = DataContext(context_root_dir=str(GX_ROOT))
-
-    table_dfs = {
-        table_key: _load_dataframe(table_key) for table_key in SCHEMA_TARGETS
-    }
-    exam_df = table_dfs["exam_results"]
+    loaded_tables = load_bundle(DATA_ROOT, "good", targets=SCHEMA_TARGETS)
+    table_dfs = {name: table.df for name, table in loaded_tables.items()}
+    bundle_min_timestamp, bundle_max_timestamp = _bundle_time_bounds(table_dfs)
 
     evaluation_params = {
-        "min_exam_date": _to_datetime(exam_df["exam_date"].min()),
-        "max_exam_date": _to_datetime(exam_df["exam_date"].max()),
-        "min_file_received_ts": _to_datetime(
-            exam_df["file_received_ts"].min()
-        ),
-        "max_file_received_ts": _to_datetime(
-            exam_df["file_received_ts"].max()
-        ),
+        "bundle_min_timestamp": bundle_min_timestamp,
+        "bundle_max_timestamp": bundle_max_timestamp,
     }
 
     validations = [

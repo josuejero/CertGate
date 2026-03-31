@@ -1,0 +1,52 @@
+{
+  "expectation_suite_name": "activities_suite",
+  "data_asset_type": "pandas",
+  "meta": {
+    "notes": "Activity schema and object-type expectations for the CRM integrity gate.",
+    "contributors": [
+      "CertGate CRM Integrity Gate"
+    ],
+    "great_expectations_version": "0.17.0"
+  },
+  "ge_cloud_id": null,
+  "evaluation_parameters": {},
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "activity_id",
+          "object_type",
+          "object_id",
+          "activity_type",
+          "activity_at",
+          "owner_id",
+          "outcome"
+        ]
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {
+        "column": "activity_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {
+        "column": "activity_id"
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "object_type",
+        "value_set": [
+          "lead",
+          "account",
+          "opportunity"
+        ]
+      }
+    }
+  ]
+}

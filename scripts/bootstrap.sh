@@ -97,8 +97,8 @@ fi
 
 # shellcheck source=/dev/null
 source ".venv/bin/activate"
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
 
 deactivate >/dev/null 2>&1 || true
 
