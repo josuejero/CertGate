@@ -69,8 +69,3 @@ The CLI still works through `python -m certgate` and keeps the existing package 
 - UAT checks confirm the demo comparison remains “blocked before, ready after.”
 
 Run the suite with `python3 -m pytest -q`.
-
-## Portfolio Positioning
-This repo now presents as:
-
-**A Python, Great Expectations, and DuckDB CRM integrity gate that validates lead, account, opportunity, activity, and owner data; blocks bad syncs; generates ops-facing summaries; and publishes a GitHub Pages dashboard with before/after cleanup evidence.**
