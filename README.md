@@ -1,9 +1,31 @@
 # CertGate: CRM Integrity Gate
 
-## What This Repo Is Now
-CertGate is now framed as a **CRM integrity gate** for revops-style data operations. It validates `leads`, `accounts`, `opportunities`, `activities`, and `owners` before sync/reporting, catches duplicates and broken joins, flags stale follow-up risk, runs DuckDB ops rollups, and publishes recruiter-friendly JSON, Markdown, Great Expectations Data Docs, and a static dashboard.
+CertGate is a CRM data-quality gate for validating leads, accounts, opportunities, activities, and owners before reporting or sync. It catches duplicates, broken joins, stale follow-up risks, invalid deal states, and missing firmographic data, then produces JSON, Markdown, Great Expectations Data Docs, DuckDB rollups, and a static dashboard. This project demonstrates Python data validation, SQL analytics, release gating, regression testing, generated reports, and CI/CD-backed portfolio evidence.
 
-## Core Story
+## Quick links
+- **Live demo:** [static dashboard](https://josuejero.github.io/CertGate/) and [Great Expectations Data Docs](https://josuejero.github.io/CertGate/data-docs/)
+- **Screenshots:** [dashboard](demo-site/assets/screenshots/static-dashboard.png), [Data Docs](demo-site/assets/screenshots/gx-data-docs.png), [before/after report](demo-site/assets/screenshots/before-after-report.svg), [weekly summary](demo-site/assets/screenshots/weekly-exec-summary.svg)
+- **Test report:** `reports/junit.xml` and `python -m pytest -q`
+- **CI workflow:** `.github/workflows/ci.yml`
+- **Architecture docs:** `docs/business-rules.md`, `docs/rule-severity-matrix.md`, `docs/test-plan.md`
+- **Main code to inspect:** `src/`, `scripts/generate_release_reports.py`, `sql/`, `reports/`
+
+## Employer scan
+**Best fit roles:** Data Quality Engineer, Analytics Engineer, QA Automation Engineer, RevOps Data Analyst  
+**Core stack:** Python, DuckDB, Pandas, Great Expectations, PyTest, SQL, GitHub Pages  
+**What this proves:** CRM data contracts, validation layers, SQL reporting, generated artifacts, regression coverage, release decisions  
+**Start here:** `src/`, `sql/`, `scripts/`, `reports/ops_insights/`
+
+## Visual proof
+| Static dashboard | Great Expectations Data Docs |
+| --- | --- |
+| ![CertGate dashboard screenshot](demo-site/assets/screenshots/static-dashboard.png) | ![CertGate Great Expectations Data Docs screenshot](demo-site/assets/screenshots/gx-data-docs.png) |
+
+| Before/after decision | Weekly executive summary |
+| --- | --- |
+| ![CertGate before and after release decision proof](demo-site/assets/screenshots/before-after-report.svg) | ![CertGate weekly executive summary proof](demo-site/assets/screenshots/weekly-exec-summary.svg) |
+
+## Overview
 - **Integrity gate:** blocks bad CRM bundles when duplicates, broken owner/account/activity joins, or invalid open-deal states appear.
 - **Deterministic reporting:** produces `reports/validation_summary.json`, `reports/defect_summary.json`, `reports/release_decision.json`, `reports/weekly_exec_summary.json`, and DuckDB-backed `reports/ops_insights/*`.
 - **Recruiter-facing demo:** GitHub Pages serves the dashboard in `demo-site/`, the demo before/after artifacts under `reports/demo/`, and Great Expectations Data Docs under `/data-docs/`.
