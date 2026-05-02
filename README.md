@@ -4,11 +4,35 @@ CertGate is a CRM data-quality gate for validating leads, accounts, opportunitie
 
 ## Quick links
 - **Live demo:** [static dashboard](https://josuejero.github.io/CertGate/) and [Great Expectations Data Docs](https://josuejero.github.io/CertGate/data-docs/)
+- **Metrics snapshot:** `reports/metrics_snapshot.md` and `reports/metrics_snapshot.json`
+- **Coverage artifacts:** CI writes `reports/coverage.json` and `reports/coverage_html/index.html`
 - **Screenshots:** [dashboard](demo-site/assets/screenshots/static-dashboard.png), [Data Docs](demo-site/assets/screenshots/gx-data-docs.png), [before/after report](demo-site/assets/screenshots/before-after-report.svg), [weekly summary](demo-site/assets/screenshots/weekly-exec-summary.svg)
 - **Test report:** `reports/junit.xml` and `python -m pytest -q`
 - **CI workflow:** `.github/workflows/ci.yml`
+- **Security workflow:** `.github/workflows/security.yml`
 - **Architecture docs:** `docs/business-rules.md`, `docs/rule-severity-matrix.md`, `docs/test-plan.md`
 - **Main code to inspect:** `src/`, `scripts/generate_release_reports.py`, `sql/`, `reports/`
+
+## Metrics at a glance
+| Area | Current metric |
+|---|---:|
+| CRM entities validated | 5 tables |
+| Clean-bundle records scanned | 28 records |
+| Validation rule outcomes | 93 |
+| Clean-bundle failed rules | 0 |
+| Clean-bundle release status | Ready |
+| Before-cleanup defects detected | 15 |
+| After-cleanup defects remaining | 0 |
+| Critical defects reduced | 8 to 0 |
+| Warning defects reduced | 7 to 0 |
+| Regression scenario bundles | 9 |
+| Great Expectations suites | 6 |
+| Great Expectations expectations | 28 |
+| DuckDB SQL insight reports | 6 |
+| PyTest tests | See generated `reports/junit.xml` |
+| Coverage | See generated `reports/coverage.json` and `reports/coverage_html/` |
+
+Latest generated metrics are written to `reports/metrics_snapshot.json` and `reports/metrics_snapshot.md` during CI.
 
 ## Employer scan
 **Best fit roles:** Data Quality Engineer, Analytics Engineer, QA Automation Engineer, RevOps Data Analyst  
@@ -90,4 +114,7 @@ The CLI still works through `python -m certgate` and keeps the existing package 
 - Regression tests pin targeted failure scenarios under `data/regression`.
 - UAT checks confirm the demo comparison remains “blocked before, ready after.”
 
-Run the suite with `python3 -m pytest -q`.
+Run the suite with `python -m pytest -q`. CI writes `reports/junit.xml`, `reports/coverage.json`, and `reports/coverage_html/index.html`.
+
+## Security Posture
+CertGate tracks repository security posture with OpenSSF Scorecard and `pip-audit` in `.github/workflows/security.yml`. These checks provide supply-chain evidence without claiming the project is fully hardened.

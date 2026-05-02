@@ -15,31 +15,57 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: "3.11"
+          cache: "pip"
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-      - name: Run pytest suite
-        run: pytest
+
+      - name: Run pytest suite with coverage
+        run: python -m pytest -q
+
       - name: Execute Great Expectations checkpoint
         run: python scripts/run_great_expectations.py
+
       - name: Generate CRM integrity artifacts
         run: python scripts/generate_release_reports.py
+
       - name: Generate demo visuals
         run: python scripts/generate_demo_assets.py
+
+      - name: Generate metrics snapshot
+        run: python scripts/generate_metrics_snapshot.py
+
+      - name: Publish metrics to job summary
+        run: cat reports/metrics_snapshot.md >> "$GITHUB_STEP_SUMMARY"
+
       - name: Upload reports artifacts
         uses: actions/upload-artifact@v4
         with:
           name: reports
-          path: reports
+          path: |
+            reports
+            !reports/coverage_html/**
+          retention-days: 30
+
+      - name: Upload coverage HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: reports/coverage_html
+          retention-days: 30
+
       - name: Upload data docs
         uses: actions/upload-artifact@v4
         with:
           name: gx-data-docs
           path: gx/data_docs/local_site
+          retention-days: 30
 
   publish-pages:
     needs: test

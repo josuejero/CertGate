@@ -47,7 +47,7 @@ def test_great_expectations_checkpoint_runs_for_crm_bundle():
 
     repo_root = Path(__file__).resolve().parents[2]
     subprocess.run(
-        ["python3", "scripts/run_great_expectations.py"],
+        [sys.executable, "scripts/run_great_expectations.py"],
         cwd=repo_root,
         check=True,
     )
