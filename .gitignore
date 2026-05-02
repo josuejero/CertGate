@@ -8,6 +8,7 @@ reports/junit.xml
 reports/coverage.json
 reports/coverage_html/
 reports/scorecard-results.sarif
+scorecard-results.sarif
 
 gx/validations/
 gx/data_docs/local_site/validations/

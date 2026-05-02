@@ -24,20 +24,17 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Prepare reports directory
-        run: mkdir -p reports
-
       - name: Run OpenSSF Scorecard
         uses: ossf/scorecard-action@v2.4.0
         with:
-          results_file: reports/scorecard-results.sarif
+          results_file: scorecard-results.sarif
           results_format: sarif
           publish_results: true
 
       - name: Upload Scorecard SARIF
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: reports/scorecard-results.sarif
+          sarif_file: scorecard-results.sarif
 
   pip-audit:
     runs-on: ubuntu-latest
