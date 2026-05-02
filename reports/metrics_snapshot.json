@@ -1,0 +1,67 @@
+{
+  "project": "CertGate",
+  "generated_at": "2026-05-02T18:40:18.615173+00:00",
+  "commit_sha": "8d42fa37a8fc3815de21e7d5f498451512b58899",
+  "run_id": "25259032937",
+  "data_quality": {
+    "tables_validated": 5,
+    "table_counts": {
+      "leads": 6,
+      "accounts": 5,
+      "opportunities": 4,
+      "activities": 9,
+      "owners": 4
+    },
+    "records_scanned": 28,
+    "rule_count": 93,
+    "passed_count": 93,
+    "failed_count": 0,
+    "rule_pass_rate_percent": 100.0,
+    "defect_count": 0,
+    "defects_per_100_records": 0.0,
+    "critical_issues": 0,
+    "warning_issues": 0,
+    "release_status": "Ready"
+  },
+  "demo_before_after": {
+    "before_defects": 15,
+    "after_defects": 0,
+    "defect_reduction": 15,
+    "critical_reduction": 8,
+    "warning_reduction": 7,
+    "baseline_bundle": "bad/demo-before-cleanup",
+    "after_bundle": "good"
+  },
+  "great_expectations": {
+    "suite_count": 6,
+    "expectation_count": 28,
+    "data_docs_generated": true
+  },
+  "testing": {
+    "junit": {
+      "tests": 35,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time_seconds": 11.509
+    },
+    "coverage": {
+      "line_coverage_percent": 89.72,
+      "branch_coverage_percent": 71.35,
+      "covered_lines": 716,
+      "missing_lines": 82
+    },
+    "regression_scenarios": 9
+  },
+  "analytics": {
+    "sql_report_count": 6,
+    "weekly_exec_summary_generated": true,
+    "week_over_week_improvement": {
+      "baseline_bundle": "bad/demo-before-cleanup",
+      "critical_issue_reduction": 8,
+      "warning_issue_reduction": 7,
+      "duplicate_domain_reduction": 1,
+      "stale_opportunity_reduction": 2
+    }
+  }
+}
