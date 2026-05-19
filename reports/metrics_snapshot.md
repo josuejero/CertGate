@@ -2,7 +2,7 @@
 
 | Metric | Value |
 |---|---:|
-| Generated at | 2026-05-18T11:43:39.870730+00:00 |
+| Generated at | 2026-05-19T11:16:55.163763+00:00 |
 | Release status | Ready |
 | CRM tables validated | 5 |
 | Clean-bundle records scanned | 28 |
@@ -25,7 +25,7 @@
 | PyTest failures | 0 |
 | PyTest errors | 0 |
 | PyTest skipped | 0 |
-| Test duration seconds | 14.293 |
+| Test duration seconds | 10.467 |
 | Line coverage | 89.72% |
 | Branch coverage | 71.35% |
 
