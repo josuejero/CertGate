@@ -1,8 +1,8 @@
 {
   "project": "CertGate",
-  "generated_at": "2026-07-23T10:21:48.230239+00:00",
+  "generated_at": "2026-07-24T10:15:22.880283+00:00",
   "commit_sha": "513babf8cbe1d75e1e5011dda2ffedd47a8ab3d1",
-  "run_id": "29998944457",
+  "run_id": "30085461121",
   "data_quality": {
     "tables_validated": 5,
     "table_counts": {
@@ -43,7 +43,7 @@
       "failures": 0,
       "errors": 0,
       "skipped": 0,
-      "time_seconds": 8.729
+      "time_seconds": 12.87
     },
     "coverage": {
       "line_coverage_percent": 89.72,
